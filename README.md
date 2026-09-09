@@ -65,3 +65,9 @@ Then wait a few minutes and reload the Pages URL.
 - Added one slow neon-flicker word to every main page heading.
 - Expanded the Crew page to four responsive crew-member cards.
 - Added extra mobile transition, smoke, heading, and crew layout tuning.
+
+
+## v1.3.1
+- Fixed mobile horizontal overflow / side-to-side scrolling across all pages.
+- Added safer responsive sizing for grids, headings, cards, buttons, loader, transition doors/sign, smoke overlay, footer, and toasts.
+- Preserved the existing neon brick theme and animations.
