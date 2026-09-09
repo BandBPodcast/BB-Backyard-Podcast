@@ -494,3 +494,15 @@ pre{overflow-x:auto;}
   .main-stream-video-shell{aspect-ratio:16/9;min-height:0}
   .chat-panel .stream-chat-shell{height:360px}
 }
+
+/* ===== B&B v1.3.4 Toast position: top-right ===== */
+.toast-stack{
+  left:auto;
+  right:18px;
+}
+.neon-toast{transform-origin:82% 0;}
+.neon-toast.toast-off{transform:translateX(26px) scale(.98);}
+.neon-toast.toast-out{transform:translateX(22px) scale(.98);}
+@media(max-width:640px){
+  .toast-stack{left:10px;right:10px;}
+}
