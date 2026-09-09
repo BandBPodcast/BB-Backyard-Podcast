@@ -1,0 +1,2 @@
+const form=document.querySelector('#contactForm');
+form?.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(form);const subject=encodeURIComponent(`[B&B Website] ${data.get('topic')||'Message'}`);const body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`);location.href=`mailto:YOUR_EMAIL_HERE?subject=${subject}&body=${body}`;window.bbToast?.('MESSAGE READY','Your email app should open with the B&B message prepared.');});

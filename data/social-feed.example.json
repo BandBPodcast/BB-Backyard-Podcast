@@ -1,0 +1,6 @@
+{
+  "live":{"isLive":false,"title":"B&B Backyard Podcast","url":"https://youtube.com/"},
+  "items":[
+    {"id":"yt-example-1","platform":"YouTube","type":"video","title":"New B&B episode","message":"A new episode is available.","url":"https://youtube.com/","publishedAt":"2026-09-09T12:00:00Z"}
+  ]
+}
