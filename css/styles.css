@@ -246,3 +246,54 @@ main{background:linear-gradient(180deg,rgba(3,3,4,.18),rgba(3,3,4,.42));}
 }
 @media(max-width:640px){.loader-inner{padding-inline:8px}.loader-status{width:86vw}.loader .progress{width:86vw}}
 @media(prefers-reduced-motion:reduce){.backyard-neon-flicker,.loader-atmosphere,.loader.powering .loader-logo,.loader.neon-on .loader-logo,.loader.neon-on .loader-electric-glow,.page-transition.sign-on .transition-sign{animation:none!important}}
+
+/* ===== B&B v1.3 transition, smoke, page flicker and mobile polish ===== */
+html.loader-seen .loader{display:none!important;opacity:0!important;visibility:hidden!important}
+html.bb-transition-enter body{opacity:0}
+html.bb-transition-ready body{opacity:1;transition:opacity .08s linear}
+
+/* Slow atmospheric smoke layer. Visual only; never captures clicks. */
+.site-smoke{position:fixed;inset:-18%;z-index:25;pointer-events:none;overflow:hidden;opacity:.34;mix-blend-mode:screen;filter:blur(22px);transform:translateZ(0)}
+.site-smoke::before,.site-smoke::after{content:"";position:absolute;inset:0;background:
+radial-gradient(ellipse at 12% 78%,rgba(235,235,235,.12) 0 8%,transparent 34%),
+radial-gradient(ellipse at 42% 65%,rgba(170,180,190,.09) 0 10%,transparent 38%),
+radial-gradient(ellipse at 78% 80%,rgba(230,230,230,.10) 0 7%,transparent 35%),
+radial-gradient(ellipse at 58% 35%,rgba(135,150,160,.06) 0 8%,transparent 32%);background-size:92% 72%,78% 62%,88% 70%,68% 54%;animation:bbSmokeDrift 24s ease-in-out infinite alternate}
+.site-smoke::after{opacity:.65;transform:scaleX(-1) translateY(10%);animation-duration:31s;animation-direction:alternate-reverse}
+@keyframes bbSmokeDrift{0%{transform:translate3d(-5%,4%,0) scale(1.02);opacity:.55}45%{transform:translate3d(5%,-2%,0) scale(1.08);opacity:.8}100%{transform:translate3d(-1%,-7%,0) scale(1.13);opacity:.58}}
+.site-header,.toast-stack{z-index:60}.page-transition{z-index:9998}.loader{z-index:9999}
+
+/* Every page gets one gentle neon word with a natural, infrequent flicker. */
+.neon-page-flicker{display:inline-block;color:#efffff;text-shadow:0 0 4px #fff,0 0 9px var(--neon-cyan),0 0 20px var(--neon-cyan),0 0 36px rgba(67,245,255,.58);animation:pageWordFlicker 8.8s linear infinite}
+@keyframes pageWordFlicker{0%,22%,24%,27%,29%,63%,65%,100%{opacity:1;filter:brightness(1)}23%{opacity:.3;filter:brightness(.4)}25%{opacity:.68;filter:brightness(.72)}26%{opacity:.14;filter:brightness(.2)}28%{opacity:.78}64%{opacity:.45;filter:brightness(.55)}}
+
+/* Door transition: close -> sign off -> neon ignition -> next page -> open. */
+.page-transition{overflow:hidden;background:#030304;transition:none}
+.page-transition::before{z-index:0;background:rgba(0,0,0,.40);box-shadow:inset 0 0 180px 65px #000}
+.transition-door{position:absolute;top:0;bottom:0;width:50.5%;z-index:2;background:#08080a url('../assets/images/bandbbrickbackground.png') center/cover no-repeat;box-shadow:inset 0 0 120px 30px rgba(0,0,0,.82);will-change:transform;transition:transform .72s cubic-bezier(.77,0,.18,1)}
+.transition-door::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.50),transparent 38%,rgba(255,32,56,.06));}
+.transition-door-left{left:0;transform:translateX(-101%);border-right:1px solid rgba(255,75,90,.22)}
+.transition-door-right{right:0;transform:translateX(101%);border-left:1px solid rgba(67,245,255,.18)}
+.page-transition.closing .transition-door,.page-transition.closed .transition-door,.page-transition.entering .transition-door{transform:translateX(0)}
+.page-transition.opening .transition-door-left{transform:translateX(-101%)}
+.page-transition.opening .transition-door-right{transform:translateX(101%)}
+.transition-seam{position:absolute;left:50%;top:0;bottom:0;width:2px;z-index:3;opacity:0;background:linear-gradient(180deg,transparent,var(--neon-red),var(--neon-cyan),transparent);box-shadow:0 0 12px var(--neon-red),0 0 18px rgba(67,245,255,.45);transition:opacity .18s}
+.page-transition.closed .transition-seam,.page-transition.sign-ready .transition-seam,.page-transition.sign-on .transition-seam,.page-transition.entering .transition-seam{opacity:.55}
+.transition-sign{z-index:4;opacity:0;transform:scale(.96);transition:opacity .2s ease,transform .25s ease}
+.page-transition.sign-ready .transition-sign,.page-transition.sign-on .transition-sign,.page-transition.entering .transition-sign{opacity:1;transform:scale(1)}
+.page-transition.opening .transition-sign{opacity:0;transform:scale(.94)}
+
+/* Four crew cards on wide screens. */
+.crew-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.crew-photo{min-height:170px}
+
+@media(max-width:980px){.crew-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site-smoke{opacity:.27}}
+@media(max-width:640px){
+  .crew-grid{grid-template-columns:1fr}.crew-photo{min-height:150px;aspect-ratio:16/9}
+  .page-transition .transition-sign{width:min(360px,78vw);height:150px;border-width:3px}
+  .transition-sign b{font-size:clamp(2rem,12vw,3.6rem)}.transition-sign span{font-size:.78rem;letter-spacing:.11em}
+  .site-smoke{inset:-28%;opacity:.22;filter:blur(18px)}
+  .page-hero h1{font-size:clamp(2.7rem,14vw,4.6rem)}
+  .hero h1{font-size:clamp(3rem,15vw,5rem)}
+}
+@media(prefers-reduced-motion:reduce){.site-smoke::before,.site-smoke::after,.neon-page-flicker{animation:none!important}.transition-door{transition:none!important}}

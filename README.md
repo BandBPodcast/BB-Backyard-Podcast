@@ -57,3 +57,11 @@ Then wait a few minutes and reload the Pages URL.
 - Home page "Backyard." text now uses a slow, occasional neon-tube flicker.
 - Internal page transitions show the B&B neon sign powered OFF first, then flicker ON before navigating.
 - First-session loading screen now treats the B&B podcast logo as a custom neon wall sign: it begins unpowered, tracks 0–100%, then ignites at 100% before revealing the site.
+
+## v1.3.0 visual update
+- Fixed the brief loading-screen flash during internal page transitions.
+- Added seamless sliding brick doors: close -> neon sign off -> ignition -> destination -> doors open.
+- Added a lightweight, pointer-events-disabled smoke atmosphere layer across the site.
+- Added one slow neon-flicker word to every main page heading.
+- Expanded the Crew page to four responsive crew-member cards.
+- Added extra mobile transition, smoke, heading, and crew layout tuning.
