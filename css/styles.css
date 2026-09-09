@@ -155,3 +155,94 @@ main{background:linear-gradient(180deg,rgba(3,3,4,.18),rgba(3,3,4,.42));}
   .transition-sign{height:175px;border-width:3px;}
 }
 @media(prefers-reduced-motion:reduce){.page-transition,.transition-sign{transition:none}.loader-logo,.hero-logo{animation:none}}
+
+/* ===== B&B v1.2 Neon Power-Up Animations ===== */
+.backyard-neon-flicker{
+  display:inline-block;
+  color:#fff5f6;
+  text-shadow:0 0 4px #fff,0 0 10px var(--neon-red),0 0 22px var(--neon-red),0 0 42px rgba(255,32,56,.85);
+  animation:backyardNeonFlicker 7.5s linear infinite;
+}
+@keyframes backyardNeonFlicker{
+  0%,13%,15%,17%,20%,54%,56%,58%,100%{opacity:1;filter:brightness(1)}
+  14%,16%{opacity:.28;filter:brightness(.35)}
+  18%{opacity:.62;filter:brightness(.7)}
+  19%{opacity:.12;filter:brightness(.18)}
+  55%{opacity:.48;filter:brightness(.55)}
+  57%{opacity:.75;filter:brightness(.82)}
+}
+
+/* Loader: the B&B logo behaves like a custom neon sign powering on at 100%. */
+.loader{overflow:hidden;}
+.loader-atmosphere{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 46%,rgba(67,245,255,.08),transparent 28%),
+    radial-gradient(circle at 50% 30%,rgba(255,32,56,.10),transparent 30%),
+    linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.58));
+  animation:loaderAtmosphere 4s ease-in-out infinite alternate;
+}
+@keyframes loaderAtmosphere{to{filter:brightness(1.18)}}
+.loader-inner{width:min(760px,90vw);padding:32px 18px;}
+.loader-sign-wrap{display:grid;place-items:center;margin-bottom:22px;perspective:900px;}
+.loader-sign-frame{
+  position:relative;width:min(590px,86vw);padding:14px;border-radius:28px;
+  background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.04);
+  box-shadow:0 28px 65px rgba(0,0,0,.72),inset 0 0 28px rgba(0,0,0,.7);
+}
+.loader-logo{
+  width:100%;margin:0;opacity:.42;
+  filter:grayscale(1) brightness(.18) contrast(1.35) drop-shadow(0 18px 28px rgba(0,0,0,.92));
+  transition:filter .22s ease,opacity .22s ease,transform .22s ease;
+}
+.loader-electric-glow{position:absolute;inset:10% 8%;border-radius:24px;opacity:0;pointer-events:none;box-shadow:0 0 35px rgba(255,32,56,.4),0 0 70px rgba(67,245,255,.2);}
+.loader.powering .loader-logo{animation:loaderPreFlicker 2.4s steps(1,end) infinite;}
+@keyframes loaderPreFlicker{
+  0%,78%,82%,87%,100%{filter:grayscale(1) brightness(.18) contrast(1.35);opacity:.42}
+  79%,84%{filter:grayscale(.65) brightness(.42) contrast(1.25) drop-shadow(0 0 8px rgba(255,32,56,.35));opacity:.72}
+  85%{filter:grayscale(.25) brightness(.72) contrast(1.12) drop-shadow(0 0 12px rgba(67,245,255,.35));opacity:.9}
+}
+.loader.neon-on .loader-logo{
+  opacity:1;transform:scale(1.015);
+  filter:saturate(1.15) brightness(1.08) contrast(1.05) drop-shadow(0 0 8px rgba(255,255,255,.28)) drop-shadow(0 0 20px rgba(255,32,56,.70)) drop-shadow(0 0 35px rgba(67,245,255,.27));
+  animation:loaderIgnition .8s steps(1,end) both;
+}
+.loader.neon-on .loader-electric-glow{opacity:1;animation:loaderGlowPulse 1.6s ease-in-out infinite alternate;}
+@keyframes loaderIgnition{
+  0%{opacity:.18;filter:grayscale(1) brightness(.12)}
+  12%{opacity:1;filter:saturate(1.2) brightness(1.2) drop-shadow(0 0 28px rgba(255,32,56,.8))}
+  22%{opacity:.28;filter:grayscale(.8) brightness(.25)}
+  31%{opacity:1;filter:saturate(1.15) brightness(1.12) drop-shadow(0 0 28px rgba(67,245,255,.45))}
+  39%{opacity:.58}
+  48%,100%{opacity:1;filter:saturate(1.15) brightness(1.08) contrast(1.05) drop-shadow(0 0 8px rgba(255,255,255,.28)) drop-shadow(0 0 20px rgba(255,32,56,.70)) drop-shadow(0 0 35px rgba(67,245,255,.27))}
+}
+@keyframes loaderGlowPulse{to{box-shadow:0 0 50px rgba(255,32,56,.52),0 0 95px rgba(67,245,255,.26)}}
+.loader-status{width:min(470px,80vw);margin:0 auto 8px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#eee;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:900;}
+.loader-status strong{font-size:.82rem;color:#fff;text-shadow:0 0 8px var(--neon-cyan),0 0 18px rgba(67,245,255,.55)}
+.loader .progress{width:min(470px,80vw);height:7px;margin:0 auto 14px;border-color:rgba(67,245,255,.18);box-shadow:inset 0 0 12px #000,0 0 16px rgba(255,32,56,.08)}
+.loader .progress span{width:0;animation:none;transition:width .08s linear;}
+.loader-wave{margin-top:4px;height:30px}.loader-wave i{width:4px;height:8px}.loader-wave i:nth-child(6){animation-delay:.5s}.loader-wave i:nth-child(7){animation-delay:.6s}
+.loader.neon-on small{color:#fff;text-shadow:0 0 6px #fff,0 0 14px var(--neon-red),0 0 24px var(--neon-cyan)}
+
+/* Page transition: sign is visibly OFF, sparks/flickers ON, then navigation happens. */
+.page-transition{transition:opacity .22s ease,visibility .22s ease;}
+.transition-sign{
+  border-color:#282123;background:rgba(0,0,0,.18);
+  box-shadow:0 18px 60px rgba(0,0,0,.75),inset 0 0 22px rgba(0,0,0,.75);
+}
+.transition-sign b,.transition-sign span{
+  color:#30292a;text-shadow:none;filter:brightness(.45);transition:none;
+}
+.page-transition.sign-on .transition-sign{border-color:#ff8b98;box-shadow:0 0 5px #fff,0 0 18px var(--neon-red),0 0 38px rgba(255,32,56,.52),inset 0 0 20px rgba(255,32,56,.18);animation:transitionTubeIgnite .58s steps(1,end) both;}
+.page-transition.sign-on .transition-sign b{color:#fff7f8;text-shadow:0 0 4px #fff,0 0 10px var(--neon-red),0 0 26px var(--neon-red);filter:none;}
+.page-transition.sign-on .transition-sign span{color:#eaffff;text-shadow:0 0 5px #fff,0 0 10px var(--neon-cyan),0 0 25px var(--neon-cyan);filter:none;}
+@keyframes transitionTubeIgnite{
+  0%{opacity:.32;filter:brightness(.3)}
+  13%{opacity:1;filter:brightness(1.3)}
+  25%{opacity:.36;filter:brightness(.38)}
+  37%{opacity:1;filter:brightness(1.15)}
+  49%{opacity:.7;filter:brightness(.72)}
+  61%,100%{opacity:1;filter:brightness(1)}
+}
+@media(max-width:640px){.loader-inner{padding-inline:8px}.loader-status{width:86vw}.loader .progress{width:86vw}}
+@media(prefers-reduced-motion:reduce){.backyard-neon-flicker,.loader-atmosphere,.loader.powering .loader-logo,.loader.neon-on .loader-logo,.loader.neon-on .loader-electric-glow,.page-transition.sign-on .transition-sign{animation:none!important}}

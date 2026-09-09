@@ -52,3 +52,8 @@ Then wait a few minutes and reload the Pages URL.
 - Added a neon brick loading screen.
 - Added an animated neon B&B page transition for internal navigation.
 - Kept the existing page structure and social/live notification foundation intact.
+
+## v1.2.0 neon animation update
+- Home page "Backyard." text now uses a slow, occasional neon-tube flicker.
+- Internal page transitions show the B&B neon sign powered OFF first, then flicker ON before navigating.
+- First-session loading screen now treats the B&B podcast logo as a custom neon wall sign: it begins unpowered, tracks 0–100%, then ignites at 100% before revealing the site.
