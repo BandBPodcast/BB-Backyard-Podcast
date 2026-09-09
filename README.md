@@ -71,3 +71,7 @@ Then wait a few minutes and reload the Pages URL.
 - Fixed mobile horizontal overflow / side-to-side scrolling across all pages.
 - Added safer responsive sizing for grids, headings, cards, buttons, loader, transition doors/sign, smoke overlay, footer, and toasts.
 - Preserved the existing neon brick theme and animations.
+
+
+## v1.3.3 live chat setup
+Edit `js/live-config.js` and set `youtubeVideoId` to the current YouTube livestream video ID and `twitchChannel` to the Twitch channel name. YouTube Live Chat embeds use the current site hostname automatically. Twitch embeds also use the current hostname as the required `parent` domain. YouTube does not support embedded Live Chat on mobile web, so mobile visitors should open the stream in YouTube to chat.
