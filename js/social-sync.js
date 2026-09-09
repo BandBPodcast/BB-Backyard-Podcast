@@ -20,7 +20,12 @@ async function pollFeed(){
     }
     localStorage.setItem(seenKey,JSON.stringify([...seen].slice(-100)));
     const liveDot=document.querySelector('[data-live-dot]'), liveText=document.querySelector('[data-live-text]'),liveBtn=document.querySelector('[data-live-btn]');
-    if(data.live?.isLive){liveDot?.classList.add('live');if(liveText)liveText.textContent=data.live.title||'B&B is live now';if(liveBtn){liveBtn.textContent='Watch Live';liveBtn.href=data.live.url||'live.html'}}
+    if(data.live?.isLive){
+      liveDot?.classList.add('live');if(liveText)liveText.textContent=data.live.title||'B&B is live now';if(liveBtn){liveBtn.textContent='Watch Live';liveBtn.href=data.live.url||'live.html'}
+      window.bbSetLiveState?.(true,data.live.title||'B&B is live now',data.live.url||'#mainLiveStream');
+    }else{
+      liveDot?.classList.remove('live');window.bbSetLiveState?.(false);
+    }
   }catch(e){console.debug('B&B feed endpoint unavailable',e)}
 }
 pollFeed(); setInterval(pollFeed,POLL_MS);

@@ -79,3 +79,11 @@ Edit `js/live-config.js` and set `youtubeVideoId` to the current YouTube livestr
 ### v1.3.4
 - Moved the neon notification toast to the top-right on tablet/desktop while retaining safe full-width mobile positioning.
 - Updated toast entrance/exit motion to animate naturally from the right side.
+
+## v1.3.5 Live-page update
+- Replaced the plain live-status bar with a neon OFF AIR / CURRENTLY LIVE sign.
+- Added a Test Live Sign button beside Preview Neon Toast.
+- Added Theatre Mode / lights-out focus for desktop and mobile.
+- Left chat can switch between YouTube and Facebook. Because Facebook does not expose a dependable embedded live-chat composer for third-party sites, the Facebook tab opens the official Facebook Live post/comments instead; on mobile it is preferred automatically when configured.
+- Twitch chat remains on the right.
+- Configure `youtubeVideoId`, `twitchChannel`, and `facebookLiveUrl` in `js/live-config.js`.
