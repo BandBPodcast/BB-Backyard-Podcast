@@ -846,3 +846,92 @@ main .bb-text-reveal.is-visible{opacity:1;transform:translateY(0);filter:blur(0)
 @media(prefers-reduced-motion:reduce){
   .loader.powering .loader-logo-off,.page-transition.sign-on .transition-logo-on,.page-transition.entering .transition-logo-on{animation:none!important}
 }
+
+
+/* ===== B&B v1.4.2 loader neon flicker sequence ===== */
+/* While loading: stay on the supplied OFF artwork, with one quick electrical teaser flash. */
+.loader.powering .loader-logo-off{
+  opacity:.90!important;
+  visibility:visible!important;
+  animation:loaderOffTeaser 2.05s steps(1,end) 1 both!important;
+}
+.loader.powering .loader-logo-on{
+  visibility:visible!important;
+  animation:loaderOnTeaser 2.05s steps(1,end) 1 both!important;
+  filter:drop-shadow(0 20px 32px rgba(0,0,0,.84)) drop-shadow(0 0 18px rgba(255,26,38,.34)) drop-shadow(0 0 16px rgba(0,145,255,.22))!important;
+}
+@keyframes loaderOffTeaser{
+  0%,26%{opacity:.90;filter:brightness(.68) contrast(1.08) saturate(.82) drop-shadow(0 18px 30px rgba(0,0,0,.78))}
+  27%,31%{opacity:.18;filter:brightness(.48) contrast(1.05) saturate(.74)}
+  32%,100%{opacity:.90;filter:brightness(.68) contrast(1.08) saturate(.82) drop-shadow(0 18px 30px rgba(0,0,0,.78))}
+}
+@keyframes loaderOnTeaser{
+  0%,26%{opacity:0}
+  27%{opacity:.92}
+  29%{opacity:.18}
+  30%{opacity:.72}
+  32%,100%{opacity:0}
+}
+
+/* At 100%: rapidly sputter between OFF and ON several times, then remain fully ON. */
+.loader.neon-on .loader-logo-off{
+  visibility:visible!important;
+  animation:loaderFinalOffFlicker 1.48s steps(1,end) both!important;
+}
+.loader.neon-on .loader-logo-on{
+  visibility:visible!important;
+  animation:loaderFinalOnFlicker 1.48s steps(1,end) both!important;
+  filter:drop-shadow(0 22px 34px rgba(0,0,0,.88)) drop-shadow(0 0 26px rgba(255,26,38,.48)) drop-shadow(0 0 24px rgba(0,145,255,.34))!important;
+}
+.loader.neon-on .loader-electric-glow{
+  opacity:1!important;
+  animation:loaderFinalGlowFlicker 1.48s steps(1,end) both!important;
+}
+@keyframes loaderFinalOffFlicker{
+  0%{opacity:.90}
+  7%{opacity:.12}
+  12%{opacity:.88}
+  18%{opacity:.08}
+  23%{opacity:.84}
+  31%{opacity:.10}
+  37%{opacity:.80}
+  44%{opacity:.05}
+  50%{opacity:.68}
+  57%{opacity:.04}
+  64%{opacity:.46}
+  71%{opacity:.03}
+  78%{opacity:.22}
+  84%,100%{opacity:0}
+}
+@keyframes loaderFinalOnFlicker{
+  0%{opacity:.05;filter:brightness(.36)}
+  7%{opacity:1;filter:brightness(1.28)}
+  12%{opacity:.10;filter:brightness(.42)}
+  18%{opacity:1;filter:brightness(1.20)}
+  23%{opacity:.16;filter:brightness(.48)}
+  31%{opacity:1;filter:brightness(1.14)}
+  37%{opacity:.22;filter:brightness(.54)}
+  44%{opacity:1;filter:brightness(1.18)}
+  50%{opacity:.34;filter:brightness(.62)}
+  57%{opacity:1;filter:brightness(1.10)}
+  64%{opacity:.55;filter:brightness(.78)}
+  71%{opacity:1;filter:brightness(1.08)}
+  78%{opacity:.80;filter:brightness(.94)}
+  84%,100%{opacity:1;filter:brightness(1)}
+}
+@keyframes loaderFinalGlowFlicker{
+  0%,12%,23%,37%,50%,64%{opacity:.08}
+  7%,18%,31%,44%,57%,71%{opacity:1}
+  78%{opacity:.58}
+  84%,100%{opacity:1}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .loader.powering .loader-logo-off,.loader.powering .loader-logo-on,
+  .loader.neon-on .loader-logo-off,.loader.neon-on .loader-logo-on,
+  .loader.neon-on .loader-electric-glow{animation:none!important}
+  .loader.powering .loader-logo-off{opacity:.90!important}
+  .loader.powering .loader-logo-on{opacity:0!important}
+  .loader.neon-on .loader-logo-off{opacity:0!important}
+  .loader.neon-on .loader-logo-on{opacity:1!important}
+}

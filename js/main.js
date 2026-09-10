@@ -24,7 +24,7 @@ function runBBLoader(){
         loader.classList.add('hide');
         document.documentElement.classList.add('bb-first-load-complete');
         setTimeout(()=>document.documentElement.classList.add('loader-seen'),760);
-      },1050);
+      },1650);
     }
   },55);
 }

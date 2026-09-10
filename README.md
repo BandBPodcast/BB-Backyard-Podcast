@@ -128,3 +128,9 @@ Added viewport fade/reveal animations, a neon scroll-to-top button that shifts f
 - Replaced the transition text/neon mock sign with the supplied transparent OFF/ON B&B logo images.
 - Transition timing and brick-door close/open behavior remain unchanged: OFF image appears first, then the ON image ignites before navigation.
 - Brightened the loader OFF image so the artwork stays clearly visible while still looking unpowered.
+
+
+### v1.4.2
+- Loader OFF sign now gives one quick teaser flash during loading, then stays off.
+- At 100%, the OFF/ON supplied logos rapidly flicker several times before settling fully ON.
+- Existing page transitions and site systems remain unchanged.
