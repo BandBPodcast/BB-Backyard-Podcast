@@ -130,7 +130,18 @@ Added viewport fade/reveal animations, a neon scroll-to-top button that shifts f
 - Brightened the loader OFF image so the artwork stays clearly visible while still looking unpowered.
 
 
-### v1.4.2
+### v1.4.3
 - Loader OFF sign now gives one quick teaser flash during loading, then stays off.
 - At 100%, the OFF/ON supplied logos rapidly flicker several times before settling fully ON.
 - Existing page transitions and site systems remain unchanged.
+
+
+## v1.4.3 loader fix
+The loader flicker now swaps the actual supplied OFF and ON transparent logo images with a teaser flash during loading and a repeated sputter sequence at 100%, then locks ON before the page fade.
+
+
+## v1.4.4 navigation logo update
+- Replaced the old navigation image with the transparent OFF/ON B&B neon logo pair.
+- Navigation logo stays ON normally, performs a short electrical OFF/ON blink, then returns ON.
+- Blink repeats once every 60 seconds; no rapid continuous flashing.
+- Existing loader, transition, Live page, toast, theatre mode, scroll effects, and other systems were left intact.

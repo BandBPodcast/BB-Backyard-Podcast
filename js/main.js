@@ -5,7 +5,22 @@ const hasSeen=sessionStorage.getItem('bb-loader-seen');
 function runBBLoader(){
   if(!loader) return;
   const percentEl=qs('#loaderPercent'), progressEl=qs('#loaderProgress'), messageEl=qs('#loaderMessage');
-  loader.classList.add('powering');
+  loader.classList.add('powering','bb-flash-off');
+
+  // Real image-swap flicker: OFF -> quick electrical teaser -> OFF again.
+  // This is driven by classes instead of opacity keyframes so the two supplied
+  // transparent PNGs visibly swap even when older loader CSS is present.
+  const flickerTimers=[];
+  const later=(fn,ms)=>{const id=setTimeout(fn,ms);flickerTimers.push(id);return id};
+  const showFlash=(on)=>{
+    loader.classList.toggle('bb-flash-on',!!on);
+    loader.classList.toggle('bb-flash-off',!on);
+  };
+  later(()=>showFlash(true),430);
+  later(()=>showFlash(false),525);
+  later(()=>showFlash(true),590);
+  later(()=>showFlash(false),650);
+
   let progress=0;
   const messages=[[0,'Neon circuits warming up'],[28,'Lighting the backyard wall'],[56,'Tuning the podcast signal'],[82,'Powering the B&B sign']];
   const timer=setInterval(()=>{
@@ -16,15 +31,30 @@ function runBBLoader(){
     if(progressEl) progressEl.style.width=progress+'%';
     for(const [at,text] of messages) if(progress>=at&&messageEl) messageEl.textContent=text;
     if(progress>=100){
-      clearInterval(timer); loader.classList.remove('powering'); loader.classList.add('neon-on');
-      if(messageEl) messageEl.textContent='B&B Backyard Podcast — powered on';
-      setTimeout(()=>{
+      clearInterval(timer);
+      flickerTimers.forEach(clearTimeout);
+      loader.classList.remove('powering','bb-flash-on','bb-flash-off','neon-on');
+      if(messageEl) messageEl.textContent='B&B Backyard Podcast — powering on';
+
+      // At 100%, sputter repeatedly between the actual OFF and ON image,
+      // then lock the ON sign before fading into the page.
+      const sequence=[
+        [0,false],[90,true],[165,false],[245,true],[315,false],[385,true],
+        [455,false],[535,true],[610,false],[690,true],[775,false],[855,true],
+        [935,false],[1015,true],[1090,false],[1170,true]
+      ];
+      sequence.forEach(([ms,on])=>later(()=>showFlash(on),ms));
+      later(()=>{
+        loader.classList.remove('bb-flash-on','bb-flash-off');
+        loader.classList.add('bb-final-on');
+        if(messageEl) messageEl.textContent='B&B Backyard Podcast — powered on';
+      },1240);
+      later(()=>{
         sessionStorage.setItem('bb-loader-seen','1');
-        // Fade the loader away first so the page is revealed smoothly.
         loader.classList.add('hide');
         document.documentElement.classList.add('bb-first-load-complete');
         setTimeout(()=>document.documentElement.classList.add('loader-seen'),760);
-      },1650);
+      },1640);
     }
   },55);
 }
@@ -179,3 +209,31 @@ window.addEventListener('pageshow',bbResetScroll);
   btn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 })();
 
+
+
+// v1.4.4 — navigation neon logo: a brief OFF/ON electrical blink once per minute.
+(()=>{
+  const brand=document.querySelector('.site-header .brand');
+  if(!brand || !brand.querySelector('.nav-logo-stack')) return;
+
+  let sequenceTimers=[];
+  const clearSequence=()=>{sequenceTimers.forEach(clearTimeout);sequenceTimers=[]};
+  const setState=(state)=>{
+    brand.classList.remove('nav-neon-off','nav-neon-flash');
+    if(state) brand.classList.add(state);
+  };
+  const blink=()=>{
+    clearSequence();
+    // Normally ON. Briefly lose power, spark back, dip once, then remain ON.
+    setState('nav-neon-off');
+    sequenceTimers.push(setTimeout(()=>setState('nav-neon-flash'),170));
+    sequenceTimers.push(setTimeout(()=>setState('nav-neon-off'),290));
+    sequenceTimers.push(setTimeout(()=>setState('nav-neon-flash'),390));
+    sequenceTimers.push(setTimeout(()=>setState(''),560));
+  };
+
+  // Give visitors one subtle blink shortly after the page settles, then once per minute.
+  const first=setTimeout(blink,8000);
+  const interval=setInterval(blink,60000);
+  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval);clearSequence()},{once:true});
+})();
