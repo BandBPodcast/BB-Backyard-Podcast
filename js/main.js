@@ -262,3 +262,53 @@ window.addEventListener('pageshow',bbResetScroll);
   const interval=setInterval(blink,75000);
   window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval);clear();},{once:true});
 })();
+
+
+// ===== B&B v1.4.6 crew profile modal =====
+(()=>{
+  const modal=document.querySelector('#crewModal');
+  if(!modal)return;
+  const cards=[...document.querySelectorAll('.crew-card-interactive')];
+  const nameEl=modal.querySelector('#crewModalName');
+  const titleEl=modal.querySelector('#crewModalTitle');
+  const descEl=modal.querySelector('#crewModalDescription');
+  const photoEl=modal.querySelector('#crewModalPhoto');
+  const closeBtn=modal.querySelector('.crew-modal-close');
+  let lastFocus=null;
+
+  const syncPhoto=(card)=>{
+    const source=card.querySelector('.crew-photo');
+    photoEl.innerHTML='';
+    const img=source?.querySelector('img');
+    if(img){
+      const clone=img.cloneNode(true);
+      clone.removeAttribute('id');
+      photoEl.appendChild(clone);
+    }else{
+      photoEl.textContent=(source?.textContent||'B&B').trim();
+    }
+  };
+  const open=(card)=>{
+    lastFocus=document.activeElement;
+    nameEl.textContent=card.dataset.crewName||card.querySelector('h3')?.textContent||'Crew Member';
+    titleEl.textContent=card.dataset.crewTitle||card.querySelector('.eyebrow')?.textContent||'Host / Co-Host';
+    descEl.textContent=card.dataset.crewDescription||card.querySelector('p')?.textContent||'';
+    syncPhoto(card);
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('crew-modal-open');
+    requestAnimationFrame(()=>closeBtn?.focus());
+  };
+  const close=()=>{
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('crew-modal-open');
+    if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus();
+  };
+  cards.forEach(card=>{
+    card.addEventListener('click',()=>open(card));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(card)}});
+  });
+  modal.querySelectorAll('[data-crew-close]').forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))close()});
+})();

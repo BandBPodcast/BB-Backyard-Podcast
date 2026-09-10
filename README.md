@@ -151,3 +151,9 @@ The loader flicker now swaps the actual supplied OFF and ON transparent logo ima
 - Fixed the Home navigation logo so it uses the transparent OFF/ON image stack and visibly blinks on a gentle 60-second interval.
 - Reduced loader flashing to a few spaced power-on flashes, then holds fully ON for 2 seconds at 100% before entering the page.
 - Reworked the Home hero logo float to use independent translate motion for seamless animation and added a subtle occasional OFF/ON blink.
+
+
+## v1.4.6
+- Added Joseph Romero developer/technical credit to the site footer.
+- Crew cards now open neon profile popouts with blurred background and accessible close control.
+- Updated all four crew roles to Host / Co-Host, with Joseph Romero listed last and technical production responsibilities summarized.
