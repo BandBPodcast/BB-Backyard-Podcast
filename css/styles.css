@@ -712,3 +712,36 @@ main .bb-text-reveal.is-visible{opacity:1;transform:translateY(0);filter:blur(0)
   main .bb-text-reveal,main .bb-text-reveal.is-visible{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .bb-scroll-top.at-bottom{animation:none!important}
 }
+
+
+/* ===== B&B v1.3.9 supplied OFF/ON logo loader ===== */
+.loader-logo-stack{
+  position:relative;
+  width:min(560px,90%);
+  aspect-ratio:1/1;
+  margin:0 auto 22px;
+  display:grid;
+  place-items:center;
+}
+.loader-logo-stack .loader-logo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  margin:0;
+  transition:opacity .16s ease,filter .24s ease;
+}
+.loader-logo-off{opacity:1!important;visibility:visible!important;}
+.loader-logo-on{opacity:0!important;visibility:hidden!important;filter:drop-shadow(0 25px 30px #000)!important;}
+.loader.powering .loader-logo-off{opacity:1!important;visibility:visible!important;}
+.loader.powering .loader-logo-on{opacity:0!important;visibility:hidden!important;animation:none!important;}
+.loader.neon-on .loader-logo-off{opacity:0!important;visibility:hidden!important;animation:none!important;}
+.loader.neon-on .loader-logo-on{
+  opacity:1!important;
+  visibility:visible!important;
+  animation:loaderIgnite .82s steps(1,end) both!important;
+  filter:drop-shadow(0 22px 34px rgba(0,0,0,.88)) drop-shadow(0 0 24px rgba(255,26,38,.42)) drop-shadow(0 0 22px rgba(0,145,255,.28))!important;
+}
+@media(max-width:640px){.loader-logo-stack{width:min(82vw,440px)}}
+@media(prefers-reduced-motion:reduce){.loader.neon-on .loader-logo-on{animation:none!important}}

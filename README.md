@@ -110,3 +110,10 @@ Added viewport fade/reveal animations, a neon scroll-to-top button that shifts f
 - Fixed page-transition doors so the brick wall is continuous instead of appearing as two enlarged brick textures.
 - Expanded scroll fade-in/fade-out animation to all main-page text across every page.
 - Preserved the existing loader, smoke, neon status, toast, theatre mode, social links, and live-page systems.
+
+
+## v1.3.9
+- Added the supplied `offsignlogo.png` and `nowalltexturelogo.png` assets.
+- Loader now displays the true OFF sign for the full loading cycle and swaps to the true neon ON sign only at 100%, preserving the existing loader timing/fade.
+- Homepage logo imagery now uses `nowalltexturelogo.png`.
+- Existing transitions, reveal animations, Live systems, theatre mode, toast, footer, and scroll-to-top behavior were left intact.
