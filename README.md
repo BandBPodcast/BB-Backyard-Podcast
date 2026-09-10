@@ -102,3 +102,11 @@ The Twitch channel is also preconfigured in `js/live-config.js`. The YouTube cha
 
 ## v1.3.7 motion polish
 Added viewport fade/reveal animations, a neon scroll-to-top button that shifts from cyan to red with scroll progress, a smoother loader-to-page fade, animated theatre-mode dimming, and a softer neon-toast entrance. Scroll restoration is disabled so every page opens at its top rather than restoring an old scroll position.
+
+
+## v1.3.8
+- Fixed the footer/floating scroll-to-top positioning issue caused by the first-load body filter animation.
+- Scroll-to-top now stays viewport-fixed for the entire page; its outer frame starts unlit, powers to cyan, then reaches full red at the bottom.
+- Fixed page-transition doors so the brick wall is continuous instead of appearing as two enlarged brick textures.
+- Expanded scroll fade-in/fade-out animation to all main-page text across every page.
+- Preserved the existing loader, smoke, neon status, toast, theatre mode, social links, and live-page systems.

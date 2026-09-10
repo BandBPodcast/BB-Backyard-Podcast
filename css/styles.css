@@ -591,7 +591,7 @@ html,body{scroll-behavior:smooth}
 .loader{will-change:opacity,visibility;transition:opacity .78s cubic-bezier(.22,.8,.24,1),visibility .78s linear!important}
 .loader.hide{opacity:0!important;visibility:hidden!important;pointer-events:none}
 html.bb-first-load-complete body{animation:bbPageReveal .82s ease both}
-@keyframes bbPageReveal{from{filter:brightness(.72)}to{filter:brightness(1)}}
+@keyframes bbPageReveal{from{opacity:.72}to{opacity:1}}
 
 /* Elements intentionally disappear outside the viewport and return softly when scrolled back. */
 .bb-reveal{
@@ -656,4 +656,59 @@ body.live-theatre-mode .chat-panel{transform:translateY(2px)}
   html,body{scroll-behavior:auto}
   .bb-reveal,.bb-reveal.is-visible{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .bb-scroll-top,.loader,.neon-toast,.theatre-dimmer,.live-focus-zone,.main-stream-card,.chat-panel{transition:none!important;animation:none!important}
+}
+
+
+/* ===== B&B v1.3.8 stability + motion fixes ===== */
+/* Never leave filter/transform on BODY: doing so changes the containing block for fixed UI. */
+html.bb-first-load-complete body{filter:none!important;transform:none!important}
+
+/* Keep the footer in normal document flow and visually separated from floating controls. */
+.footer{position:relative;z-index:2;margin:0;min-height:0;padding:36px 0 42px;background:rgba(3,3,4,.82);backdrop-filter:blur(8px)}
+.footer-wrap{position:relative;z-index:1}
+
+/* Transition doors use the brick image as one continuous full-screen wall instead of two zoomed halves. */
+.page-transition{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;max-width:none!important;background:#030304!important}
+.transition-door{background-color:#08080a!important;background-image:url('../assets/images/bandbbrickbackground.png')!important;background-repeat:no-repeat!important;background-size:200% 100%!important}
+.transition-door-left{background-position:left center!important}
+.transition-door-right{background-position:right center!important}
+
+/* Scroll-to-top is a true viewport-floating control, independent of the footer. */
+.bb-scroll-top{
+  position:fixed!important;right:22px!important;bottom:22px!important;z-index:400!important;
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;
+  border-color:var(--scroll-border,transparent)!important;
+  box-shadow:0 0 8px var(--scroll-glow1,transparent),0 0 24px var(--scroll-glow2,transparent),inset 0 0 18px rgba(0,0,0,.74)!important;
+  transition:transform .28s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease!important;
+}
+.bb-scroll-top::before{
+  border-color:var(--scroll-inner,transparent)!important;
+  box-shadow:inset 0 0 12px var(--scroll-inner-glow,transparent)!important;
+}
+.bb-scroll-top:hover,.bb-scroll-top:focus-visible{
+  transform:translateY(-3px)!important;
+  box-shadow:0 0 10px var(--scroll-neon),0 0 30px var(--scroll-neon),inset 0 0 18px rgba(0,0,0,.68)!important;
+}
+.bb-scroll-top.at-top{background:rgba(8,8,10,.88)!important}
+.bb-scroll-top.at-bottom{animation:bbScrollTopBottomPulse 1.65s ease-in-out infinite alternate}
+@keyframes bbScrollTopBottomPulse{to{box-shadow:0 0 12px var(--scroll-neon),0 0 34px var(--scroll-neon),0 0 54px rgba(255,32,56,.34),inset 0 0 18px rgba(0,0,0,.68)!important}}
+
+/* Every main-page text element can fade in/out independently as it enters/leaves view. */
+main .bb-text-reveal{
+  opacity:0;
+  transform:translateY(18px);
+  filter:blur(2px);
+  transition:opacity .62s ease var(--reveal-delay,0ms),transform .72s cubic-bezier(.2,.72,.2,1) var(--reveal-delay,0ms),filter .58s ease var(--reveal-delay,0ms);
+  will-change:opacity,transform,filter;
+}
+main .bb-text-reveal.is-visible{opacity:1;transform:translateY(0);filter:blur(0)}
+
+@media(max-width:640px){
+  .bb-scroll-top{right:14px!important;bottom:14px!important}
+  .footer{padding:30px 0 34px}
+  main .bb-text-reveal{transform:translateY(14px)}
+}
+@media(prefers-reduced-motion:reduce){
+  main .bb-text-reveal,main .bb-text-reveal.is-visible{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+  .bb-scroll-top.at-bottom{animation:none!important}
 }

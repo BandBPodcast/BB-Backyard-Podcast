@@ -110,35 +110,41 @@ const bbResetScroll=()=>window.scrollTo({top:0,left:0,behavior:'auto'});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bbResetScroll,{once:true});else bbResetScroll();
 window.addEventListener('pageshow',bbResetScroll);
 
-// Scroll reveal: content fades/slides in while visible and fades back out after leaving view.
+// Scroll reveal: panels plus ALL main-page text fade in while visible and fade back out when out of view.
 (()=>{
-  const selector=[
-    '.hero h1','.hero p','.hero .actions','.hero-logo',
-    '.page-hero .eyebrow','.page-hero h1','.page-hero p',
-    '.section > .container > .eyebrow','.section > .container > .section-title',
-    '.section .card','.section .notice','.section .actions',
-    '.section > .container > p','.section > .container > ul','.section > .container > ol',
-    '.live-neon-status','.main-stream-card','.chat-panel','.footer-wrap'
+  const panelSelector=[
+    '.hero-logo','.section .card','.section .notice','.section .actions',
+    '.live-neon-status','.main-stream-card','.chat-panel'
   ].join(',');
-  const items=[...new Set(qsa(selector))].filter(el=>!el.closest('.page-transition')&&!el.closest('.loader'));
-  items.forEach((el,i)=>{
+  const panelItems=[...new Set(qsa(panelSelector))].filter(el=>!el.closest('.page-transition')&&!el.closest('.loader'));
+  panelItems.forEach((el,i)=>{
     el.classList.add('bb-reveal');
-    el.style.setProperty('--reveal-delay',`${Math.min((i%4)*55,165)}ms`);
+    el.style.setProperty('--reveal-delay',`${Math.min((i%4)*45,135)}ms`);
   });
+
+  // Text is handled separately so every page gets the same in/out motion, not just whole cards.
+  const textSelector='main h1,main h2,main h3,main h4,main h5,main h6,main p,main li,main .eyebrow,main .section-title,main .meta,main label,main blockquote,main .btn';
+  const textItems=[...new Set(qsa(textSelector))].filter(el=>!el.closest('.page-transition')&&!el.closest('.loader')&&!el.closest('.toast-stack'));
+  textItems.forEach((el,i)=>{
+    el.classList.add('bb-text-reveal');
+    el.style.setProperty('--reveal-delay',`${Math.min((i%5)*38,152)}ms`);
+  });
+
+  const items=[...new Set([...panelItems,...textItems])];
   if(!('IntersectionObserver' in window)){
     items.forEach(el=>el.classList.add('is-visible'));
     return;
   }
   const observer=new IntersectionObserver(entries=>{
     entries.forEach(entry=>entry.target.classList.toggle('is-visible',entry.isIntersecting));
-  },{threshold:.09,rootMargin:'0px 0px -5% 0px'});
+  },{threshold:.06,rootMargin:'2% 0px -4% 0px'});
   items.forEach(el=>observer.observe(el));
 })();
 
-// Neon scroll-to-top button. It shifts from cyan/blue near the top to red near the bottom.
+// Neon scroll-to-top button. Always visible: no outer glow at the top, cyan as you scroll, fully red at the bottom.
 (()=>{
   const btn=document.createElement('button');
-  btn.className='bb-scroll-top';
+  btn.className='bb-scroll-top at-top';
   btn.type='button';
   btn.setAttribute('aria-label','Scroll to top');
   btn.innerHTML='<span aria-hidden="true">↑</span><small>TOP</small>';
@@ -147,14 +153,29 @@ window.addEventListener('pageshow',bbResetScroll);
     const doc=document.documentElement;
     const max=Math.max(1,doc.scrollHeight-innerHeight);
     const p=Math.max(0,Math.min(1,scrollY/max));
-    // cyan/blue -> red
-    const r=Math.round(67+(255-67)*p), g=Math.round(245+(32-245)*p), b=Math.round(255+(56-255)*p);
+    // Hold cyan through most of the page, then blend to full neon red near the bottom.
+    const redMix=Math.max(0,Math.min(1,(p-.58)/.42));
+    const r=Math.round(67+(255-67)*redMix);
+    const g=Math.round(245+(32-245)*redMix);
+    const b=Math.round(255+(56-255)*redMix);
+    // Outer square begins with no light and powers up smoothly after leaving the top.
+    const glow=Math.max(0,Math.min(1,p/.22));
+    const borderAlpha=(.10+.78*glow).toFixed(3);
+    const innerAlpha=(.04+.48*glow).toFixed(3);
+    const glow1=(.18+.46*glow).toFixed(3);
+    const glow2=(.06+.34*glow).toFixed(3);
     btn.style.setProperty('--scroll-neon',`rgb(${r} ${g} ${b})`);
-    btn.style.setProperty('--scroll-progress',String(p));
-    btn.classList.toggle('show',scrollY>260);
+    btn.style.setProperty('--scroll-border',p<.012?'transparent':`rgba(${r},${g},${b},${borderAlpha})`);
+    btn.style.setProperty('--scroll-inner',p<.012?'transparent':`rgba(${r},${g},${b},${innerAlpha})`);
+    btn.style.setProperty('--scroll-inner-glow',p<.012?'transparent':`rgba(${r},${g},${b},${(0.16*glow).toFixed(3)})`);
+    btn.style.setProperty('--scroll-glow1',p<.012?'transparent':`rgba(${r},${g},${b},${glow1})`);
+    btn.style.setProperty('--scroll-glow2',p<.012?'transparent':`rgba(${r},${g},${b},${glow2})`);
+    btn.classList.toggle('at-top',p<.012);
+    btn.classList.toggle('at-bottom',p>.97);
   };
   addEventListener('scroll',update,{passive:true});
   addEventListener('resize',update,{passive:true});
   update();
   btn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 })();
+
