@@ -98,3 +98,7 @@ Official accounts now wired into the website:
 - Twitch: https://www.twitch.tv/bandbpodcast
 
 The Twitch channel is also preconfigured in `js/live-config.js`. The YouTube channel is saved there too, but the current static player still needs an individual live video ID until the automatic live-status backend is connected.
+
+
+## v1.3.7 motion polish
+Added viewport fade/reveal animations, a neon scroll-to-top button that shifts from cyan to red with scroll progress, a smoother loader-to-page fade, animated theatre-mode dimming, and a softer neon-toast entrance. Scroll restoration is disabled so every page opens at its top rather than restoring an old scroll position.

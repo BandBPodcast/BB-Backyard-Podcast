@@ -69,9 +69,14 @@
   buttons.forEach(b=>b.addEventListener('click',()=>selectChat(b.dataset.chatSwitch)));
   selectChat(isMobile&&facebookLiveUrl?'facebook':'youtube');
 
-  // Theatre mode / lights-out focus works on desktop and mobile.
+  // Theatre mode / lights-out focus works on desktop and mobile, with a smooth dimmer fade.
   const theatreBtn=document.getElementById('theatreToggle');
+  const theatreDimmer=document.createElement('div');
+  theatreDimmer.className='theatre-dimmer';
+  theatreDimmer.setAttribute('aria-hidden','true');
+  document.body.appendChild(theatreDimmer);
   function setTheatre(on){
+    theatreDimmer.classList.toggle('active',on);
     document.body.classList.toggle('live-theatre-mode',on);
     theatreBtn?.setAttribute('aria-pressed',String(on));
     if(theatreBtn) theatreBtn.textContent=on?'✕ Exit Theatre Mode':'◐ Theatre Mode';

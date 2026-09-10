@@ -18,7 +18,13 @@ function runBBLoader(){
     if(progress>=100){
       clearInterval(timer); loader.classList.remove('powering'); loader.classList.add('neon-on');
       if(messageEl) messageEl.textContent='B&B Backyard Podcast — powered on';
-      setTimeout(()=>{sessionStorage.setItem('bb-loader-seen','1');document.documentElement.classList.add('loader-seen');loader.classList.add('hide')},1050);
+      setTimeout(()=>{
+        sessionStorage.setItem('bb-loader-seen','1');
+        // Fade the loader away first so the page is revealed smoothly.
+        loader.classList.add('hide');
+        document.documentElement.classList.add('bb-first-load-complete');
+        setTimeout(()=>document.documentElement.classList.add('loader-seen'),760);
+      },1050);
     }
   },55);
 }
@@ -94,4 +100,61 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
   });
 
   window.addEventListener('pageshow',(e)=>{if(e.persisted){transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});
+})();
+
+
+// ===== B&B v1.3.7 motion polish =====
+// Always begin at the top of the current page instead of restoring an old scroll position.
+try{history.scrollRestoration='manual'}catch(e){}
+const bbResetScroll=()=>window.scrollTo({top:0,left:0,behavior:'auto'});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bbResetScroll,{once:true});else bbResetScroll();
+window.addEventListener('pageshow',bbResetScroll);
+
+// Scroll reveal: content fades/slides in while visible and fades back out after leaving view.
+(()=>{
+  const selector=[
+    '.hero h1','.hero p','.hero .actions','.hero-logo',
+    '.page-hero .eyebrow','.page-hero h1','.page-hero p',
+    '.section > .container > .eyebrow','.section > .container > .section-title',
+    '.section .card','.section .notice','.section .actions',
+    '.section > .container > p','.section > .container > ul','.section > .container > ol',
+    '.live-neon-status','.main-stream-card','.chat-panel','.footer-wrap'
+  ].join(',');
+  const items=[...new Set(qsa(selector))].filter(el=>!el.closest('.page-transition')&&!el.closest('.loader'));
+  items.forEach((el,i)=>{
+    el.classList.add('bb-reveal');
+    el.style.setProperty('--reveal-delay',`${Math.min((i%4)*55,165)}ms`);
+  });
+  if(!('IntersectionObserver' in window)){
+    items.forEach(el=>el.classList.add('is-visible'));
+    return;
+  }
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>entry.target.classList.toggle('is-visible',entry.isIntersecting));
+  },{threshold:.09,rootMargin:'0px 0px -5% 0px'});
+  items.forEach(el=>observer.observe(el));
+})();
+
+// Neon scroll-to-top button. It shifts from cyan/blue near the top to red near the bottom.
+(()=>{
+  const btn=document.createElement('button');
+  btn.className='bb-scroll-top';
+  btn.type='button';
+  btn.setAttribute('aria-label','Scroll to top');
+  btn.innerHTML='<span aria-hidden="true">↑</span><small>TOP</small>';
+  document.body.appendChild(btn);
+  const update=()=>{
+    const doc=document.documentElement;
+    const max=Math.max(1,doc.scrollHeight-innerHeight);
+    const p=Math.max(0,Math.min(1,scrollY/max));
+    // cyan/blue -> red
+    const r=Math.round(67+(255-67)*p), g=Math.round(245+(32-245)*p), b=Math.round(255+(56-255)*p);
+    btn.style.setProperty('--scroll-neon',`rgb(${r} ${g} ${b})`);
+    btn.style.setProperty('--scroll-progress',String(p));
+    btn.classList.toggle('show',scrollY>260);
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update,{passive:true});
+  update();
+  btn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 })();
