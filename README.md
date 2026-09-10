@@ -122,3 +122,9 @@ Added viewport fade/reveal animations, a neon scroll-to-top button that shifts f
 - Replaced the loader OFF-state logo with the supplied transparent `offsignlogotp.png` artwork while preserving the existing `offsignlogo.png` path used by the site.
 - Replaced the loader ON-state and homepage logo artwork with the supplied transparent `nowalltexturelogotp.png` while preserving the existing `nowalltexturelogo.png` path.
 - No loader timing, transitions, scroll effects, live systems, toast behavior, navigation, or page structure were changed.
+
+
+## v1.4.1
+- Replaced the transition text/neon mock sign with the supplied transparent OFF/ON B&B logo images.
+- Transition timing and brick-door close/open behavior remain unchanged: OFF image appears first, then the ON image ignites before navigation.
+- Brightened the loader OFF image so the artwork stays clearly visible while still looking unpowered.
