@@ -87,3 +87,14 @@ Edit `js/live-config.js` and set `youtubeVideoId` to the current YouTube livestr
 - Left chat can switch between YouTube and Facebook. Because Facebook does not expose a dependable embedded live-chat composer for third-party sites, the Facebook tab opens the official Facebook Live post/comments instead; on mobile it is preferred automatically when configured.
 - Twitch chat remains on the right.
 - Configure `youtubeVideoId`, `twitchChannel`, and `facebookLiveUrl` in `js/live-config.js`.
+
+
+## v1.3.6 — Official social links
+
+Official accounts now wired into the website:
+- YouTube: https://www.youtube.com/@BnBEntertains
+- TikTok: https://www.tiktok.com/@bnb_entertains
+- Facebook: https://www.facebook.com/profile.php?id=61579615124683
+- Twitch: https://www.twitch.tv/bandbpodcast
+
+The Twitch channel is also preconfigured in `js/live-config.js`. The YouTube channel is saved there too, but the current static player still needs an individual live video ID until the automatic live-status backend is connected.
