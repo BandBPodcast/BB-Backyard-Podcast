@@ -117,3 +117,8 @@ Added viewport fade/reveal animations, a neon scroll-to-top button that shifts f
 - Loader now displays the true OFF sign for the full loading cycle and swaps to the true neon ON sign only at 100%, preserving the existing loader timing/fade.
 - Homepage logo imagery now uses `nowalltexturelogo.png`.
 - Existing transitions, reveal animations, Live systems, theatre mode, toast, footer, and scroll-to-top behavior were left intact.
+
+### v1.4.0 — Transparent logo asset swap
+- Replaced the loader OFF-state logo with the supplied transparent `offsignlogotp.png` artwork while preserving the existing `offsignlogo.png` path used by the site.
+- Replaced the loader ON-state and homepage logo artwork with the supplied transparent `nowalltexturelogotp.png` while preserving the existing `nowalltexturelogo.png` path.
+- No loader timing, transitions, scroll effects, live systems, toast behavior, navigation, or page structure were changed.
