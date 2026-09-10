@@ -7,19 +7,23 @@ function runBBLoader(){
   const percentEl=qs('#loaderPercent'), progressEl=qs('#loaderProgress'), messageEl=qs('#loaderMessage');
   loader.classList.add('powering','bb-flash-off');
 
-  // Real image-swap flicker: OFF -> quick electrical teaser -> OFF again.
-  // This is driven by classes instead of opacity keyframes so the two supplied
-  // transparent PNGs visibly swap even when older loader CSS is present.
+  // v1.4.5: gentler, photosensitive-friendly image-swap flicker.
+  // Keep the OFF transparent sign visible, allow one small teaser flash while loading,
+  // then use only a couple of spaced flashes at 100% before staying ON for two seconds.
   const flickerTimers=[];
   const later=(fn,ms)=>{const id=setTimeout(fn,ms);flickerTimers.push(id);return id};
   const showFlash=(on)=>{
     loader.classList.toggle('bb-flash-on',!!on);
     loader.classList.toggle('bb-flash-off',!on);
   };
-  later(()=>showFlash(true),430);
-  later(()=>showFlash(false),525);
-  later(()=>showFlash(true),590);
-  later(()=>showFlash(false),650);
+
+  const reduceMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  // One subtle teaser only — no rapid strobing while the percentage is moving.
+  if(!reduceMotion){
+    later(()=>showFlash(true),700);
+    later(()=>showFlash(false),880);
+  }
 
   let progress=0;
   const messages=[[0,'Neon circuits warming up'],[28,'Lighting the backyard wall'],[56,'Tuning the podcast signal'],[82,'Powering the B&B sign']];
@@ -33,28 +37,31 @@ function runBBLoader(){
     if(progress>=100){
       clearInterval(timer);
       flickerTimers.forEach(clearTimeout);
-      loader.classList.remove('powering','bb-flash-on','bb-flash-off','neon-on');
+      loader.classList.remove('powering','bb-flash-on','bb-flash-off','neon-on','bb-final-on');
+      showFlash(false);
       if(messageEl) messageEl.textContent='B&B Backyard Podcast — powering on';
 
-      // At 100%, sputter repeatedly between the actual OFF and ON image,
-      // then lock the ON sign before fading into the page.
-      const sequence=[
-        [0,false],[90,true],[165,false],[245,true],[315,false],[385,true],
-        [455,false],[535,true],[610,false],[690,true],[775,false],[855,true],
-        [935,false],[1015,true],[1090,false],[1170,true]
-      ];
-      sequence.forEach(([ms,on])=>later(()=>showFlash(on),ms));
+      // Two deliberate flashes with comfortable spacing, then lock ON.
+      const lockOnAt=reduceMotion?180:1380;
+      if(!reduceMotion){
+        later(()=>showFlash(true),260);
+        later(()=>showFlash(false),520);
+        later(()=>showFlash(true),820);
+        later(()=>showFlash(false),1080);
+      }
       later(()=>{
         loader.classList.remove('bb-flash-on','bb-flash-off');
         loader.classList.add('bb-final-on');
         if(messageEl) messageEl.textContent='B&B Backyard Podcast — powered on';
-      },1240);
+      },lockOnAt);
+
+      // Keep the fully illuminated sign on-screen for a full two seconds.
       later(()=>{
         sessionStorage.setItem('bb-loader-seen','1');
         loader.classList.add('hide');
         document.documentElement.classList.add('bb-first-load-complete');
         setTimeout(()=>document.documentElement.classList.add('loader-seen'),760);
-      },1640);
+      },lockOnAt+2000);
     }
   },55);
 }
@@ -211,10 +218,11 @@ window.addEventListener('pageshow',bbResetScroll);
 
 
 
-// v1.4.4 — navigation neon logo: a brief OFF/ON electrical blink once per minute.
+// v1.4.5 — transparent navigation sign + subtle periodic power blink.
 (()=>{
   const brand=document.querySelector('.site-header .brand');
-  if(!brand || !brand.querySelector('.nav-logo-stack')) return;
+  const stack=brand?.querySelector('.nav-logo-stack');
+  if(!brand || !stack) return;
 
   let sequenceTimers=[];
   const clearSequence=()=>{sequenceTimers.forEach(clearTimeout);sequenceTimers=[]};
@@ -224,16 +232,33 @@ window.addEventListener('pageshow',bbResetScroll);
   };
   const blink=()=>{
     clearSequence();
-    // Normally ON. Briefly lose power, spark back, dip once, then remain ON.
+    // A clearly visible but gentle power dip: ON -> OFF -> ON -> OFF -> ON.
     setState('nav-neon-off');
-    sequenceTimers.push(setTimeout(()=>setState('nav-neon-flash'),170));
-    sequenceTimers.push(setTimeout(()=>setState('nav-neon-off'),290));
-    sequenceTimers.push(setTimeout(()=>setState('nav-neon-flash'),390));
-    sequenceTimers.push(setTimeout(()=>setState(''),560));
+    sequenceTimers.push(setTimeout(()=>setState('nav-neon-flash'),260));
+    sequenceTimers.push(setTimeout(()=>setState('nav-neon-off'),520));
+    sequenceTimers.push(setTimeout(()=>setState(''),780));
   };
 
-  // Give visitors one subtle blink shortly after the page settles, then once per minute.
-  const first=setTimeout(blink,8000);
+  const first=setTimeout(blink,4500);
   const interval=setInterval(blink,60000);
   window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval);clearSequence()},{once:true});
+})();
+
+// Home hero sign: seamless float using CSS translate + a very occasional gentle image blink.
+(()=>{
+  const hero=document.querySelector('.hero-logo-stack');
+  if(!hero) return;
+  let timers=[];
+  const clear=()=>{timers.forEach(clearTimeout);timers=[]};
+  const setOff=(off)=>hero.classList.toggle('hero-neon-off',off);
+  const blink=()=>{
+    clear();
+    setOff(true);
+    timers.push(setTimeout(()=>setOff(false),260));
+    timers.push(setTimeout(()=>setOff(true),540));
+    timers.push(setTimeout(()=>setOff(false),820));
+  };
+  const first=setTimeout(blink,12000);
+  const interval=setInterval(blink,75000);
+  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval);clear();},{once:true});
 })();

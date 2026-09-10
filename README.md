@@ -145,3 +145,9 @@ The loader flicker now swaps the actual supplied OFF and ON transparent logo ima
 - Navigation logo stays ON normally, performs a short electrical OFF/ON blink, then returns ON.
 - Blink repeats once every 60 seconds; no rapid continuous flashing.
 - Existing loader, transition, Live page, toast, theatre mode, scroll effects, and other systems were left intact.
+
+
+## v1.4.5
+- Fixed the Home navigation logo so it uses the transparent OFF/ON image stack and visibly blinks on a gentle 60-second interval.
+- Reduced loader flashing to a few spaced power-on flashes, then holds fully ON for 2 seconds at 100% before entering the page.
+- Reworked the Home hero logo float to use independent translate motion for seamless animation and added a subtle occasional OFF/ON blink.
