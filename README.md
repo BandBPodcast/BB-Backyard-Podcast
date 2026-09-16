@@ -157,3 +157,18 @@ The loader flicker now swaps the actual supplied OFF and ON transparent logo ima
 - Added Joseph Romero developer/technical credit to the site footer.
 - Crew cards now open neon profile popouts with blurred background and accessible close control.
 - Updated all four crew roles to Host / Co-Host, with Joseph Romero listed last and technical production responsibilities summarized.
+
+
+## v1.4.8 brand update
+- Public name: B & B Backyard Podcast.
+- Loader uses the sunset without logo first, then the supplied sunset/logo image at completion before fading into the page.
+- Navigation, home hero, and footer use the supplied transparent bottle-cap logo.
+- Existing transitions, live systems, crew profiles, social links, toast system, smoke, scroll effects, and mobile behavior are preserved.
+
+
+## v1.4.9
+- Added supplied crew portraits to the existing Crew cards and profile modal.
+- Page transition now uses the blank bottle cap first, then the supplied logo bottle cap.
+- Added a weathered roadside-billboard frame around the existing sunset loader without changing its loading behavior.
+
+Version 1.4.42: Crew modal portraits now render behind the transparent WANTED poster opening and scale to fill the portrait window.
