@@ -1118,3 +1118,1157 @@ main .bb-text-reveal.is-visible{opacity:1;transform:translateY(0);filter:blur(0)
 body.crew-modal-open{overflow:hidden}
 @media(max-width:700px){.footer-meta{text-align:center}.crew-modal{padding:14px}.crew-modal-panel{grid-template-columns:1fr;gap:18px;padding:56px 20px 24px}.crew-modal-photo{width:min(250px,72vw);margin:auto}.crew-modal-copy{text-align:center}}
 @media(prefers-reduced-motion:reduce){.crew-card-interactive,.crew-modal,.crew-modal-close{transition:none!important}}
+
+/* ===== B & B v1.4.8 sunset loader + bottle-cap brand refresh ===== */
+.loader-inner{width:min(1040px,94vw)}
+.loader-sign-wrap{width:100%;margin-bottom:18px}
+.loader-sign-frame{width:min(960px,92vw);max-width:none;aspect-ratio:3/2;border:0!important;background:transparent!important;box-shadow:none!important;overflow:hidden;border-radius:22px}
+.loader-sunset-stack{position:absolute;inset:0;width:100%;height:100%}
+.loader-sunset-stack .loader-sunset-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;margin:0!important;border-radius:22px;filter:none!important;transform:none!important}
+.loader.bb-flash-off .loader-sunset-stack .loader-logo-off,.loader.powering .loader-sunset-stack .loader-logo-off{opacity:1!important;filter:brightness(.88) saturate(.92)!important}
+.loader.bb-flash-off .loader-sunset-stack .loader-logo-on,.loader.powering .loader-sunset-stack .loader-logo-on{opacity:0!important}
+.loader.bb-flash-on .loader-sunset-stack .loader-logo-off{opacity:.08!important}
+.loader.bb-flash-on .loader-sunset-stack .loader-logo-on{opacity:1!important;filter:brightness(1.04) saturate(1.04)!important}
+.loader.bb-final-on .loader-sunset-stack .loader-logo-off{opacity:0!important}
+.loader.bb-final-on .loader-sunset-stack .loader-logo-on{opacity:1!important;filter:brightness(1.04) saturate(1.05) drop-shadow(0 0 24px rgba(255,176,64,.22))!important}
+.loader-electric-glow{inset:8% 6%;border-radius:28px;box-shadow:0 0 45px rgba(255,154,44,.22),0 0 90px rgba(255,211,111,.10)!important}
+.site-header .brand .nav-logo-stack{width:58px!important;height:58px!important;flex-basis:58px!important}
+.site-header .brand .nav-logo-on{opacity:1!important;filter:drop-shadow(0 4px 8px rgba(0,0,0,.55))!important}
+.site-header .brand.nav-bottlecap-pulse .nav-logo-on{filter:brightness(1.14) drop-shadow(0 0 8px rgba(255,66,66,.38)) drop-shadow(0 0 12px rgba(255,180,70,.22))!important}
+.hero-logo.hero-bottlecap{aspect-ratio:1/1;width:min(100%,560px);animation:bbHeroFloatV145 6s ease-in-out infinite!important}
+.hero-bottlecap .hero-logo-on{opacity:1!important;filter:drop-shadow(0 26px 40px rgba(0,0,0,.55));transition:filter .5s ease!important}
+.hero-bottlecap.hero-bottlecap-pulse .hero-logo-on{filter:brightness(1.1) drop-shadow(0 0 18px rgba(255,48,48,.28)) drop-shadow(0 28px 42px rgba(0,0,0,.58))!important}
+.footer-logo img{object-fit:contain;background:transparent;border-radius:0}
+@media(max-width:640px){
+ .loader-inner{width:96vw;padding-inline:10px}
+ .loader-sign-frame{width:94vw;border-radius:14px}
+ .loader-sunset-stack .loader-sunset-image{border-radius:14px}
+ .site-header .brand .nav-logo-stack{width:50px!important;height:50px!important;flex-basis:50px!important}
+}
+@media(prefers-reduced-motion:reduce){.site-header .brand.nav-bottlecap-pulse .nav-logo-on,.hero-bottlecap.hero-bottlecap-pulse .hero-logo-on{filter:none!important}}
+
+
+/* ===== B & B v1.4.9 crew portraits + weathered roadside billboard loader ===== */
+.crew-photo{overflow:hidden;background:#090909}
+.crew-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+.crew-card:nth-child(2) .crew-photo img{object-position:center 42%}
+.crew-modal-photo img{object-fit:cover;object-position:center}
+
+/* Keep the existing sunset loader mechanics; give the scene a weathered country billboard frame. */
+.loader-sign-wrap{padding:24px 28px 34px;position:relative}
+.loader-sign-frame{
+  border:12px solid #4b2c19!important;
+  border-radius:8px!important;
+  background:#160d08!important;
+  box-shadow:
+    0 0 0 3px #1c100a,
+    0 0 0 6px rgba(119,75,42,.75),
+    0 22px 42px rgba(0,0,0,.72),
+    inset 0 0 18px rgba(0,0,0,.72)!important;
+  overflow:hidden!important;
+}
+.loader-sign-frame::before{
+  content:"";position:absolute;inset:-12px;z-index:6;pointer-events:none;border-radius:8px;
+  background:
+    linear-gradient(90deg,transparent 0 8%,rgba(0,0,0,.28) 8.5% 9%,transparent 9.5% 78%,rgba(0,0,0,.24) 78.5% 79%,transparent 79.5%),
+    linear-gradient(0deg,rgba(255,255,255,.04),transparent 18%,rgba(0,0,0,.12) 72%,transparent);
+  mix-blend-mode:multiply;
+}
+.loader-sign-frame::after{
+  content:"";position:absolute;z-index:8;left:7%;right:7%;bottom:-31px;height:28px;pointer-events:none;
+  background:linear-gradient(90deg,#2a170d,#704323 12%,#392012 48%,#6a3d20 76%,#25140b);
+  border:3px solid #160c07;box-shadow:0 8px 16px rgba(0,0,0,.58);
+}
+.loader-sunset-stack .loader-sunset-image{border-radius:0!important}
+.loader-sign-wrap::before,.loader-sign-wrap::after{
+  content:"";position:absolute;bottom:0;width:28px;height:52px;z-index:0;
+  background:linear-gradient(90deg,#24130b,#63391e 45%,#2a160c);border:3px solid #160c07;
+  box-shadow:0 10px 18px rgba(0,0,0,.5)
+}
+.loader-sign-wrap::before{left:20%}.loader-sign-wrap::after{right:20%}
+
+/* Transition now uses the matching blank bottle cap, then reveals the logo cap. */
+.transition-logo-off{filter:brightness(.72) contrast(1.08) saturate(.9) drop-shadow(0 20px 34px rgba(0,0,0,.82))}
+.transition-logo-on{filter:drop-shadow(0 20px 34px rgba(0,0,0,.84))}
+@media(max-width:640px){
+  .loader-sign-wrap{padding:14px 12px 26px}
+  .loader-sign-frame{border-width:7px!important}
+  .loader-sign-frame::after{bottom:-23px;height:20px}
+  .loader-sign-wrap::before,.loader-sign-wrap::after{height:38px;width:20px}
+}
+
+/* ===== B & B v1.4.10 crew portrait framing fix ===== */
+/* Keep Ora Johnson's full head visible in the landscape crew-card crop without altering the source photo. */
+.crew-card:nth-child(3) .crew-photo img{object-position:center 32%}
+
+/* ===== B & B v1.4.11 Ora Johnson portrait framing correction ===== */
+/* Shift the existing portrait downward inside the crop so Ora's complete face/head is visible. */
+.crew-card:nth-child(3) .crew-photo img{object-position:center 72%!important}
+
+/* ===== B & B v1.4.13 Ora Johnson portrait display fix ===== */
+/* Crew card #3: prioritize Ora's complete head/face instead of cropping the portrait. */
+.crew-card:nth-child(3) .crew-photo{
+  background:#090909;
+}
+.crew-card:nth-child(3) .crew-photo img{
+  width:100%;
+  height:100%;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+/* Profile popout: show Ora's complete original portrait rather than inheriting the card crop. */
+.crew-modal-photo img[alt="Ora Johnson"]{
+  width:100%;
+  height:100%;
+  object-fit:contain!important;
+  object-position:center center!important;
+  background:#090909;
+}
+
+/* ===== B & B v1.4.14 supplied billboard loader + farm footer art ===== */
+/* Preserve the existing loader timing/flicker. The sunset stays underneath; the user's
+   transparent weathered billboard PNG is layered above it as the physical frame. */
+.loader-sign-wrap{padding:0!important;margin:0 auto 18px!important;position:relative!important;width:min(1040px,96vw)!important}
+.loader-sign-frame{position:relative!important;width:100%!important;aspect-ratio:1536/1024!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+.loader-sign-frame::before,.loader-sign-frame::after,.loader-sign-wrap::before,.loader-sign-wrap::after{display:none!important;content:none!important}
+.loader-sunset-stack{position:absolute!important;left:14.6%!important;right:14.6%!important;top:22.4%!important;bottom:34.2%!important;width:auto!important;height:auto!important;overflow:hidden!important;z-index:1!important;background:#080808}
+.loader-sunset-stack .loader-sunset-image{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
+.loader-billboard-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:5;pointer-events:none;filter:drop-shadow(0 22px 30px rgba(0,0,0,.72))}
+.loader-electric-glow{z-index:3!important;left:16%!important;right:16%!important;top:24%!important;bottom:36%!important;inset:auto!important;border-radius:4px!important;pointer-events:none}
+.loader-status{margin-top:-3.5vw!important;position:relative;z-index:8}
+.loader .progress,.loader-wave,.loader small{position:relative;z-index:8}
+
+/* Supplied transparent farm scene decorates the footer without replacing its content. */
+.footer{position:relative!important;overflow:hidden!important;padding-bottom:clamp(115px,13vw,210px)!important;background:linear-gradient(180deg,rgba(3,3,4,.9),rgba(3,3,4,.72))!important}
+.footer-wrap{position:relative!important;z-index:3!important}
+.footer-farm-art{position:absolute;z-index:1;pointer-events:none;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,2048px);height:auto;max-height:clamp(120px,15vw,230px);object-fit:cover;object-position:center bottom;filter:drop-shadow(0 -10px 22px rgba(0,0,0,.2))}
+@media(max-width:640px){
+ .loader-sign-wrap{width:98vw!important}
+ .loader-status{margin-top:-1.5vw!important}
+ .footer{padding-bottom:105px!important}
+ .footer-farm-art{width:155%;max-width:none;max-height:125px}
+}
+
+/* ===== B & B v1.4.15 billboard viewport + full footer artwork fix ===== */
+/* Keep BOTH sunset states completely inside the transparent center opening of the supplied billboard. */
+.loader-sunset-stack{
+  left:15.8%!important;
+  right:15.5%!important;
+  top:22.6%!important;
+  bottom:35.8%!important;
+  overflow:hidden!important;
+  clip-path:inset(0)!important;
+  background:#080808!important;
+}
+.loader-sunset-stack .loader-sunset-image{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+.loader-electric-glow{
+  left:16.2%!important;
+  right:15.9%!important;
+  top:23.1%!important;
+  bottom:36.3%!important;
+}
+/* Put loader information below the complete billboard instead of over the artwork. */
+.loader-status{margin-top:8px!important}
+
+/* Show the COMPLETE supplied footer scene. Never crop its wagon wheel, plants or wheelbarrow. */
+.footer{
+  overflow:visible!important;
+  padding-bottom:clamp(185px,33.3vw,355px)!important;
+}
+.footer-farm-art{
+  position:absolute!important;
+  left:50%!important;
+  bottom:0!important;
+  transform:translateX(-50%)!important;
+  width:min(100%,2048px)!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+@media(max-width:640px){
+  .loader-sunset-stack{left:15.8%!important;right:15.5%!important;top:22.6%!important;bottom:35.8%!important}
+  .loader-status{margin-top:6px!important}
+  .footer{padding-bottom:33.3vw!important;min-height:220px}
+  .footer-farm-art{width:100%!important;max-width:2048px!important;max-height:none!important;object-fit:contain!important}
+}
+
+/* ===== B & B v1.4.16 exact billboard opening containment fix ===== */
+/* The supplied billboard's true clear center opening is approx x=234..1318, y=230..651
+   on its 1536x1024 canvas. Use a slightly inset safe viewport so no sunset pixels can
+   appear through/around the weathered frame edges. */
+.loader-sign-frame{
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+.loader-sunset-stack{
+  left:15.95%!important;
+  right:15.05%!important;
+  top:23.25%!important;
+  bottom:37.20%!important;
+  width:auto!important;
+  height:auto!important;
+  overflow:hidden!important;
+  clip-path:inset(0 round 1px)!important;
+  contain:paint!important;
+  z-index:1!important;
+}
+.loader-sunset-stack .loader-sunset-image{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  border-radius:0!important;
+}
+.loader-billboard-frame{
+  z-index:10!important;
+}
+.loader-electric-glow{
+  left:16.35%!important;
+  right:15.45%!important;
+  top:23.65%!important;
+  bottom:37.60%!important;
+  z-index:4!important;
+}
+@media(max-width:640px){
+  .loader-sunset-stack{
+    left:15.95%!important;
+    right:15.05%!important;
+    top:23.25%!important;
+    bottom:37.20%!important;
+  }
+}
+
+/* ===== B & B v1.4.17 — warm golden backyard/farm theme =====
+   Replaces the dark brick atmosphere with the supplied sunrise/farm artwork.
+   Existing layout, loader billboard, crew, transitions and page structure are preserved. */
+body{
+  background:#b56f28 url('../assets/images/backyard-golden-farm-background.png') center center/cover fixed no-repeat!important;
+}
+body::before{
+  background:
+    linear-gradient(180deg,rgba(78,35,10,.08),rgba(76,31,8,.18)),
+    radial-gradient(circle at 50% 12%,rgba(255,231,154,.18),transparent 42%)!important;
+}
+body::after{
+  box-shadow:inset 0 0 110px 18px rgba(83,35,8,.20)!important;
+}
+main{
+  background:linear-gradient(180deg,rgba(255,210,128,.05),rgba(90,38,10,.10))!important;
+}
+.site-header{
+  background:linear-gradient(180deg,rgba(74,31,12,.88),rgba(55,22,9,.82))!important;
+  border-bottom:1px solid rgba(255,190,93,.42)!important;
+  box-shadow:0 8px 28px rgba(68,27,8,.24),0 1px 0 rgba(255,224,166,.15)!important;
+}
+.card{
+  background:linear-gradient(145deg,rgba(75,36,16,.88),rgba(38,19,10,.86))!important;
+  border-color:rgba(255,211,147,.22)!important;
+  box-shadow:0 18px 44px rgba(68,27,8,.24)!important;
+}
+.page-hero,.section{position:relative}
+.section-copy,.page-hero p,.hero p,.card p,.footer{color:#f0dfca!important}
+.eyebrow{color:#ffd07a!important;text-shadow:0 0 12px rgba(255,174,55,.30)}
+.section-title,.page-hero h1,.hero h1,.card h2,.card h3{color:#fffaf0!important;text-shadow:0 2px 8px rgba(70,27,7,.48)!important}
+.btn-ghost{background:rgba(85,40,16,.55)!important;border-color:rgba(255,221,169,.34)!important}
+.footer{
+  background:linear-gradient(180deg,rgba(73,31,11,.42),rgba(41,19,8,.70))!important;
+  border-top-color:rgba(255,205,129,.28)!important;
+}
+/* Keep the loader readable, but replace the black/brick surround with a warm sunrise backdrop. */
+.loader{
+  background:#9b581f url('../assets/images/backyard-golden-farm-background.png') center/cover no-repeat!important;
+}
+.loader::before{
+  background:linear-gradient(180deg,rgba(73,29,8,.18),rgba(58,23,7,.30))!important;
+  box-shadow:inset 0 0 120px 30px rgba(76,30,7,.28)!important;
+}
+/* The page-change doors now carry the same warm farm identity instead of dark brick. */
+.transition-door{
+  background:#8f4e1d url('../assets/images/backyard-golden-farm-background.png') center/cover no-repeat!important;
+  box-shadow:inset 0 0 90px 18px rgba(66,25,7,.34)!important;
+}
+.transition-door::after{
+  background:linear-gradient(90deg,rgba(80,31,8,.26),transparent 42%,rgba(255,190,80,.10))!important;
+}
+.page-transition::before{
+  background:rgba(83,32,8,.18)!important;
+  box-shadow:inset 0 0 120px 25px rgba(71,27,7,.28)!important;
+}
+@media(max-width:980px){body{background-attachment:scroll!important;background-position:center top!important}}
+
+/* ===== B & B v1.4.19 — lightweight sunset atmosphere ===== */
+body{background:#9b5727 url('../assets/images/sunset-lightweight-background.jpg') center top/cover no-repeat!important;background-attachment:scroll!important}
+body::before{opacity:.10!important;background:linear-gradient(180deg,rgba(255,229,170,.08),rgba(75,31,20,.06))!important;mask-image:none!important}
+body::after{background:none!important;box-shadow:none!important}
+main{background:rgba(92,39,21,.025)!important}
+.site-header,.card,.footer{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.loader{background:#98502b!important;background-image:linear-gradient(180deg,#c9783d 0%,#98502b 54%,#633523 100%)!important}
+.loader::before{background:rgba(79,32,18,.10)!important;box-shadow:inset 0 0 70px 12px rgba(78,32,19,.14)!important}
+.transition-door{background:#874326!important;background-image:linear-gradient(180deg,#b96532 0%,#874326 58%,#603222 100%)!important}
+.transition-door::after{background:linear-gradient(90deg,rgba(82,33,19,.16),transparent 48%,rgba(255,205,119,.06))!important}
+.page-transition::before{background:rgba(105,49,27,.12)!important;box-shadow:inset 0 0 70px 12px rgba(73,31,19,.16)!important}
+
+
+/* ===== B & B v1.4.20 — custom country loading bar =====
+   Uses the supplied transparent loading-bar artwork while preserving the existing loader logic. */
+.country-progress-shell{
+  position:relative;
+  width:min(820px,94vw);
+  aspect-ratio:2048 / 690;
+  margin:-6px auto -4px;
+  pointer-events:none;
+}
+.country-progress-art{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  z-index:2;
+  filter:drop-shadow(0 12px 16px rgba(66,31,12,.30));
+}
+/* Fill sits only inside the long empty opening in the custom artwork. */
+.country-progress-shell .progress{
+  position:absolute!important;
+  left:21.9%!important;
+  top:54.0%!important;
+  width:65.0%!important;
+  height:14.0%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:linear-gradient(180deg,#24160d 0%,#3b2414 50%,#1d120b 100%)!important;
+  box-shadow:inset 0 2px 7px rgba(0,0,0,.75),inset 0 -1px 1px rgba(255,224,166,.10)!important;
+  z-index:1!important;
+}
+.country-progress-shell .progress span{
+  display:block!important;
+  height:100%!important;
+  width:0;
+  border-radius:5px!important;
+  background:linear-gradient(90deg,#7b451f 0%,#b87333 42%,#d29a52 72%,#c4823e 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,235,196,.25),inset 0 -2px 4px rgba(75,35,13,.42)!important;
+  transition:width .08s linear!important;
+}
+/* Remove the former neon treatment from loader progress/status only. */
+.loader-status strong{
+  color:#f3d7a4!important;
+  text-shadow:0 1px 2px rgba(55,25,9,.75)!important;
+}
+.loader-status-label{
+  color:#f0d3a1!important;
+  text-shadow:0 1px 2px rgba(55,25,9,.75)!important;
+}
+@media(max-width:640px){
+  .country-progress-shell{width:98vw;margin:0 auto -2px}
+  .country-progress-shell .progress{border-radius:4px!important}
+}
+\n\n/* ===== B & B v1.4.21 — billboard-contained sunset + bottom-mounted country loader ===== */
+/* Sunset is clipped to the billboard's actual transparent viewing opening (x 234–1318, y 230–651). */
+.loader-sign-frame{overflow:hidden!important;isolation:isolate!important}
+.loader-sunset-stack{
+ left:15.30%!important; right:14.13%!important;
+ top:22.66%!important; bottom:36.23%!important;
+ overflow:hidden!important; clip-path:inset(2px)!important; contain:paint!important;
+}
+.loader-sunset-stack .loader-sunset-image{
+ position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
+ object-fit:cover!important; object-position:center center!important; transform:none!important;
+}
+/* Mount the supplied custom bar directly across the billboard's lower wooden section. */
+.loader-sign-frame .country-progress-shell{
+ position:absolute!important; left:7.5%!important; bottom:-0.5%!important;
+ width:85%!important; height:auto!important; aspect-ratio:2048/690!important;
+ margin:0!important; z-index:14!important; pointer-events:none!important;
+ transform:none!important;
+}
+.loader-sign-frame .country-progress-art{z-index:15!important}
+.loader-sign-frame .country-progress-shell .progress{z-index:14!important}
+.loader-billboard-frame{z-index:10!important}
+.loader-status{margin-top:2px!important}
+@media(max-width:640px){
+ .loader-sign-frame .country-progress-shell{left:5%!important;bottom:-1%!important;width:90%!important}
+ .loader-status{margin-top:0!important}
+}
+
+/* ===== v1.4.22 Withered barn-door page transition =====
+   Keeps the existing transition timing/logo sequence; only replaces the old brick door artwork. */
+.transition-door{
+  background-color:#030304;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100% 100%;
+  box-shadow:inset 0 0 70px 10px rgba(0,0,0,.28);
+}
+.transition-door-left{
+  background-image:url('../assets/images/transition-barn-door-left.png');
+}
+.transition-door-right{
+  background-image:url('../assets/images/transition-barn-door-right.png');
+}
+.transition-door::after{
+  background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 45%,rgba(0,0,0,.08));
+  pointer-events:none;
+}
+@media(max-width:640px){
+  .transition-door{background-size:100% 100%;}
+}
+
+/* ===== B & B v1.4.23 — barn door transition visibility fix =====
+   Force the supplied transparent barn-door artwork to override older brick/sunset transition rules. */
+.page-transition .transition-door{
+  background-color:transparent!important;
+  background-repeat:no-repeat!important;
+  background-position:center center!important;
+  background-size:100% 100%!important;
+}
+.page-transition .transition-door-left{
+  background-image:url('../assets/images/transition-barn-door-left.png')!important;
+}
+.page-transition .transition-door-right{
+  background-image:url('../assets/images/transition-barn-door-right.png')!important;
+}
+
+/* ===== B & B v1.4.24 — true hinged barn-door transition =====
+   The barn doors now swing on their outside hinges instead of sliding.
+   Transition stage is pure black and the old red/cyan center seam is disabled. */
+.page-transition{
+  background:#000!important;
+  perspective:1800px;
+  perspective-origin:50% 50%;
+}
+.page-transition::before{
+  background:#000!important;
+  box-shadow:none!important;
+}
+.page-transition .transition-door{
+  top:0!important;
+  bottom:0!important;
+  width:50%!important;
+  height:100%!important;
+  background-color:#000!important;
+  background-repeat:no-repeat!important;
+  background-position:center center!important;
+  background-size:100% 100%!important;
+  border:0!important;
+  box-shadow:none!important;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:transform .78s cubic-bezier(.62,.02,.22,1)!important;
+}
+.page-transition .transition-door::after{display:none!important;content:none!important}
+.page-transition .transition-door-left{
+  left:0!important;
+  right:auto!important;
+  transform-origin:left center!important;
+  transform:rotateY(-102deg)!important;
+  background-image:url('../assets/images/transition-barn-door-left.png')!important;
+}
+.page-transition .transition-door-right{
+  right:0!important;
+  left:auto!important;
+  transform-origin:right center!important;
+  transform:rotateY(102deg)!important;
+  background-image:url('../assets/images/transition-barn-door-right.png')!important;
+}
+.page-transition.closing .transition-door-left,
+.page-transition.closed .transition-door-left,
+.page-transition.entering .transition-door-left{transform:rotateY(0deg)!important}
+.page-transition.closing .transition-door-right,
+.page-transition.closed .transition-door-right,
+.page-transition.entering .transition-door-right{transform:rotateY(0deg)!important}
+.page-transition.opening .transition-door-left{transform:rotateY(-102deg)!important}
+.page-transition.opening .transition-door-right{transform:rotateY(102deg)!important}
+.page-transition .transition-seam{display:none!important;opacity:0!important;background:none!important;box-shadow:none!important}
+@media(max-width:640px){
+  .page-transition{perspective:1200px}
+  .page-transition .transition-door{width:50%!important;background-size:100% 100%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-transition .transition-door{transition:none!important}
+}
+
+/* ===== B & B v1.4.26 — interactive hanging roadside sign ===== */
+.bb-hanging-sign{position:fixed;z-index:70;left:0;top:72px;width:clamp(245px,22vw,390px);height:clamp(320px,43vw,650px);pointer-events:none;transform:translateX(-18%);filter:drop-shadow(0 12px 12px rgba(0,0,0,.28));contain:layout style;}
+.bb-hanging-post{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:left top;pointer-events:none;user-select:none;-webkit-user-drag:none;}
+.bb-sign-pivot{position:absolute;left:38%;top:15.5%;width:66%;transform-origin:50% 3%;transform:rotate(var(--sign-angle,-3deg));transition:transform .16s ease-out;will-change:transform;}
+.bb-hanging-board{display:block;width:100%;height:auto;pointer-events:none;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 9px 8px rgba(0,0,0,.32));}
+@media(max-width:1100px){.bb-hanging-sign{width:270px;top:66px;transform:translateX(-30%)}.bb-sign-pivot{left:38%;width:69%}}
+@media(max-width:760px){.bb-hanging-sign{width:205px;height:340px;top:60px;transform:translateX(-39%);opacity:.92}.bb-sign-pivot{left:39%;top:15.5%;width:72%}}
+@media(max-width:480px){.bb-hanging-sign{display:none}}
+@media(prefers-reduced-motion:reduce){.bb-sign-pivot{transition:none!important;transform:rotate(-3deg)!important}}
+
+/* ===== B & B v1.4.27 — lower chain-hung sign + country typography ===== */
+/* Country/editorial typography without adding a web-font download. */
+body,button,input,textarea,select{font-family:Georgia,'Times New Roman',serif;}
+.site-nav a,.eyebrow,.btn,.badge,.social-label,.meta,.brand-copy strong,.brand-copy span,.footer,.crew-card .eyebrow{font-family:Rockwell,'Roboto Slab','Courier New',serif;letter-spacing:.055em;}
+h1,h2,h3,h4,h5,h6,.hero h1,.page-hero h1,.section-title,.stream-panel-head h2,.main-stream-head h2,.chat-panel-head h2,.live-neon-sign strong,.facebook-chat-fallback h3,.crew-modal-copy h2,.stat strong{font-family:Rockwell,Georgia,'Times New Roman',serif;letter-spacing:-.018em;}
+.hero p,.section-copy,.card p,.page-hero p,.episode-card p,.mini-card p,.social-card p,.crew-card .card-pad p{font-family:Georgia,'Times New Roman',serif;}
+
+/* The board now begins down at the free ends of the two chains. */
+.bb-hanging-sign{perspective:900px;perspective-origin:58% 27%;}
+.bb-sign-pivot{left:31%;top:28.5%;width:75%;transform-origin:50% 0%;transform:translateY(var(--sign-y,0px)) rotateX(var(--sign-pitch,3deg)) rotateZ(-1.5deg);transition:none;will-change:transform,filter;transform-style:preserve-3d;}
+.bb-hanging-board{filter:drop-shadow(0 var(--sign-shadow-y,10px) var(--sign-shadow-blur,9px) rgba(0,0,0,.34));}
+@media(max-width:1100px){.bb-sign-pivot{left:31%;top:28.5%;width:76%}}
+@media(max-width:760px){.bb-sign-pivot{left:31%;top:28%;width:78%}}
+@media(prefers-reduced-motion:reduce){.bb-sign-pivot{transform:rotateX(2deg) rotateZ(-1.5deg)!important}}
+
+/* ===== B & B v1.4.28 — beer mug page-progress / scroll-to-top ===== */
+/* Replaces the old neon square completely. The fill is a separate layer behind the PNG. */
+.bb-scroll-top{display:none!important}
+.bb-scroll-mug{
+  --mug-fill:0%;
+  position:fixed;right:18px;bottom:12px;z-index:95;
+  width:clamp(82px,7.2vw,122px);aspect-ratio:1014/1536;
+  padding:0;border:0;background:transparent;cursor:pointer;
+  overflow:visible;isolation:isolate;
+  filter:drop-shadow(0 8px 8px rgba(48,24,8,.30));
+  transition:transform .2s ease,filter .2s ease,opacity .2s ease;
+}
+.bb-scroll-mug:hover,.bb-scroll-mug:focus-visible{transform:translateY(-4px) rotate(-1deg);filter:drop-shadow(0 10px 10px rgba(48,24,8,.42));outline:none}
+.bb-mug-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;pointer-events:none;user-select:none;-webkit-user-drag:none}
+/* Interior bowl only: intentionally excludes the left-side handle and the outside of the glass. */
+.bb-mug-liquid{
+  position:absolute;z-index:4;
+  left:29.6%;right:3.8%;top:5.3%;bottom:5.1%;
+  overflow:hidden;
+  clip-path:polygon(5% 0,96% 0,99% 3%,99% 95%,94% 99%,7% 99%,2% 96%,2% 4%);
+  border-radius:8% 8% 13% 13% / 3% 3% 5% 5%;
+  pointer-events:none;
+}
+.bb-beer-fill{
+  position:absolute;left:0;bottom:0;width:100%;height:100%;
+  object-fit:fill;object-position:center bottom;
+  transform:none;
+  transition:none;
+  pointer-events:none;user-select:none;-webkit-user-drag:none;
+}
+@media(max-width:760px){.bb-scroll-mug{right:8px;bottom:8px;width:82px}}
+@media(prefers-reduced-motion:reduce){.bb-scroll-mug,.bb-beer-fill{transition:none!important}.bb-scroll-mug:hover{transform:none}}
+
+/* ===== v1.4.31 — guaranteed visible beer fill ===== */
+.bb-mug-liquid{z-index:4!important;bottom:5.1%!important;top:auto!important;height:var(--mug-fill,0%)!important;max-height:89.6%;overflow:hidden!important;}
+.bb-beer-fill{left:0!important;bottom:0!important;width:100%!important;height:auto!important;min-height:100%!important;transform:none!important;object-fit:cover!important;object-position:center bottom!important;opacity:1!important;visibility:visible!important;}
+.bb-mug-art{z-index:2!important;}
+
+/* ===== B & B v1.4.32 — Country / Cowboy Typography + No-Neon Polish ===== */
+:root{
+  --country-cream:#f4e1bd;
+  --country-paper:#ead0a0;
+  --country-tan:#c99a61;
+  --country-rust:#9f452b;
+  --country-rust-dark:#71301f;
+  --country-brown:#4b2a1b;
+  --country-ink:#2b190f;
+}
+/* Readable western typography using system-safe slab/serif faces. */
+body,button,input,textarea,select{font-family:Georgia,'Times New Roman',serif!important;}
+h1,h2,h3,h4,h5,h6,.hero h1,.page-hero h1,.section-title,.stat strong,.crew-modal-copy h2{
+  font-family:Rockwell,'Roboto Slab','Courier New',serif!important;
+  color:var(--country-cream);
+  text-shadow:0 2px 1px rgba(45,22,10,.34)!important;
+}
+.eyebrow,.nav-link,.btn,.badge,.social-label,.meta,.brand,.brand-copy strong,.brand-copy span,.loader-status,.loader small,.transition-sign span{
+  font-family:Rockwell,'Courier New',serif!important;
+  letter-spacing:.075em;
+}
+.eyebrow{color:#7b351f!important;text-shadow:none!important;}
+/* Remove neon typography throughout while keeping contrast against the warm site. */
+.neon-page-flicker,.backyard-neon-flicker{
+  color:#f4e1bd!important;
+  text-shadow:0 2px 1px rgba(65,31,14,.38)!important;
+  filter:none!important;
+}
+.nav-link:hover,.nav-link.active{color:#fff0cf!important;text-shadow:none!important;}
+.nav-link::after{background:#8f3f29!important;box-shadow:none!important;}
+.nav-link:hover::after,.nav-link.active::after{box-shadow:none!important;}
+.btn-primary{background:linear-gradient(180deg,#9f4d2d,#73301f)!important;border-color:#bc7548!important;box-shadow:0 5px 12px rgba(65,30,12,.24)!important;}
+.btn-primary:hover{box-shadow:0 7px 14px rgba(65,30,12,.3)!important;}
+.btn-ghost:hover{border-color:#a86a43!important;box-shadow:none!important;}
+
+/* Loader: preserve its intentional flicker, remove every electrical/neon glow. */
+.loader-electric-glow{display:none!important;opacity:0!important;box-shadow:none!important;animation:none!important;}
+.loader-logo,.loader.powering .loader-logo,.loader.neon-on .loader-logo{filter:drop-shadow(0 16px 20px rgba(0,0,0,.55))!important;}
+.loader.neon-on .loader-logo{animation:loaderIgnition .8s steps(1,end) both!important;}
+.loader-status,.loader-status-label{color:#e6c48e!important;text-shadow:0 1px 1px #2f190e!important;}
+.loader-status strong{color:#f3d7a4!important;text-shadow:0 1px 1px #2f190e!important;}
+.loader small,.loader.neon-on small{color:#d8b47c!important;text-shadow:0 1px 1px #2f190e!important;}
+.loader-wave i{background:#9b542f!important;box-shadow:none!important;}
+@keyframes wave{50%{height:30px;box-shadow:none}}
+
+/* Transition: hinged doors stay untouched; only the old neon sign treatment is replaced. */
+.transition-sign{
+  background:linear-gradient(180deg,rgba(75,40,23,.96),rgba(43,24,15,.98))!important;
+  border-color:#9b6841!important;
+  box-shadow:inset 0 0 0 2px rgba(35,18,10,.72),0 8px 22px rgba(0,0,0,.45)!important;
+}
+.transition-sign b,.page-transition.sign-on .transition-sign b{
+  font-family:Rockwell,'Courier New',serif!important;
+  font-style:normal!important;
+  color:#f1d7a7!important;
+  text-shadow:0 2px 1px #24130b!important;
+  filter:none!important;
+  letter-spacing:.015em;
+}
+.transition-sign span,.page-transition.sign-on .transition-sign span{
+  color:#c99860!important;
+  text-shadow:0 1px 1px #24130b!important;
+  filter:none!important;
+}
+.page-transition.sign-on .transition-sign{
+  border-color:#a87348!important;
+  box-shadow:inset 0 0 0 2px rgba(35,18,10,.72),0 8px 22px rgba(0,0,0,.45)!important;
+  animation:countrySignFlicker .58s steps(1,end) both!important;
+}
+@keyframes countrySignFlicker{
+  0%,18%,42%{opacity:.62} 10%,28%,55%,100%{opacity:1}
+}
+/* No colored seam/glow can leak between the barn doors. */
+.page-transition .transition-seam{display:none!important;background:none!important;box-shadow:none!important;}
+
+/* ===== B & B v1.4.33 — sunset barn-door transition / no neon flash =====
+   Keeps the existing hinged doors and bottle-cap transition. The supplied farm sunset
+   is a true background layer behind the doors and remains visible while they open. */
+.page-transition{
+  background:#1f1008 url('../assets/images/transition-sunset-background.png') center center/cover no-repeat!important;
+}
+.page-transition::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:rgba(35,17,7,.08)!important;
+  box-shadow:inset 0 0 70px 14px rgba(43,20,7,.20)!important;
+  pointer-events:none!important;
+}
+/* Barn doors stay above the sunset and continue using the existing real hinge animation. */
+.page-transition .transition-door{z-index:2!important;background-color:transparent!important;}
+.page-transition .transition-seam{display:none!important;opacity:0!important;background:none!important;box-shadow:none!important;}
+/* Keep the bottle-cap transition but remove the old red/blue neon ignition colors. */
+.transition-logo-on,
+.page-transition.sign-on .transition-logo-on,
+.page-transition.entering .transition-logo-on{
+  filter:brightness(1) contrast(1.03) saturate(.96) drop-shadow(0 18px 28px rgba(45,22,8,.55))!important;
+}
+@keyframes transitionImageIgnite{
+  0%{opacity:.25;filter:brightness(.60) contrast(1.03) saturate(.92) drop-shadow(0 18px 28px rgba(45,22,8,.55))}
+  14%{opacity:1;filter:brightness(1.06) contrast(1.03) saturate(.96) drop-shadow(0 18px 28px rgba(45,22,8,.55))}
+  27%{opacity:.42;filter:brightness(.72) contrast(1.03) saturate(.92) drop-shadow(0 18px 28px rgba(45,22,8,.55))}
+  40%{opacity:1;filter:brightness(1.02) contrast(1.03) saturate(.96) drop-shadow(0 18px 28px rgba(45,22,8,.55))}
+  52%{opacity:.72;filter:brightness(.86) contrast(1.03) saturate(.94) drop-shadow(0 18px 28px rgba(45,22,8,.55))}
+  65%,100%{opacity:1;filter:brightness(1) contrast(1.03) saturate(.96) drop-shadow(0 18px 28px rgba(45,22,8,.55))}
+}
+
+/* ===== B & B v1.4.35 — cinematic sunset door transition refinement =====
+   Start sunset sharp, blur it as the doors close, then sharpen it again as the doors open. */
+.page-transition{
+  background:#000!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+/* Sunset is its own layer so its blur/fade never affects the doors or bottle-cap artwork. */
+.page-transition::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-3%!important;
+  z-index:0!important;
+  background:url('../assets/images/transition-sunset-background.png') center center/cover no-repeat!important;
+  opacity:0!important;
+  filter:blur(0) brightness(1)!important;
+  transform:scale(1)!important;
+  transition:opacity .32s ease,filter .68s ease,transform .68s ease!important;
+  box-shadow:none!important;
+  pointer-events:none!important;
+}
+/* Strong black edge vignette keeps the scene cinematic and hides any exposed outer edge. */
+.page-transition::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  background:radial-gradient(ellipse at center,transparent 36%,rgba(0,0,0,.18) 61%,rgba(0,0,0,.72) 100%)!important;
+  opacity:0!important;
+  transition:opacity .32s ease!important;
+  pointer-events:none!important;
+}
+.page-transition.show::before,.page-transition.show::after{opacity:1!important;}
+.page-transition.closing::before,
+.page-transition.closed::before,
+.page-transition.entering::before{
+  filter:blur(14px) brightness(.72)!important;
+  transform:scale(1.045)!important;
+}
+.page-transition.opening::before{
+  filter:blur(0) brightness(1)!important;
+  transform:scale(1)!important;
+}
+/* Slightly oversized leaves overlap at center so the doors cover the full viewport cleanly. */
+.page-transition .transition-door{width:53%!important;height:104%!important;top:-2%!important;bottom:auto!important;z-index:3!important;}
+.page-transition .transition-door-left{left:-3%!important;right:auto!important;}
+.page-transition .transition-door-right{right:-3%!important;left:auto!important;}
+.page-transition .transition-sign{z-index:4!important;}
+.page-transition .transition-seam{display:none!important;opacity:0!important;}
+@media(max-width:640px){
+  .page-transition .transition-door{width:55%!important;height:104%!important;}
+  .page-transition .transition-door-left{left:-5%!important;}
+  .page-transition .transition-door-right{right:-5%!important;}
+}
+
+/* ===== B&B v1.4.36 — Western WANTED crew cards ===== */
+.crew-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px;
+  align-items:start;
+}
+.wanted-crew-card{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  padding:0!important;
+  min-width:0;
+}
+.wanted-crew-card:hover,.wanted-crew-card:focus-visible{
+  transform:translateY(-7px) rotate(-.35deg)!important;
+  box-shadow:none!important;
+  outline:none;
+}
+.wanted-poster-card{
+  position:relative;
+  width:100%;
+  aspect-ratio:1018/1477;
+  isolation:isolate;
+  filter:drop-shadow(0 14px 15px rgba(38,18,8,.30));
+}
+.wanted-portrait{
+  position:absolute;
+  z-index:1;
+  left:14.7%;
+  right:14.3%;
+  top:31.1%;
+  bottom:20.8%;
+  overflow:hidden;
+  background:#17100a;
+}
+.wanted-portrait img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:grayscale(1) sepia(.16) contrast(1.05) brightness(.90);
+  transition:filter .38s ease,transform .45s ease;
+}
+.wanted-crew-card:hover .wanted-portrait img,
+.wanted-crew-card:focus-visible .wanted-portrait img{
+  filter:grayscale(0) sepia(0) contrast(1.03) brightness(1);
+  transform:scale(1.025);
+}
+.wanted-poster-frame{
+  position:absolute;
+  z-index:3;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  pointer-events:none;
+}
+.wanted-nameplate{
+  position:absolute;
+  z-index:4;
+  left:14.5%;
+  right:14.5%;
+  bottom:10.8%;
+  height:8.8%;
+  pointer-events:none;
+}
+.wanted-nameplate svg{width:100%;height:100%;display:block;overflow:visible}
+.wanted-nameplate text{
+  fill:#2b160c;
+  font-family:Rockwell,'Roboto Slab','Courier New',serif;
+  font-size:47px;
+  font-weight:950;
+  letter-spacing:2px;
+  paint-order:stroke fill;
+  stroke:rgba(255,239,194,.18);
+  stroke-width:.7px;
+}
+.wanted-view-hint{
+  display:block;
+  margin-top:9px;
+  text-align:center;
+  color:#6e3d20;
+  font-family:Rockwell,'Roboto Slab','Courier New',serif;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.72;
+  transition:opacity .2s ease,transform .2s ease;
+}
+.wanted-crew-card:hover .wanted-view-hint,.wanted-crew-card:focus-visible .wanted-view-hint{opacity:1;transform:translateY(2px)}
+/* Modal remains the existing working profile module; the portrait is still sourced from the clicked card. */
+.wanted-crew-card .crew-photo{display:none!important}
+@media(max-width:1050px){.crew-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px;margin-inline:auto}}
+@media(max-width:600px){.crew-grid{grid-template-columns:1fr;max-width:360px}}
+@media(prefers-reduced-motion:reduce){.wanted-portrait img,.wanted-view-hint{transition:none!important}.wanted-crew-card:hover,.wanted-crew-card:focus-visible{transform:none!important}}
+
+/* ===== B&B v1.4.39 — raise crew names farther into WANTED ribbon ===== */
+.wanted-nameplate{
+  bottom:12.25%;
+}
+
+/* ===== B&B v1.4.40 — wide western wanted crew profile ===== */
+.crew-modal{padding:22px}
+.crew-modal-backdrop{background:rgba(28,12,5,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.crew-modal-panel{
+  width:min(1120px,calc(100vw - 34px));
+  aspect-ratio:1700/835;
+  max-height:none;
+  overflow:visible;
+  display:block;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:url('../assets/images/crew-wanted-wide.png') center/100% 100% no-repeat;
+  box-shadow:0 28px 80px rgba(0,0,0,.58);
+}
+.crew-modal-panel::before{display:none}
+.crew-modal-photo{
+  position:absolute;z-index:2;
+  left:10.4%;top:33.5%;
+  width:30.2%;height:48.5%;
+  aspect-ratio:auto;border-radius:0;
+  overflow:hidden;background:#2a1b10;
+  border:0;box-shadow:none;
+}
+.crew-modal-photo img{width:100%;height:100%;object-fit:cover;object-position:center;filter:sepia(.12) contrast(1.04)}
+.crew-modal-copy{
+  position:absolute;z-index:3;
+  left:45.2%;top:36%;width:40.5%;height:43%;
+  display:flex;flex-direction:column;justify-content:center;
+  color:#2a160d;text-align:center;
+  transform:rotate(-.15deg);
+}
+.crew-modal-copy .eyebrow{
+  order:2;margin:.25rem auto .65rem;max-width:95%;
+  color:#6e281b;font-family:Rockwell,Georgia,serif;
+  font-size:clamp(.66rem,1.05vw,.95rem);font-weight:900;
+  letter-spacing:.08em;line-height:1.15;text-transform:uppercase;
+}
+.crew-modal-copy h2{
+  order:1;margin:0 auto .15rem;max-width:96%;
+  color:#27140c;font-family:Rockwell,Georgia,serif;
+  font-size:clamp(1.8rem,4.1vw,4.15rem);line-height:.92;
+  letter-spacing:-.035em;text-transform:uppercase;
+  text-shadow:0 1px 0 rgba(255,225,166,.35);
+}
+.crew-modal-copy p{
+  order:3;margin:0 auto;max-width:95%;
+  color:#392116;font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(.72rem,1.18vw,1.05rem);line-height:1.42;font-weight:600;
+}
+.crew-modal-close{
+  top:10.5%;right:6.2%;width:42px;height:42px;border-radius:50%;
+  border:2px solid rgba(48,25,13,.72);background:rgba(78,39,20,.9);
+  color:#ead0a0;box-shadow:0 3px 8px rgba(0,0,0,.35);font-family:Georgia,serif;
+}
+.crew-modal-close:hover,.crew-modal-close:focus-visible{color:#fff2cf;border-color:#2d170d;box-shadow:0 4px 12px rgba(0,0,0,.45);transform:scale(1.06)}
+@media(max-width:700px){
+  .crew-modal{padding:8px;overflow:auto}
+  .crew-modal-panel{width:min(980px,96vw);aspect-ratio:1700/835;min-height:0;padding:0;transform:none}
+  .crew-modal-photo{left:10.4%;top:33.5%;width:30.2%;height:48.5%;margin:0}
+  .crew-modal-copy{left:45.2%;top:34%;width:40.5%;height:47%;text-align:center}
+  .crew-modal-copy h2{font-size:clamp(1rem,5vw,2rem)}
+  .crew-modal-copy .eyebrow{font-size:clamp(.42rem,1.9vw,.7rem);margin:.08rem auto .2rem}
+  .crew-modal-copy p{font-size:clamp(.43rem,1.75vw,.68rem);line-height:1.25}
+  .crew-modal-close{width:30px;height:30px;font-size:1.15rem;top:9%;right:5.5%}
+}
+
+/* ===== B&B v1.4.41 — crew modal alignment / western text colors ===== */
+/* Keep portrait completely inside the transparent wanted-poster opening. */
+.crew-modal-photo{
+  left:11.8%;
+  top:32.8%;
+  width:29.1%;
+  height:49.2%;
+  z-index:1;
+  background:#24140c;
+}
+.crew-modal-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  transform:scale(1.035);
+  filter:sepia(.08) contrast(1.05);
+}
+/* Pull all copy above the lower star/divider artwork. */
+.crew-modal-copy{
+  left:45.0%;
+  top:34.0%;
+  width:40.7%;
+  height:35.5%;
+  justify-content:flex-start;
+  padding-top:0;
+}
+.crew-modal-copy h2{
+  color:#9d211b;
+  margin:0 auto .28rem;
+  font-size:clamp(1.65rem,3.65vw,3.75rem);
+  line-height:.9;
+  text-shadow:0 1px 0 rgba(255,225,166,.25);
+}
+.crew-modal-copy .eyebrow{
+  color:#a1261e;
+  margin:.12rem auto .58rem;
+  font-size:clamp(.62rem,.98vw,.9rem);
+}
+.crew-modal-copy p{
+  color:#17100b;
+  max-width:92%;
+  font-size:clamp(.68rem,1.04vw,.98rem);
+  line-height:1.32;
+  font-weight:700;
+}
+@media(max-width:700px){
+  .crew-modal-photo{left:11.8%;top:32.8%;width:29.1%;height:49.2%;margin:0}
+  .crew-modal-copy{left:45%;top:33.5%;width:40.7%;height:37%;padding:0}
+  .crew-modal-copy h2{font-size:clamp(.92rem,4.6vw,1.8rem);margin-bottom:.08rem}
+  .crew-modal-copy .eyebrow{font-size:clamp(.38rem,1.65vw,.64rem);margin:.03rem auto .14rem}
+  .crew-modal-copy p{font-size:clamp(.39rem,1.55vw,.62rem);line-height:1.18;max-width:93%}
+}
+
+/* ===== B&B v1.4.42 — portrait BEHIND transparent WANTED poster opening ===== */
+/* The poster remains the modal artwork. This second copy only redraws the left
+   poster/frame above the portrait so the crew photo cannot sit on top of it. */
+.crew-modal-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:url('../assets/images/crew-wanted-wide.png') center/100% 100% no-repeat;
+  clip-path:polygon(0 0,43.5% 0,43.5% 100%,0 100%);
+}
+.crew-modal-photo{
+  z-index:1;
+  left:9.8%;
+  top:25.8%;
+  width:32.2%;
+  height:57.2%;
+  overflow:hidden;
+  background:#24140c;
+}
+.crew-modal-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  transform:none;
+}
+.crew-modal-copy{z-index:3;}
+.crew-modal-close{z-index:4;}
+@media(max-width:700px){
+  .crew-modal-photo{left:9.8%;top:25.8%;width:32.2%;height:57.2%;margin:0}
+}
+
+/* ===== B&B v1.4.43 — transparent crew modal + fitted crew portraits ===== */
+/* The modal itself is now truly transparent. The WANTED PNG is a foreground
+   layer, allowing the portrait to remain behind its transparent photo opening. */
+.crew-modal-panel{
+  background:none!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+.crew-modal-panel::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  border-radius:0!important;
+  background:url('../assets/images/crew-wanted-wide.png') center/100% 100% no-repeat!important;
+}
+.crew-modal-panel::after{display:none!important;content:none!important;}
+
+/* Keep the modal portrait behind the parchment and fill the transparent window. */
+.crew-modal-photo{
+  z-index:1!important;
+  left:9.9%!important;
+  top:25.9%!important;
+  width:32.1%!important;
+  height:57.0%!important;
+  overflow:hidden!important;
+  background:#24140c!important;
+}
+.crew-modal-photo img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+
+/* Raise the entire text group so the biography clears the bottom star/divider. */
+.crew-modal-copy{
+  z-index:3!important;
+  top:31.0%!important;
+  height:34.5%!important;
+  justify-content:flex-start!important;
+}
+.crew-modal-copy h2{margin-bottom:.18rem!important;}
+.crew-modal-copy .eyebrow{margin:.08rem auto .38rem!important;}
+.crew-modal-copy p{line-height:1.25!important;max-width:91%!important;}
+.crew-modal-close{z-index:4!important;}
+
+/* Main crew-page WANTED cards: fill the actual portrait opening instead of
+   containing the whole source image and leaving gaps around it. */
+.wanted-portrait{
+  left:14.7%!important;
+  right:14.3%!important;
+  top:31.1%!important;
+  bottom:20.8%!important;
+  overflow:hidden!important;
+}
+.wanted-portrait img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+}
+.wanted-crew-card:nth-child(2) .wanted-portrait img{object-position:center 45%!important;}
+.wanted-crew-card:nth-child(3) .wanted-portrait img{object-position:center 30%!important;}
+.wanted-crew-card:nth-child(4) .wanted-portrait img{object-position:center center!important;}
+
+@media(max-width:700px){
+  .crew-modal-photo{left:9.9%!important;top:25.9%!important;width:32.1%!important;height:57%!important;margin:0!important;}
+  .crew-modal-copy{top:30.6%!important;height:36%!important;}
+  .crew-modal-copy p{line-height:1.14!important;max-width:92%!important;}
+}
+
+/* ===== B & B v1.4.44 — footer tumbleweed ===== */
+.footer{position:relative!important;}
+.bb-footer-tumbleweed-track{
+  position:absolute;
+  left:0;
+  bottom:clamp(8px,2.2vw,30px);
+  width:100%;
+  height:clamp(64px,8vw,118px);
+  z-index:2; /* in front of footer artwork (z1), behind footer copy (z3) + mug (z95) */
+  overflow:hidden;
+  pointer-events:none;
+}
+.bb-footer-tumbleweed{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:clamp(58px,6.5vw,105px);
+  height:auto;
+  opacity:0;
+  will-change:transform,opacity;
+  filter:drop-shadow(0 8px 5px rgba(37,18,7,.34));
+}
+.bb-footer-tumbleweed.is-rolling{
+  animation:bbTumbleweedCross 11s linear both;
+}
+@keyframes bbTumbleweedCross{
+  0%{opacity:0;transform:translate3d(-130%,8px,0) rotate(0deg)}
+  3%{opacity:1}
+  10%{transform:translate3d(calc(10vw - 50%),-12px,0) rotate(145deg)}
+  20%{transform:translate3d(calc(20vw - 50%),5px,0) rotate(300deg)}
+  31%{transform:translate3d(calc(31vw - 50%),-20px,0) rotate(470deg)}
+  43%{transform:translate3d(calc(43vw - 50%),3px,0) rotate(655deg)}
+  55%{transform:translate3d(calc(55vw - 50%),-14px,0) rotate(840deg)}
+  68%{transform:translate3d(calc(68vw - 50%),6px,0) rotate(1045deg)}
+  80%{transform:translate3d(calc(80vw - 50%),-18px,0) rotate(1230deg)}
+  91%{opacity:1;transform:translate3d(calc(91vw - 50%),3px,0) rotate(1405deg)}
+  100%{opacity:0;transform:translate3d(calc(100vw + 130%),-8px,0) rotate(1580deg)}
+}
+@media(max-width:640px){
+  .bb-footer-tumbleweed-track{bottom:6px;height:72px}
+  .bb-footer-tumbleweed{width:62px}
+}
+@media(prefers-reduced-motion:reduce){.bb-footer-tumbleweed{display:none!important}}
+
+/* ===== B&B v1.4.45 — mobile hardening pass ===== */
+html,body{max-width:100%;overflow-x:hidden}
+iframe,video,embed,object{max-width:100%}
+
+@media(max-width:760px){
+  body{font-size:16px;-webkit-text-size-adjust:100%}
+  .container{width:min(100% - 24px,1180px)}
+  .site-header{height:68px}
+  .nav{min-width:0}
+  .brand{max-width:calc(100% - 76px)}
+  .brand span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.82rem}
+  .menu-btn{display:block;min-width:54px;min-height:44px;padding:9px 11px;touch-action:manipulation}
+  .nav-links{top:68px;max-height:calc(100dvh - 68px);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px 18px}
+  .nav-link{min-height:44px;display:flex;align-items:center;justify-content:center;padding:11px}
+
+  .hero-wrap,.feature-grid,.about-grid,.live-platform-grid,.live-chat-grid{grid-template-columns:minmax(0,1fr)!important}
+  .hero h1{font-size:clamp(2.45rem,13vw,4.25rem)}
+  .hero-logo{max-height:46vh;object-fit:contain}
+  .actions{gap:10px}.actions .btn{width:100%;flex:1 1 100%;min-height:48px}
+  .stats,.social-grid,.list-grid{grid-template-columns:1fr!important}
+
+  .crew-grid{grid-template-columns:1fr!important;max-width:360px!important;margin-inline:auto!important;gap:26px!important}
+  .wanted-poster-card{width:100%;max-width:100%}
+  .wanted-crew-card:hover,.wanted-crew-card:focus-visible{transform:none!important}
+
+  /* Keep the wide WANTED profile usable without changing its desktop composition. */
+  .crew-modal{padding:8px!important;align-items:center!important;overflow:auto!important}
+  .crew-modal-panel{width:min(100%,700px)!important;max-width:100%!important;aspect-ratio:1700/835!important;min-height:0!important;margin:auto!important}
+  .crew-modal-copy{left:44.5%!important;top:29.5%!important;width:41.5%!important;height:40%!important;padding:0!important}
+  .crew-modal-copy h2{font-size:clamp(.92rem,6vw,1.65rem)!important;line-height:.86!important}
+  .crew-modal-copy .eyebrow{font-size:clamp(.34rem,1.75vw,.58rem)!important;line-height:1.1!important;margin:.05rem auto .16rem!important}
+  .crew-modal-copy p{font-size:clamp(.38rem,1.65vw,.59rem)!important;line-height:1.14!important;max-width:94%!important;margin-inline:auto!important}
+  .crew-modal-close{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;top:7%!important;right:5%!important}
+
+  .stream-video-shell,.main-stream-video-shell{width:100%;max-width:100%}
+  .stream-chat-shell,.chat-panel .stream-chat-shell{height:min(430px,62vh)!important;min-height:320px}
+  .stream-panel-head{gap:8px;flex-wrap:wrap}
+
+  .footer-wrap{padding-inline:4px;gap:18px}
+  .footer-meta{max-width:100%;overflow-wrap:anywhere}
+  .footer-farm-art{max-width:100%!important;height:auto!important}
+  .bb-footer-tumbleweed-track{max-width:100vw;overflow:hidden}
+
+  /* Mug stays easy to tap but does not cover mobile footer/content. */
+  .bb-scroll-mug{right:max(8px,env(safe-area-inset-right))!important;bottom:max(8px,env(safe-area-inset-bottom))!important;width:72px!important;max-height:112px;touch-action:manipulation}
+
+  .toast-stack{left:10px!important;right:10px!important;width:auto!important;max-width:none!important}
+  .page-transition,.loader{height:100dvh;min-height:100vh}
+}
+
+@media(max-width:420px){
+  .container{width:calc(100% - 20px)}
+  .brand span{font-size:.72rem;letter-spacing:.025em}
+  .brand img{width:44px;height:36px}
+  .hero h1{font-size:clamp(2.25rem,12.5vw,3.35rem)}
+  .page-hero h1{font-size:clamp(2rem,11.5vw,3rem)}
+  .section-title{font-size:clamp(1.85rem,10.5vw,2.8rem)}
+  .crew-modal-copy p{font-size:clamp(.34rem,1.55vw,.52rem)!important;line-height:1.1!important}
+  .bb-scroll-mug{width:66px!important}
+}

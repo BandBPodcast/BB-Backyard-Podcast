@@ -39,7 +39,7 @@ function runBBLoader(){
       flickerTimers.forEach(clearTimeout);
       loader.classList.remove('powering','bb-flash-on','bb-flash-off','neon-on','bb-final-on');
       showFlash(false);
-      if(messageEl) messageEl.textContent='B&B Backyard Podcast — powering on';
+      if(messageEl) messageEl.textContent='B & B Backyard Podcast — bringing the sunset to life';
 
       // Two deliberate flashes with comfortable spacing, then lock ON.
       const lockOnAt=reduceMotion?180:1380;
@@ -52,7 +52,7 @@ function runBBLoader(){
       later(()=>{
         loader.classList.remove('bb-flash-on','bb-flash-off');
         loader.classList.add('bb-final-on');
-        if(messageEl) messageEl.textContent='B&B Backyard Podcast — powered on';
+        if(messageEl) messageEl.textContent='B & B Backyard Podcast — welcome to the Backyard';
       },lockOnAt);
 
       // Keep the fully illuminated sign on-screen for a full two seconds.
@@ -100,7 +100,7 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
 (()=>{
   const transition=document.createElement('div');
   transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><div class="transition-sign transition-logo-stack" aria-label="B&B Backyard Podcast"><img class="transition-logo transition-logo-off" src="assets/images/offsignlogo.png" alt="B&B Backyard Podcast sign off"><img class="transition-logo transition-logo-on" src="assets/images/nowalltexturelogo.png" alt="" aria-hidden="true"></div>';
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><div class="transition-sign transition-logo-stack" aria-label="B&B Backyard Podcast"><img class="transition-logo transition-logo-off" src="assets/images/bnb-current-logo.png" alt="B&B Backyard Podcast bottle cap"><img class="transition-logo transition-logo-on" src="assets/images/bnb-current-logo.png" alt="" aria-hidden="true"></div>';
   document.body.appendChild(transition);
 
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
@@ -110,8 +110,8 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     document.documentElement.classList.remove('bb-transition-enter');
     transition.classList.add('show','entering','sign-on');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      setTimeout(()=>{transition.classList.remove('entering','sign-on');transition.classList.add('opening')},220);
-      setTimeout(()=>{transition.classList.remove('show','opening');},980);
+      setTimeout(()=>{transition.classList.remove('entering','sign-on');transition.classList.add('opening')},420);
+      setTimeout(()=>{transition.classList.remove('show','opening');},1320);
     }));
   }else{
     document.documentElement.classList.add('bb-transition-ready');
@@ -127,13 +127,13 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     if(url.pathname===location.pathname&&url.hash)return;
     event.preventDefault();
     transition.className='page-transition show closing';
-    setTimeout(()=>{transition.classList.remove('closing');transition.classList.add('closed','sign-ready')},720);
-    setTimeout(()=>transition.classList.add('sign-on'),1040);
+    setTimeout(()=>{transition.classList.remove('closing');transition.classList.add('closed','sign-ready')},620);
+    setTimeout(()=>transition.classList.add('sign-on'),780);
     setTimeout(()=>{
       sessionStorage.setItem('bb-loader-seen','1');
       sessionStorage.setItem('bb-transition-pending','1');
       location.href=link.href;
-    },1810);
+    },1450);
   });
 
   window.addEventListener('pageshow',(e)=>{if(e.persisted){transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});
@@ -178,89 +178,54 @@ window.addEventListener('pageshow',bbResetScroll);
   items.forEach(el=>observer.observe(el));
 })();
 
-// Neon scroll-to-top button. Always visible: no outer glow at the top, cyan as you scroll, fully red at the bottom.
+// B & B v1.4.28 — pint-glass scroll progress / scroll-to-top control.
+// The beer layer sits BEHIND the transparent mug artwork and is clipped to the glass bowl only.
 (()=>{
   const btn=document.createElement('button');
-  btn.className='bb-scroll-top at-top';
+  btn.className='bb-scroll-mug at-top';
   btn.type='button';
-  btn.setAttribute('aria-label','Scroll to top');
-  btn.innerHTML='<span aria-hidden="true">↑</span><small>TOP</small>';
+  btn.setAttribute('aria-label','Scroll to top — page progress');
+  btn.innerHTML='<span class="bb-mug-liquid" aria-hidden="true"><img class="bb-beer-fill" src="assets/images/bnb-scroll-beer-fill.png" alt=""></span><img class="bb-mug-art" src="assets/images/bnb-scroll-mug.png" alt="">';
   document.body.appendChild(btn);
+  let ticking=false;
   const update=()=>{
     const doc=document.documentElement;
     const max=Math.max(1,doc.scrollHeight-innerHeight);
     const p=Math.max(0,Math.min(1,scrollY/max));
-    // Hold cyan through most of the page, then blend to full neon red near the bottom.
-    const redMix=Math.max(0,Math.min(1,(p-.58)/.42));
-    const r=Math.round(67+(255-67)*redMix);
-    const g=Math.round(245+(32-245)*redMix);
-    const b=Math.round(255+(56-255)*redMix);
-    // Outer square begins with no light and powers up smoothly after leaving the top.
-    const glow=Math.max(0,Math.min(1,p/.22));
-    const borderAlpha=(.10+.78*glow).toFixed(3);
-    const innerAlpha=(.04+.48*glow).toFixed(3);
-    const glow1=(.18+.46*glow).toFixed(3);
-    const glow2=(.06+.34*glow).toFixed(3);
-    btn.style.setProperty('--scroll-neon',`rgb(${r} ${g} ${b})`);
-    btn.style.setProperty('--scroll-border',p<.012?'transparent':`rgba(${r},${g},${b},${borderAlpha})`);
-    btn.style.setProperty('--scroll-inner',p<.012?'transparent':`rgba(${r},${g},${b},${innerAlpha})`);
-    btn.style.setProperty('--scroll-inner-glow',p<.012?'transparent':`rgba(${r},${g},${b},${(0.16*glow).toFixed(3)})`);
-    btn.style.setProperty('--scroll-glow1',p<.012?'transparent':`rgba(${r},${g},${b},${glow1})`);
-    btn.style.setProperty('--scroll-glow2',p<.012?'transparent':`rgba(${r},${g},${b},${glow2})`);
-    btn.classList.toggle('at-top',p<.012);
-    btn.classList.toggle('at-bottom',p>.97);
+    btn.style.setProperty('--mug-fill',(p*100).toFixed(2)+'%');
+    btn.style.setProperty('--mug-progress',p.toFixed(4));
+    const liquid=btn.querySelector('.bb-mug-liquid');
+    if(liquid) liquid.style.height=(p*89.6).toFixed(2)+'%';
+    btn.classList.toggle('at-top',p<.008);
+    btn.classList.toggle('at-bottom',p>.985);
+    ticking=false;
   };
-  addEventListener('scroll',update,{passive:true});
-  addEventListener('resize',update,{passive:true});
+  const requestUpdate=()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}};
+  addEventListener('scroll',requestUpdate,{passive:true});
+  addEventListener('resize',requestUpdate,{passive:true});
   update();
   btn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 })();
 
 
-
-// v1.4.5 — transparent navigation sign + subtle periodic power blink.
+// v1.4.8 — new bottle-cap navigation logo: gentle glow pulse without swapping assets.
 (()=>{
   const brand=document.querySelector('.site-header .brand');
-  const stack=brand?.querySelector('.nav-logo-stack');
-  if(!brand || !stack) return;
-
-  let sequenceTimers=[];
-  const clearSequence=()=>{sequenceTimers.forEach(clearTimeout);sequenceTimers=[]};
-  const setState=(state)=>{
-    brand.classList.remove('nav-neon-off','nav-neon-flash');
-    if(state) brand.classList.add(state);
-  };
-  const blink=()=>{
-    clearSequence();
-    // A clearly visible but gentle power dip: ON -> OFF -> ON -> OFF -> ON.
-    setState('nav-neon-off');
-    sequenceTimers.push(setTimeout(()=>setState('nav-neon-flash'),260));
-    sequenceTimers.push(setTimeout(()=>setState('nav-neon-off'),520));
-    sequenceTimers.push(setTimeout(()=>setState(''),780));
-  };
-
-  const first=setTimeout(blink,4500);
-  const interval=setInterval(blink,60000);
-  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval);clearSequence()},{once:true});
+  if(!brand) return;
+  const pulse=()=>{brand.classList.add('nav-bottlecap-pulse');setTimeout(()=>brand.classList.remove('nav-bottlecap-pulse'),900)};
+  const first=setTimeout(pulse,5000);
+  const interval=setInterval(pulse,60000);
+  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval)},{once:true});
 })();
 
-// Home hero sign: seamless float using CSS translate + a very occasional gentle image blink.
+// Home bottle-cap logo: keep the seamless float and add a restrained glow pulse.
 (()=>{
-  const hero=document.querySelector('.hero-logo-stack');
+  const hero=document.querySelector('.hero-bottlecap');
   if(!hero) return;
-  let timers=[];
-  const clear=()=>{timers.forEach(clearTimeout);timers=[]};
-  const setOff=(off)=>hero.classList.toggle('hero-neon-off',off);
-  const blink=()=>{
-    clear();
-    setOff(true);
-    timers.push(setTimeout(()=>setOff(false),260));
-    timers.push(setTimeout(()=>setOff(true),540));
-    timers.push(setTimeout(()=>setOff(false),820));
-  };
-  const first=setTimeout(blink,12000);
-  const interval=setInterval(blink,75000);
-  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval);clear();},{once:true});
+  const pulse=()=>{hero.classList.add('hero-bottlecap-pulse');setTimeout(()=>hero.classList.remove('hero-bottlecap-pulse'),1100)};
+  const first=setTimeout(pulse,12000);
+  const interval=setInterval(pulse,75000);
+  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(interval)},{once:true});
 })();
 
 
@@ -277,12 +242,14 @@ window.addEventListener('pageshow',bbResetScroll);
   let lastFocus=null;
 
   const syncPhoto=(card)=>{
-    const source=card.querySelector('.crew-photo');
+    const source=card.querySelector('.wanted-portrait, .crew-photo');
     photoEl.innerHTML='';
     const img=source?.querySelector('img');
     if(img){
       const clone=img.cloneNode(true);
       clone.removeAttribute('id');
+      // Preserve each crew portrait's card framing inside the profile modal.
+      if((img.getAttribute('alt')||'')!=='Ora Johnson') clone.style.objectPosition=getComputedStyle(img).objectPosition;
       photoEl.appendChild(clone);
     }else{
       photoEl.textContent=(source?.textContent||'B&B').trim();
@@ -311,4 +278,76 @@ window.addEventListener('pageshow',bbResetScroll);
   });
   modal.querySelectorAll('[data-crew-close]').forEach(el=>el.addEventListener('click',close));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))close()});
+})();
+
+// B & B v1.4.27 — chain-hung sign: subtle forward/back porch-sign motion + mouse response.
+(()=>{
+  const wrap=document.createElement('div');
+  wrap.className='bb-hanging-sign';
+  wrap.setAttribute('aria-hidden','true');
+  wrap.innerHTML='<img class="bb-hanging-post" src="assets/images/hanging-sign-post.png" alt=""><div class="bb-sign-pivot"><img class="bb-hanging-board" src="assets/images/hanging-bnb-sign.png" alt=""></div>';
+  document.body.appendChild(wrap);
+  const pivot=wrap.querySelector('.bb-sign-pivot');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||innerWidth<=480)return;
+
+  let mousePitch=0, mouseLift=0;
+  let lastMove=0;
+  addEventListener('pointermove',e=>{
+    const r=wrap.getBoundingClientRect();
+    const cx=r.left+r.width*.63, cy=r.top+r.height*.39;
+    const dx=e.clientX-cx, dy=e.clientY-cy;
+    const dist=Math.hypot(dx,dy);
+    if(dist<520){
+      const proximity=1-dist/520;
+      // Vertical pointer movement pushes the board toward/away from the viewer.
+      mousePitch=Math.max(-9,Math.min(9,(dy/230)*9))*proximity;
+      mouseLift=Math.max(-4,Math.min(4,(-dy/270)*4))*proximity;
+      lastMove=performance.now();
+    }
+  },{passive:true});
+
+  const started=performance.now();
+  const animate=now=>{
+    // Slow natural front/back movement, like a heavy weathered sign in a light breeze.
+    const t=(now-started)/1000;
+    const gust=(Math.sin(t*.19)+1)*.5;
+    const idlePitch=Math.sin(t*.88)*3.1 + Math.sin(t*.37)*1.25 + Math.sin(t*1.73)*(.65+gust*.8);
+    const idleLift=Math.sin(t*.88+.7)*1.35 + Math.sin(t*.29)*.55;
+    const stale=Math.min(1,Math.max(0,(now-lastMove-250)/1500));
+    mousePitch*=.965;
+    mouseLift*=.965;
+    const pitch=idlePitch+mousePitch*(1-stale);
+    const lift=idleLift+mouseLift*(1-stale);
+    pivot.style.setProperty('--sign-pitch',pitch.toFixed(2)+'deg');
+    pivot.style.setProperty('--sign-y',lift.toFixed(2)+'px');
+    pivot.style.setProperty('--sign-shadow-y',(10+Math.abs(pitch)*.7).toFixed(1)+'px');
+    pivot.style.setProperty('--sign-shadow-blur',(9+Math.abs(pitch)*.45).toFixed(1)+'px');
+    requestAnimationFrame(animate);
+  };
+  requestAnimationFrame(animate);
+})();
+
+// B & B v1.4.44 — tumbleweed rolls/bounces across the footer once every minute.
+(()=>{
+  const footer=document.querySelector('.footer');
+  if(!footer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const track=document.createElement('div');
+  track.className='bb-footer-tumbleweed-track';
+  track.setAttribute('aria-hidden','true');
+  const weed=document.createElement('img');
+  weed.className='bb-footer-tumbleweed';
+  weed.src='assets/images/tumbleweed.png';
+  weed.alt='';
+  track.appendChild(weed);
+  footer.appendChild(track);
+
+  const roll=()=>{
+    weed.classList.remove('is-rolling');
+    void weed.offsetWidth;
+    weed.classList.add('is-rolling');
+  };
+  // Give the page a moment to settle, then roll; repeat every 60 seconds.
+  const first=setTimeout(roll,1800);
+  const timer=setInterval(roll,60000);
+  window.addEventListener('pagehide',()=>{clearTimeout(first);clearInterval(timer)},{once:true});
 })();
