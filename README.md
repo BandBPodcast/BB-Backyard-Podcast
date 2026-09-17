@@ -172,3 +172,5 @@ The loader flicker now swaps the actual supplied OFF and ON transparent logo ima
 - Added a weathered roadside-billboard frame around the existing sunset loader without changing its loading behavior.
 
 Version 1.4.42: Crew modal portraits now render behind the transparent WANTED poster opening and scale to fill the portrait window.
+
+- v1.4.46: Crew order and responsibilities updated: Bill Brading (Founder / Brand Originator), Ora Johnson (Co-Founder / Musician), Lamont Terry (PR & Equipment Operations), Joseph Romero (Technical Production).
