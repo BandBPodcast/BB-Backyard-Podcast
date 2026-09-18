@@ -193,3 +193,7 @@ The workflow resolves YouTube handle `@BnBEntertains`, reads its uploads playlis
 
 ## v1.4.56 — Restream unified chat
 The Live page now uses one unified Restream chat panel instead of separate YouTube/Facebook and Twitch chat boxes. To connect it, copy the Restream Chat **Embed in stream** URL and paste it into `restreamChatEmbedUrl` in `js/live-config.js`. The embed displays incoming comments from supported connected destinations. Viewers use the included platform buttons to open the source platform when they want to send a message with their own account.
+
+
+## v1.4.57 — Restream any-live-stream chat connected
+The Live page is now configured to load the Restream **Embed chat from any live stream** feed inside the existing unified western chat panel. The separate platform buttons remain available for viewers who want to open the source platform directly.
