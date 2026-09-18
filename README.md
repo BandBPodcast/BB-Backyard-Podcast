@@ -237,5 +237,5 @@ The page transition bottle cap now drops from above with a partial spin and smal
 - Raised the bottle-cap video above the closed barn doors and made the visible playback state explicit on desktop and mobile.
 - Removed the prior reduced-motion rule that could suppress the supplied transition video.
 
-## v1.4.67 — Updated bottle-cap transition video
+## v1.4.68 — Updated bottle-cap transition video
 - Replaced the transition WebM with the newer user-provided bottle-cap animation while preserving the v1.4.66 visibility/playback fixes.
