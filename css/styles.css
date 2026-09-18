@@ -2841,3 +2841,9 @@ body,p,li,label,input,textarea,select,option,
 @media(prefers-reduced-motion:reduce){
   .page-transition.closed.video-playing .transition-bottlecap-video{display:block!important;opacity:1!important;visibility:visible!important;}
 }
+
+/* ===== B&B v1.4.69 — official TikTok creator profile embed ===== */
+.tiktok-latest-section .section-copy{max-width:760px;margin-bottom:1.25rem}
+.tiktok-creator-shell{padding:18px;overflow:hidden;background:linear-gradient(180deg,rgba(65,38,20,.9),rgba(35,20,12,.94));border:1px solid rgba(173,112,62,.42)}
+.tiktok-creator-shell .tiktok-embed{width:100%!important;margin:0 auto!important}
+@media(max-width:760px){.tiktok-creator-shell{padding:10px}.tiktok-creator-shell .tiktok-embed{min-width:0!important;max-width:100%!important}}

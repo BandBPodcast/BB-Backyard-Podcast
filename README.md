@@ -239,3 +239,7 @@ The page transition bottle cap now drops from above with a partial spin and smal
 
 ## v1.4.68 — Updated bottle-cap transition video
 - Replaced the transition WebM with the newer user-provided bottle-cap animation while preserving the v1.4.66 visibility/playback fixes.
+
+
+## v1.4.69
+- Added TikTok official Creator Profile Embed for @bnb_entertains on Socials. It displays recent public TikTok videos automatically without changing the existing cowboy social cards or other site systems.
