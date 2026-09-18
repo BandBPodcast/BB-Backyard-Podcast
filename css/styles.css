@@ -2847,3 +2847,50 @@ body,p,li,label,input,textarea,select,option,
 .tiktok-creator-shell{padding:18px;overflow:hidden;background:linear-gradient(180deg,rgba(65,38,20,.9),rgba(35,20,12,.94));border:1px solid rgba(173,112,62,.42)}
 .tiktok-creator-shell .tiktok-embed{width:100%!important;margin:0 auto!important}
 @media(max-width:760px){.tiktok-creator-shell{padding:10px}.tiktok-creator-shell .tiktok-embed{min-width:0!important;max-width:100%!important}}
+\n\n/* ===== B&B v1.4.70 — mobile transparent bottle-cap + loader centering ===== */
+/* Desktop keeps the original transparent WebM. Phones use an animated WebP
+   fallback because mobile Safari can drop VP9/WebM alpha and reveal the old-looking background. */
+.page-transition .transition-bottlecap-mobile{
+  display:none!important;
+  position:absolute!important;
+  z-index:51!important;
+  left:50%!important;
+  top:50%!important;
+  width:min(86vw,980px)!important;
+  height:auto!important;
+  max-height:76vh!important;
+  transform:translate(-50%,-50%)!important;
+  object-fit:contain!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  background:transparent!important;
+}
+@media(max-width:760px){
+  /* Never show the WebM on mobile; use the alpha-safe fallback instead. */
+  .page-transition .transition-bottlecap-video{display:none!important;opacity:0!important;visibility:hidden!important;}
+  .page-transition .transition-bottlecap-mobile{display:block!important;width:96vw!important;max-height:68dvh!important;}
+  .page-transition.closed.mobile-cap-playing .transition-bottlecap-mobile{opacity:1!important;visibility:visible!important;}
+  .page-transition.opening .transition-bottlecap-mobile,
+  .page-transition.entering .transition-bottlecap-mobile{opacity:0!important;visibility:hidden!important;}
+
+  /* Center the complete first-load composition in the phone viewport. */
+  .loader{display:flex!important;align-items:center!important;justify-content:center!important;}
+  .loader-inner{
+    position:relative!important;
+    left:0!important;
+    right:auto!important;
+    transform:translateX(-1.8vw)!important;
+    width:96vw!important;
+    max-width:96vw!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    box-sizing:border-box!important;
+  }
+  .loader-sign-wrap{width:96vw!important;max-width:96vw!important;margin-left:auto!important;margin-right:auto!important;}
+}
+@media(max-width:420px){
+  .loader-inner{transform:translateX(-2.2vw)!important;}
+}

@@ -100,7 +100,7 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
 (()=>{
   const transition=document.createElement('div');
   transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm" type="video/webm"></video>';
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm" type="video/webm"></video><img class="transition-bottlecap-mobile" id="transitionBottlecapMobile" src="assets/video/bottlecap-transition-mobile.webp" alt="" aria-hidden="true">';
   document.body.appendChild(transition);
 
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
@@ -128,6 +128,8 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     event.preventDefault();
     transition.className='page-transition show closing';
     const capVideo=transition.querySelector('#transitionBottlecapVideo');
+    const capMobile=transition.querySelector('#transitionBottlecapMobile');
+    const useMobileCap=window.matchMedia?.('(max-width: 760px)').matches;
     let leaving=false;
     const leave=()=>{
       if(leaving)return; leaving=true;
@@ -137,7 +139,18 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     };
     setTimeout(()=>{
       transition.classList.remove('closing');transition.classList.add('closed','video-playing');
-      if(capVideo){
+      if(useMobileCap && capMobile){
+        // Mobile Safari/iOS does not reliably preserve VP9 WebM alpha. Use the
+        // same transparent animation as animated WebP on phones and restart it
+        // on every navigation so the full fall/landing motion always plays.
+        transition.classList.add('mobile-cap-playing');
+        const base='assets/video/bottlecap-transition-mobile.webp';
+        capMobile.removeAttribute('src');
+        requestAnimationFrame(()=>{
+          capMobile.src=base+'?v=1470-'+Date.now();
+        });
+        setTimeout(leave,5000);
+      }else if(capVideo){
         capVideo.muted=true;
         capVideo.defaultMuted=true;
         capVideo.playsInline=true;
