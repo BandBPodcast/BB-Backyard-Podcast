@@ -2508,3 +2508,83 @@ body,p,li,label,input,textarea,select,option,
   .page-transition .transition-door-left{left:-5%!important;}
   .page-transition .transition-door-right{right:-5%!important;}
 }
+
+/* ===== B&B v1.4.53 — mobile loader coverage + seamless mobile doors ===== */
+/* Keep the real page completely hidden behind the first-load screen on phones. */
+@media(max-width:760px){
+  html:not(.loader-seen) body > :not(#siteLoader):not(script):not(style){
+    visibility:hidden!important;
+  }
+  html:not(.loader-seen) #siteLoader{
+    visibility:visible!important;
+  }
+  .loader{
+    position:fixed!important;
+    inset:0!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    left:0!important;
+    width:100vw!important;
+    max-width:none!important;
+    height:100dvh!important;
+    min-height:100svh!important;
+    max-height:100dvh!important;
+    overflow:hidden!important;
+    z-index:2147483000!important;
+    margin:0!important;
+  }
+  .loader-inner{
+    max-height:100dvh!important;
+    overflow:hidden!important;
+  }
+
+  /* Mobile uses a straight, edge-to-edge close so 3-D perspective cannot
+     skew the door leaves or expose a crooked center seam. */
+  .page-transition{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    min-height:100svh!important;
+    overflow:hidden!important;
+    perspective:none!important;
+    transform:none!important;
+    z-index:2147482990!important;
+  }
+  .page-transition .transition-door{
+    top:0!important;
+    bottom:0!important;
+    height:100%!important;
+    width:51%!important;
+    background-size:100% 100%!important;
+    background-position:center!important;
+    transform-style:flat!important;
+    backface-visibility:visible!important;
+    -webkit-backface-visibility:visible!important;
+    transition:transform .72s cubic-bezier(.62,.02,.22,1)!important;
+  }
+  .page-transition .transition-door-left{
+    left:0!important;
+    right:auto!important;
+    transform-origin:center!important;
+    transform:translate3d(-102%,0,0)!important;
+  }
+  .page-transition .transition-door-right{
+    right:0!important;
+    left:auto!important;
+    transform-origin:center!important;
+    transform:translate3d(102%,0,0)!important;
+  }
+  .page-transition.closing .transition-door-left,
+  .page-transition.closed .transition-door-left,
+  .page-transition.entering .transition-door-left,
+  .page-transition.closing .transition-door-right,
+  .page-transition.closed .transition-door-right,
+  .page-transition.entering .transition-door-right{
+    transform:translate3d(0,0,0)!important;
+  }
+  .page-transition.opening .transition-door-left{transform:translate3d(-102%,0,0)!important;}
+  .page-transition.opening .transition-door-right{transform:translate3d(102%,0,0)!important;}
+  .page-transition .transition-seam{display:none!important;opacity:0!important;}
+}
