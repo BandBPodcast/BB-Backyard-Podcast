@@ -173,4 +173,9 @@ The loader flicker now swaps the actual supplied OFF and ON transparent logo ima
 
 Version 1.4.42: Crew modal portraits now render behind the transparent WANTED poster opening and scale to fill the portrait window.
 
-- v1.4.46: Crew order and responsibilities updated: Bill Brading (Founder / Brand Originator), Ora Johnson (Co-Founder / Musician), Lamont Terry (PR & Equipment Operations), Joseph Romero (Technical Production).
+- v1.4.47: Crew order and responsibilities updated: Bill Brading (Founder / Brand Originator), Ora Johnson (Co-Founder / Musician), Lamont Terry (PR & Equipment Operations), Joseph Romero (Technical Production).
+
+## v1.4.53
+- Mobile initial loader now fully masks the underlying page until loading is complete.
+- Mobile page transition doors use a straight edge-to-edge close/open to prevent 3D skew and center gaps.
+- Desktop transition behavior and all other site systems remain unchanged.

@@ -2588,3 +2588,21 @@ body,p,li,label,input,textarea,select,option,
   .page-transition.opening .transition-door-right{transform:translate3d(102%,0,0)!important;}
   .page-transition .transition-seam{display:none!important;opacity:0!important;}
 }
+
+/* ===== B&B v1.4.54 — cowboy social emblems ===== */
+.social-cowboy-grid{align-items:stretch;gap:24px}
+.social-cowboy-card{padding:18px!important;min-height:0!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:12px;text-align:center;isolation:isolate;overflow:visible!important;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease!important}
+.social-cowboy-card::after{display:none!important}
+.social-art-link{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1/1;text-decoration:none;position:relative;z-index:1;perspective:700px}
+.social-cowboy-art{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 10px rgba(35,16,6,.35));transform:translateZ(0) rotate(0deg) scale(.96);transition:transform .34s cubic-bezier(.2,.8,.2,1),filter .34s ease}
+.social-cowboy-card:hover,.social-cowboy-card:focus-within{transform:translateY(-7px);border-color:rgba(194,117,62,.58)!important;box-shadow:0 18px 34px rgba(31,14,5,.28)!important}
+.social-cowboy-card:hover .social-cowboy-art,.social-cowboy-card:focus-within .social-cowboy-art{transform:translateY(-5px) rotate(-2deg) scale(1.045);filter:drop-shadow(0 17px 13px rgba(35,16,6,.44)) brightness(1.06)}
+.social-cowboy-card:nth-child(even):hover .social-cowboy-art,.social-cowboy-card:nth-child(even):focus-within .social-cowboy-art{transform:translateY(-5px) rotate(2deg) scale(1.045)}
+.social-card-copy{display:flex;flex:1;flex-direction:column;align-items:center;width:100%;padding:0 5px 4px}
+.social-card-copy h3{margin:.3rem 0 .45rem}
+.social-card-copy p{margin:0 0 18px;flex:1}
+.social-click-btn{margin-top:auto;min-width:150px;position:relative;z-index:2}
+.home-social-grid .social-cowboy-card{min-width:0}
+@media(max-width:980px){.social-cowboy-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.social-cowboy-art{max-height:330px}}
+@media(max-width:640px){.social-cowboy-grid{grid-template-columns:1fr!important;gap:20px}.social-cowboy-card{width:100%!important;max-width:390px!important;margin-inline:auto!important;padding:16px!important}.social-art-link{aspect-ratio:auto;min-height:0}.social-cowboy-art{width:min(100%,320px);height:auto;max-height:none}.social-card-copy p{margin-bottom:15px}.social-click-btn{width:min(100%,240px);min-height:48px}.social-cowboy-card:hover,.social-cowboy-card:focus-within{transform:none}.social-cowboy-card:hover .social-cowboy-art,.social-cowboy-card:focus-within .social-cowboy-art,.social-cowboy-card:nth-child(even):hover .social-cowboy-art,.social-cowboy-card:nth-child(even):focus-within .social-cowboy-art{transform:scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.social-cowboy-card,.social-cowboy-art{transition:none!important;transform:none!important}}
