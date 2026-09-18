@@ -53,29 +53,30 @@
   theatreBtn?.addEventListener('click',()=>setTheatre(!document.body.classList.contains('live-theatre-mode')));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('live-theatre-mode'))setTheatre(false)});
 
-  // Neon status sign. social-sync.js can call window.bbSetLiveState(...) when a backend reports a live stream.
+  // Country live-status board. social-sync.js updates it from the generated YouTube/Twitch feed.
   const sign=document.getElementById('liveNeonSign');
   const signText=document.getElementById('liveNeonText');
   const signSub=document.getElementById('liveNeonSubtext');
   window.bbSetLiveState=(isLive,title,url)=>{
     if(!sign)return;
-    sign.classList.remove('is-off','is-live','igniting');
+    sign.classList.remove('is-checking','is-off','is-live','igniting');
     if(isLive){
       sign.classList.add('igniting');
       if(signText)signText.textContent='CURRENTLY LIVE';
       if(signSub)signSub.textContent=title||'The backyard is live right now — pull up a chair.';
-      setTimeout(()=>{sign.classList.remove('igniting');sign.classList.add('is-live')},650);
+      setTimeout(()=>{sign.classList.remove('igniting');sign.classList.add('is-live')},380);
       const btn=document.querySelector('[data-live-btn]');
       if(btn){btn.textContent='Watch Live';btn.href=url||'#mainLiveStream'}
     }else{
       sign.classList.add('is-off');
       if(signText)signText.textContent='CURRENTLY OFF AIR';
-      if(signSub)signSub.textContent='The sign will power on automatically when the podcast goes live.';
+      if(signSub)signSub.textContent='No B&B broadcast is live right now. This board updates automatically when YouTube or Twitch goes live.';
       const btn=document.querySelector('[data-live-btn]');
       if(btn){btn.textContent='Watch / Follow';btn.href='#mainLiveStream'}
     }
   };
-  window.bbSetLiveState(false);
+  // Keep a neutral checking state until social-sync.js returns the current feed.
+  if(sign){sign.classList.remove('is-off','is-live');sign.classList.add('is-checking');}
 
   // Test button makes the sign ignite without changing any real live status.
   const testBtn=document.getElementById('testLiveSign');
@@ -83,7 +84,7 @@
   testBtn?.addEventListener('click',()=>{
     testOn=!testOn;
     window.bbSetLiveState(testOn,testOn?'Test signal: B&B is live!':'');
-    testBtn.textContent=testOn?'Reset Live Sign':'Test Live Sign';
+    testBtn.textContent=testOn?'Reset Live Status':'Test Live Status';
   });
 })();
 

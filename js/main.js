@@ -76,12 +76,12 @@ window.bbToast=(title,message,link)=>{
   const stack=qs('#toastStack'); if(!stack)return;
   const duration=9000;
   const el=document.createElement('div');
-  el.className='toast neon-toast toast-off';
+  el.className='toast neon-toast country-toast toast-off';
   el.setAttribute('role','status');
   el.setAttribute('aria-live','polite');
   const safeTitle=String(title||'B&B UPDATE');
   const safeMessage=String(message||'New B&B content is available.');
-  el.innerHTML=`<div class="toast-neon-rail" aria-hidden="true"></div><button class="toast-close" type="button" aria-label="Close notification">×</button><div class="toast-kicker">BACKYARD SIGNAL</div><b>${safeTitle}</b><p>${safeMessage}</p>${link?'<a class="toast-action" href="'+link+'">OPEN UPDATE →</a>':''}<div class="toast-timer" aria-hidden="true"><span></span></div>`;
+  el.innerHTML=`<div class="toast-neon-rail" aria-hidden="true"></div><button class="toast-close" type="button" aria-label="Close notification">×</button><div class="toast-kicker">B&amp;B BACKYARD BULLETIN</div><b>${safeTitle}</b><p>${safeMessage}</p>${link?'<a class="toast-action" href="'+link+'">VIEW UPDATE →</a>':''}<div class="toast-timer" aria-hidden="true"><span></span></div>`;
   stack.appendChild(el);
   requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.remove('toast-off');el.classList.add('toast-powering')}));
   const ignite=setTimeout(()=>{el.classList.remove('toast-powering');el.classList.add('toast-on')},520);
