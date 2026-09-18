@@ -207,3 +207,7 @@ The Live page is now configured to load the Restream **Embed chat from any live 
 
 ## v1.4.59 — Custom western live-status frame
 The Live page status module now uses the supplied transparent western frame artwork. Status text stays centered inside the artwork, uses the site display font stack, and switches automatically between checking, off-air, and live states without neon effects. Preview Notification and Test Live Status controls remain below the module.
+
+
+## v1.4.61 — live sign ON/OFF artwork switching
+The Live status module now uses the lantern-off artwork while checking/offline and automatically swaps to the original lantern-lit artwork when YouTube/Twitch live detection reports a live broadcast. Existing status text, preview/test controls, Restream chat, and social sync are preserved.

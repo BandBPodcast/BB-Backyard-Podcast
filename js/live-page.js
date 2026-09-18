@@ -57,10 +57,14 @@
   const sign=document.getElementById('liveNeonSign');
   const signText=document.getElementById('liveNeonText');
   const signSub=document.getElementById('liveNeonSubtext');
+  const signFrame=document.getElementById('liveCountryFrame');
+  const frameOff='assets/images/live-status-western-frame-off.png';
+  const frameOn='assets/images/live-status-western-frame-on.png';
   window.bbSetLiveState=(isLive,title,url)=>{
     if(!sign)return;
     sign.classList.remove('is-checking','is-off','is-live','igniting');
     if(isLive){
+      if(signFrame)signFrame.src=frameOn;
       sign.classList.add('igniting');
       if(signText)signText.textContent='CURRENTLY LIVE';
       if(signSub)signSub.textContent=title||'The backyard is live right now — pull up a chair.';
@@ -68,6 +72,7 @@
       const btn=document.querySelector('[data-live-btn]');
       if(btn){btn.textContent='Watch Live';btn.href=url||'#mainLiveStream'}
     }else{
+      if(signFrame)signFrame.src=frameOff;
       sign.classList.add('is-off');
       if(signText)signText.textContent='CURRENTLY OFF AIR';
       if(signSub)signSub.textContent='No B&B broadcast is live right now. This board updates automatically when YouTube or Twitch goes live.';
@@ -76,7 +81,7 @@
     }
   };
   // Keep a neutral checking state until social-sync.js returns the current feed.
-  if(sign){sign.classList.remove('is-off','is-live');sign.classList.add('is-checking');}
+  if(sign){sign.classList.remove('is-off','is-live');sign.classList.add('is-checking');if(signFrame)signFrame.src=frameOff;}
 
   // Test button makes the sign ignite without changing any real live status.
   const testBtn=document.getElementById('testLiveSign');
