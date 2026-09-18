@@ -225,3 +225,17 @@ The Episodes page now reads completed YouTube livestream archives from `data/soc
 
 ## v1.4.64 — Falling bottle-cap transition + mobile doors
 The page transition bottle cap now drops from above with a partial spin and small physical landing bounce instead of flashing. Mobile transition doors were tightened to cover the full dynamic viewport and overlap cleanly at the center before reopening.
+
+## v1.4.65 — real bottle-cap video transition
+- Replaced the CSS-generated/flashing transition bottle cap with the supplied WebM bottle-cap fall animation.
+- The barn doors close first, the bottle-cap video plays once, then navigation continues and the destination doors reopen.
+- Preserved the repaired mobile door coverage and all v1.4.64 live/social/clip/episode systems.
+
+## v1.4.66 — bottle-cap WebM transition visibility fix
+- Replaced the transition media with the exact user-supplied `transparent.webm` file.
+- Added an explicit WebM `<source type="video/webm">` and more reliable preload/load/canplay playback handling.
+- Raised the bottle-cap video above the closed barn doors and made the visible playback state explicit on desktop and mobile.
+- Removed the prior reduced-motion rule that could suppress the supplied transition video.
+
+## v1.4.67 — Updated bottle-cap transition video
+- Replaced the transition WebM with the newer user-provided bottle-cap animation while preserving the v1.4.66 visibility/playback fixes.

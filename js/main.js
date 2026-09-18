@@ -100,7 +100,7 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
 (()=>{
   const transition=document.createElement('div');
   transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><div class="transition-sign transition-logo-stack" aria-label="B&B Backyard Podcast"><img class="transition-logo transition-logo-off" src="assets/images/bnb-current-logo.png" alt="B&B Backyard Podcast bottle cap"><img class="transition-logo transition-logo-on" src="assets/images/bnb-current-logo.png" alt="" aria-hidden="true"></div>';
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm" type="video/webm"></video>';
   document.body.appendChild(transition);
 
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
@@ -108,10 +108,10 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     sessionStorage.removeItem('bb-transition-pending');
     document.documentElement.classList.add('loader-seen','bb-transition-ready');
     document.documentElement.classList.remove('bb-transition-enter');
-    transition.classList.add('show','entering','sign-on');
+    transition.classList.add('show','entering');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      setTimeout(()=>{transition.classList.remove('entering','sign-on');transition.classList.add('opening')},420);
-      setTimeout(()=>{transition.classList.remove('show','opening');},1320);
+      setTimeout(()=>{transition.classList.remove('entering');transition.classList.add('opening')},180);
+      setTimeout(()=>{transition.classList.remove('show','opening');},1080);
     }));
   }else{
     document.documentElement.classList.add('bb-transition-ready');
@@ -127,13 +127,32 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     if(url.pathname===location.pathname&&url.hash)return;
     event.preventDefault();
     transition.className='page-transition show closing';
-    setTimeout(()=>{transition.classList.remove('closing');transition.classList.add('closed','sign-ready')},620);
-    setTimeout(()=>transition.classList.add('sign-on'),1450);
-    setTimeout(()=>{
+    const capVideo=transition.querySelector('#transitionBottlecapVideo');
+    let leaving=false;
+    const leave=()=>{
+      if(leaving)return; leaving=true;
       sessionStorage.setItem('bb-loader-seen','1');
       sessionStorage.setItem('bb-transition-pending','1');
       location.href=link.href;
-    },1760);
+    };
+    setTimeout(()=>{
+      transition.classList.remove('closing');transition.classList.add('closed','video-playing');
+      if(capVideo){
+        capVideo.muted=true;
+        capVideo.defaultMuted=true;
+        capVideo.playsInline=true;
+        try{capVideo.pause();capVideo.currentTime=0;capVideo.load()}catch(e){}
+        capVideo.addEventListener('ended',leave,{once:true});
+        const startVideo=()=>{
+          transition.classList.add('video-playing');
+          const playPromise=capVideo.play();
+          if(playPromise?.catch)playPromise.catch(()=>leave());
+        };
+        if(capVideo.readyState>=2) startVideo();
+        else capVideo.addEventListener('canplay',startVideo,{once:true});
+      }else leave();
+    },760);
+    setTimeout(leave,6500);
   });
 
   window.addEventListener('pageshow',(e)=>{if(e.persisted){transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});

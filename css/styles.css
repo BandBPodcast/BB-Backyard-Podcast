@@ -2787,3 +2787,57 @@ body,p,li,label,input,textarea,select,option,
 @media(prefers-reduced-motion:reduce){
  .page-transition.sign-ready .transition-sign.transition-logo-stack{animation:none!important;transform:none!important;opacity:1!important;}
 }
+
+/* ===== B&B v1.4.65 — real bottle-cap video transition =====
+   Uses the supplied bottle-cap fall animation after the barn doors close.
+   The old CSS bottle-cap flash/fall is disabled so only the video is visible. */
+.page-transition .transition-sign{display:none!important;}
+.page-transition .transition-bottlecap-video{
+  position:absolute!important;
+  z-index:9!important;
+  left:50%!important;
+  top:50%!important;
+  width:min(72vw,848px)!important;
+  height:auto!important;
+  max-height:72vh!important;
+  transform:translate(-50%,-50%)!important;
+  object-fit:contain!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  background:transparent!important;
+}
+.page-transition.video-playing .transition-bottlecap-video{
+  opacity:1!important;
+  visibility:visible!important;
+}
+.page-transition.opening .transition-bottlecap-video,
+.page-transition.entering .transition-bottlecap-video{opacity:0!important;visibility:hidden!important;}
+@media(max-width:760px){
+  .page-transition .transition-bottlecap-video{width:min(92vw,848px)!important;max-height:60dvh!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-transition .transition-bottlecap-video{display:none!important;}
+}
+
+/* ===== B&B v1.4.66 — transition WebM visibility reliability ===== */
+.page-transition .transition-bottlecap-video{
+  display:block!important;
+  z-index:50!important;
+  width:min(86vw,980px)!important;
+  max-width:980px!important;
+  max-height:76vh!important;
+  opacity:0!important;
+  visibility:hidden!important;
+}
+.page-transition.closed.video-playing .transition-bottlecap-video{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+@media(max-width:760px){
+  .page-transition .transition-bottlecap-video{width:96vw!important;max-height:68dvh!important;z-index:50!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-transition.closed.video-playing .transition-bottlecap-video{display:block!important;opacity:1!important;visibility:visible!important;}
+}
