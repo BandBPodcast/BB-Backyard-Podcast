@@ -2272,3 +2272,239 @@ iframe,video,embed,object{max-width:100%}
   .crew-modal-copy p{font-size:clamp(.34rem,1.55vw,.52rem)!important;line-height:1.1!important}
   .bb-scroll-mug{width:66px!important}
 }
+\n\n/* ===== B&B v1.4.47 — crew profile copy fit refinement ===== */\n/* Keep every member's role and biography comfortably inside the printable parchment area. */\n.crew-modal-copy{\n  top:30.2%!important;\n  height:35.2%!important;\n  justify-content:flex-start!important;\n}\n.crew-modal-copy h2{\n  font-size:clamp(1.65rem,3.55vw,3.45rem)!important;\n  line-height:.88!important;\n  margin:0 auto .12rem!important;\n  max-width:100%!important;\n}\n.crew-modal-copy .eyebrow{\n  font-size:clamp(.58rem,1.05vw,.94rem)!important;\n  line-height:1.08!important;\n  margin:.08rem auto .34rem!important;\n  max-width:94%!important;\n}\n.crew-modal-copy p{\n  font-size:clamp(.72rem,1.13vw,1.02rem)!important;\n  line-height:1.22!important;\n  max-width:91%!important;\n  margin:0 auto!important;\n}\n@media(max-width:700px){\n  .crew-modal-copy{top:29.7%!important;height:37%!important;}\n  .crew-modal-copy h2{font-size:clamp(.82rem,5.2vw,1.58rem)!important;line-height:.86!important;}\n  .crew-modal-copy .eyebrow{font-size:clamp(.32rem,1.7vw,.56rem)!important;margin:.04rem auto .14rem!important;}\n  .crew-modal-copy p{font-size:clamp(.34rem,1.52vw,.54rem)!important;line-height:1.12!important;max-width:92%!important;}\n}\n
+/* ===== B&B v1.4.48 — crew mobile poster + Western Bang Bang typography ===== */
+/* Use the requested Western Bang Bang family when it is available on the device.
+   Keep strong western serif fallbacks so the deployed site remains readable. */
+:root{--bb-western-font:'Western Bang Bang',Rockwell,'Roboto Slab','Courier New',serif;}
+html,body,button,input,textarea,select,
+.brand,.nav-link,.menu-btn,.eyebrow,.btn,.badge,.social-label,.meta,
+h1,h2,h3,h4,h5,h6,p,a,span,strong,small,label,blockquote,
+.hero h1,.page-hero h1,.section-title,.stat strong,.footer,
+.wanted-nameplate text,.wanted-view-hint,.crew-modal-copy h2,
+.crew-modal-copy .eyebrow,.crew-modal-copy p,.crew-modal-close{
+  font-family:var(--bb-western-font)!important;
+}
+
+/* Desktop wide poster: move the full crew copy lower into the printable area. */
+.crew-modal-copy{
+  top:34.2%!important;
+  height:31.5%!important;
+  justify-content:flex-start!important;
+}
+.crew-modal-copy h2{
+  font-size:clamp(1.55rem,3.35vw,3.25rem)!important;
+  line-height:.9!important;
+  margin:0 auto .12rem!important;
+}
+.crew-modal-copy .eyebrow{
+  font-size:clamp(.56rem,1vw,.9rem)!important;
+  line-height:1.08!important;
+  margin:.06rem auto .3rem!important;
+}
+.crew-modal-copy p{
+  font-size:clamp(.68rem,1.05vw,.96rem)!important;
+  line-height:1.18!important;
+  max-width:91%!important;
+  margin:0 auto!important;
+}
+
+/* Mobile crew profile: swap the wide desktop poster for the dedicated tall poster. */
+@media(max-width:700px){
+  .crew-modal{padding:10px!important;align-items:center!important;overflow:auto!important;}
+  .crew-modal-panel{
+    width:min(94vw,430px)!important;
+    max-width:430px!important;
+    aspect-ratio:948/1659!important;
+    min-height:0!important;
+    margin:12px auto!important;
+    background:none!important;
+    box-shadow:none!important;
+  }
+  .crew-modal-panel::before{
+    background:url('../assets/images/crew-wanted-mobile.png') center/100% 100% no-repeat!important;
+  }
+  .crew-modal-photo{
+    left:18.2%!important;
+    top:21.3%!important;
+    width:51.8%!important;
+    height:28.8%!important;
+    margin:0!important;
+    z-index:1!important;
+    background:#24140c!important;
+  }
+  .crew-modal-photo img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  .crew-modal-copy{
+    left:13.5%!important;
+    top:58.7%!important;
+    width:73%!important;
+    height:25.8%!important;
+    padding:0!important;
+    text-align:center!important;
+    justify-content:flex-start!important;
+    transform:none!important;
+  }
+  .crew-modal-copy h2{
+    font-size:clamp(1.18rem,8vw,2rem)!important;
+    line-height:.86!important;
+    margin:0 auto .18rem!important;
+    max-width:96%!important;
+  }
+  .crew-modal-copy .eyebrow{
+    font-size:clamp(.5rem,3.1vw,.76rem)!important;
+    line-height:1.05!important;
+    margin:.05rem auto .28rem!important;
+    max-width:92%!important;
+  }
+  .crew-modal-copy p{
+    font-size:clamp(.54rem,2.7vw,.78rem)!important;
+    line-height:1.16!important;
+    max-width:92%!important;
+    margin:0 auto!important;
+  }
+  .crew-modal-close{
+    width:36px!important;height:36px!important;
+    top:5.5%!important;right:6.2%!important;
+    font-size:1.3rem!important;
+  }
+}
+@media(max-width:390px){
+  .crew-modal-panel{width:96vw!important;margin:8px auto!important;}
+  .crew-modal-copy{top:58.4%!important;height:26.4%!important;}
+  .crew-modal-copy h2{font-size:clamp(1rem,7.6vw,1.65rem)!important;}
+  .crew-modal-copy .eyebrow{font-size:clamp(.44rem,2.9vw,.66rem)!important;}
+  .crew-modal-copy p{font-size:clamp(.48rem,2.55vw,.68rem)!important;line-height:1.12!important;}
+}
+
+/* ===== v1.4.49 — Western Bang Bang site-wide typography =====
+   The two font files are user-owned assets and are intentionally not bundled
+   by ChatGPT. Place them in assets/fonts/ using these exact filenames. */
+@font-face{
+  font-family:'Western Bang Bang';
+  src:local('Western Bang Bang'),local('WesternBangBang-Regular'),url('../assets/fonts/WesternBangBang-Regular.ttf') format('truetype');
+  font-style:normal;
+  font-weight:100 900;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Western Bang Bang';
+  src:local('Western Bang Bang Italic'),local('WesternBangBang-Italic'),url('../assets/fonts/WesternBangBang-Italic.ttf') format('truetype');
+  font-style:italic;
+  font-weight:100 900;
+  font-display:swap;
+}
+:root{--bb-western-font:'Western Bang Bang',Rockwell,'Roboto Slab',Georgia,serif!important;}
+html,body,button,input,textarea,select,
+body *,
+.header,.nav,.nav a,.brand,.brand-name,
+.hero,.hero *,.section,.section *,
+.card,.card *,.btn,.eyebrow,.section-title,
+.footer,.footer *,
+.loader,.loader *,
+.page-transition,.page-transition *,
+.transition-sign,.transition-sign *,
+.neon-toast,.neon-toast *,
+.live-neon-status,.live-neon-status *,
+.crew-card,.crew-card *,
+.crew-modal,.crew-modal *,
+.crew-modal-copy,.crew-modal-copy *,
+.bb-scroll-top,.bb-scroll-top *{
+  font-family:var(--bb-western-font)!important;
+}
+\n\n/* ===== B&B v1.4.50 — free Rye cowboy font site-wide ===== */
+:root{--bb-western-font:'Rye',Rockwell,'Roboto Slab',Georgia,serif!important;}
+html,body,
+body *,
+body *::before,
+body *::after,
+button,input,textarea,select,option,
+.site-nav a,.eyebrow,.btn,.badge,.social-label,.meta,
+.brand-copy strong,.brand-copy span,.footer,
+h1,h2,h3,h4,h5,h6,
+.hero h1,.page-hero h1,.section-title,
+.hero p,.section-copy,.card p,.page-hero p,.episode-card p,.mini-card p,.social-card p,
+.stream-panel-head h2,.main-stream-head h2,.chat-panel-head h2,
+.live-neon-sign strong,.facebook-chat-fallback h3,
+.crew-card,.crew-card *,.crew-modal,.crew-modal *,
+.transition-sign,.transition-sign *,
+.loader,.loader *{
+  font-family:var(--bb-western-font)!important;
+}
+/* Rye is decorative, so keep copy readable without changing the requested font. */
+p,li,label,input,textarea,select,button,.section-copy,.page-hero p,.hero p,.crew-modal p{
+  line-height:1.65;
+}
+
+/* ===== B&B v1.4.51 — Western Bang Bang display headers + Rye body ===== */
+@import url('https://db.onlinewebfonts.com/c/33ad6eb9ec2d17c1fea5fc3c70674a14?family=Western+Bang+Bang');
+:root{
+  --bb-western-font:'Rye',Rockwell,'Roboto Slab',Georgia,serif!important;
+  --bb-header-font:'Western Bang Bang','Rye',Rockwell,Georgia,serif!important;
+}
+/* Western Bang Bang is reserved for prominent display/header copy. */
+h1,h2,h3,h4,h5,h6,
+.hero h1,.page-hero h1,.section-title,
+.brand-copy strong,
+.nav-link,.site-nav a,
+.eyebrow,.badge,
+.btn,
+.loader-status-label,.loader-percent,.loader strong,
+.transition-sign,.transition-sign *,
+.wanted-name,.wanted-role,
+.crew-modal-copy h2,.crew-modal-copy .eyebrow,
+.stream-panel-head h2,.main-stream-head h2,.chat-panel-head h2,
+.live-neon-sign strong,
+.neon-toast-title,
+.footer strong{
+  font-family:var(--bb-header-font)!important;
+}
+/* Keep longer copy readable in Rye. */
+body,p,li,label,input,textarea,select,option,
+.hero p,.page-hero p,.section-copy,.card p,.episode-card p,.mini-card p,.social-card p,
+.crew-modal-copy p,.footer-meta{
+  font-family:var(--bb-western-font)!important;
+}
+
+/* ===== B&B v1.4.52 — clean bottle-cap transition + tighter barn doors =====
+   Removes the inherited rectangular sign panel around the bottle-cap image and
+   gives the closed barn doors a small center overlap so no large gap is visible. */
+.page-transition .transition-sign.transition-logo-stack,
+.page-transition.sign-ready .transition-sign.transition-logo-stack,
+.page-transition.sign-on .transition-sign.transition-logo-stack,
+.page-transition.entering .transition-sign.transition-logo-stack,
+.page-transition.opening .transition-sign.transition-logo-stack{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.page-transition .transition-logo{
+  background:transparent!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+/* Overlap the two leaves slightly at the center when shut. */
+.page-transition .transition-door{
+  width:54%!important;
+}
+.page-transition .transition-door-left{
+  left:-3%!important;
+  right:auto!important;
+}
+.page-transition .transition-door-right{
+  right:-3%!important;
+  left:auto!important;
+}
+@media(max-width:640px){
+  .page-transition .transition-door{width:56%!important;}
+  .page-transition .transition-door-left{left:-5%!important;}
+  .page-transition .transition-door-right{right:-5%!important;}
+}

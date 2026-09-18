@@ -1,0 +1,6 @@
+To activate the exact Western Bang Bang font in this website, place your own two uploaded font files in this folder with these exact names:
+
+WesternBangBang-Regular.ttf
+WesternBangBang-Italic.ttf
+
+The website CSS is already configured to use them everywhere once present.
