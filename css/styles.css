@@ -2883,3 +2883,31 @@ body,p,li,label,input,textarea,select,option,
 @media(max-width:420px){
   .loader-inner{transform:translateX(-2.2vw)!important;}
 }
+\n\n/* ===== B&B v1.4.73 — mobile logo transition / desktop transparent WebM ===== */
+.page-transition .transition-mobile-logo{display:none!important;}
+@media(max-width:760px){
+  /* Mobile browsers can render VP9 alpha as a box, so the WebM is desktop-only. */
+  .page-transition .transition-bottlecap-video,
+  .page-transition.closed.video-playing .transition-bottlecap-video{display:none!important;opacity:0!important;visibility:hidden!important;}
+  .page-transition .transition-mobile-logo{
+    position:absolute!important;left:50%!important;top:50%!important;z-index:51!important;
+    display:block!important;width:min(58vw,280px)!important;height:auto!important;
+    transform:translate(-50%,-50%) rotate(0deg) scale(.9)!important;
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+    filter:drop-shadow(0 14px 22px rgba(0,0,0,.48));
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-logo{
+    opacity:1!important;visibility:visible!important;
+    animation:bbMobileLogoSpin 1.8s cubic-bezier(.2,.72,.28,1) forwards!important;
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-logo.spin-finished{
+    animation:none!important;transform:translate(-50%,-50%) rotate(720deg) scale(1)!important;
+  }
+  .page-transition.opening .transition-mobile-logo,
+  .page-transition.entering .transition-mobile-logo{opacity:0!important;visibility:hidden!important;}
+}
+@keyframes bbMobileLogoSpin{
+  0%{transform:translate(-50%,-50%) rotate(0deg) scale(.82);}
+  72%{transform:translate(-50%,-50%) rotate(650deg) scale(1.04);}
+  100%{transform:translate(-50%,-50%) rotate(720deg) scale(1);}
+}

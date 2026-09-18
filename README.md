@@ -255,3 +255,9 @@ The page transition bottle cap now drops from above with a partial spin and smal
 - Desktop and mobile both reference this exact same WebM asset.
 - Updated the transition asset cache key to v1.4.72 so browsers request the replacement file instead of the previous cached transition.
 - No layout, loader, doors, TikTok, social sync, Live, Clips, Episodes, or other website systems were changed.
+
+
+## v1.4.73
+- Mobile page transitions now use a rotating B&B bottle-cap logo instead of WebM alpha video.
+- The logo completes its spin and settles before navigation; destination doors then open normally.
+- Desktop keeps the existing transparent WebM transition unchanged.

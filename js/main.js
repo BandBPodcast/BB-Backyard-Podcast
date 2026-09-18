@@ -100,7 +100,7 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
 (()=>{
   const transition=document.createElement('div');
   transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1472" type="video/webm"></video>';
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><img class="transition-mobile-logo" id="transitionMobileLogo" src="assets/images/bnb-bottlecap-transition-logo.png?v=1473" alt="" aria-hidden="true"><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1472" type="video/webm"></video>';
   document.body.appendChild(transition);
 
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
@@ -128,6 +128,8 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     event.preventDefault();
     transition.className='page-transition show closing';
     const capVideo=transition.querySelector('#transitionBottlecapVideo');
+    const mobileLogo=transition.querySelector('#transitionMobileLogo');
+    const mobileTransition=window.matchMedia('(max-width:760px)').matches;
     let leaving=false;
     const leave=()=>{
       if(leaving)return; leaving=true;
@@ -137,7 +139,14 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     };
     setTimeout(()=>{
       transition.classList.remove('closing');transition.classList.add('closed','video-playing');
-      if(capVideo){
+      if(mobileTransition && mobileLogo){
+        transition.classList.remove('video-playing');
+        transition.classList.add('mobile-logo-playing');
+        mobileLogo.classList.remove('spin-finished');
+        // Spin the B&B bottle-cap logo, let it settle, then change pages.
+        setTimeout(()=>mobileLogo.classList.add('spin-finished'),1800);
+        setTimeout(leave,2150);
+      }else if(capVideo){
         capVideo.muted=true;
         capVideo.defaultMuted=true;
         capVideo.playsInline=true;
