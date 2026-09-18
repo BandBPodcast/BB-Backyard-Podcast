@@ -128,12 +128,12 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     event.preventDefault();
     transition.className='page-transition show closing';
     setTimeout(()=>{transition.classList.remove('closing');transition.classList.add('closed','sign-ready')},620);
-    setTimeout(()=>transition.classList.add('sign-on'),780);
+    setTimeout(()=>transition.classList.add('sign-on'),1450);
     setTimeout(()=>{
       sessionStorage.setItem('bb-loader-seen','1');
       sessionStorage.setItem('bb-transition-pending','1');
       location.href=link.href;
-    },1450);
+    },1760);
   });
 
   window.addEventListener('pageshow',(e)=>{if(e.persisted){transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});

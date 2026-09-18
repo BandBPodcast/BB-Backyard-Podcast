@@ -221,3 +221,7 @@ The Live status module now uses the lantern-off artwork while checking/offline a
 
 ## v1.4.63 — Automatic full livestream episodes
 The Episodes page now reads completed YouTube livestream archives from `data/social-feed.json`. The GitHub social-sync workflow identifies a finished livestream by YouTube `liveStreamingDetails.actualEndTime`, then the full YouTube replay appears automatically on Episodes after the next sync.
+
+
+## v1.4.64 — Falling bottle-cap transition + mobile doors
+The page transition bottle cap now drops from above with a partial spin and small physical landing bounce instead of flashing. Mobile transition doors were tightened to cover the full dynamic viewport and overlap cleanly at the center before reopening.
