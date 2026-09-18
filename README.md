@@ -261,3 +261,9 @@ The page transition bottle cap now drops from above with a partial spin and smal
 - Mobile page transitions now use a rotating B&B bottle-cap logo instead of WebM alpha video.
 - The logo completes its spin and settles before navigation; destination doors then open normally.
 - Desktop keeps the existing transparent WebM transition unchanged.
+
+
+## v1.4.74
+- Added the supplied Western Restream emblem to the Unified Live Chat header.
+- Added a matching Restream card to Socials explaining its role in B&B's streaming/unified-chat setup.
+- Preserved existing transition, loader, social sync, TikTok, Live, Episodes and Clips systems.

@@ -2911,3 +2911,10 @@ body,p,li,label,input,textarea,select,option,
   72%{transform:translate(-50%,-50%) rotate(650deg) scale(1.04);}
   100%{transform:translate(-50%,-50%) rotate(720deg) scale(1);}
 }
+
+
+/* ===== B&B v1.4.74 — Restream western branding ===== */
+.restream-head-brand{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-width:0}
+.restream-head-brand .chat-login-note{max-width:190px;text-align:right}
+.restream-head-brand img{display:block;width:82px;height:82px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 7px 8px rgba(20,8,3,.38))}
+@media(max-width:700px){.restream-head-brand{width:100%;justify-content:space-between;align-items:center}.restream-head-brand .chat-login-note{text-align:left;max-width:210px}.restream-head-brand img{width:70px;height:70px}}
