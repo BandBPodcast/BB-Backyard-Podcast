@@ -189,3 +189,7 @@ Required GitHub repository secrets (Settings → Secrets and variables → Actio
 - `TWITCH_CLIENT_SECRET` — Twitch Developer application Client Secret.
 
 The workflow resolves YouTube handle `@BnBEntertains`, reads its uploads playlist, checks recent video live status, and checks Twitch channel `bandbpodcast`. API secrets are used only inside GitHub Actions and are never shipped to the public website.
+
+
+## v1.4.56 — Restream unified chat
+The Live page now uses one unified Restream chat panel instead of separate YouTube/Facebook and Twitch chat boxes. To connect it, copy the Restream Chat **Embed in stream** URL and paste it into `restreamChatEmbedUrl` in `js/live-config.js`. The embed displays incoming comments from supported connected destinations. Viewers use the included platform buttons to open the source platform when they want to send a message with their own account.

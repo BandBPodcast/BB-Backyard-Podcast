@@ -23,51 +23,20 @@
     if(tag){tag.textContent='TWITCH LIVE';tag.className='platform-tag platform-twitch'}
   }
 
-  const ytChat=document.getElementById('youtubeChat');
-  const ytChatSetup=document.getElementById('youtubeChatSetup');
-  if(ytVideo&&ytChat){
-    showFrame(ytChat,`https://www.youtube.com/live_chat?v=${encodeURIComponent(ytVideo)}&embed_domain=${encodeURIComponent(host)}`);
-    if(ytChatSetup)ytChatSetup.hidden=true;
+  // v1.4.56: one unified Restream chat panel replaces the separate website chat boxes.
+  // Restream's embed is a combined message display; viewers still authenticate/chat on the source platform.
+  const restreamChat=document.getElementById('restreamChat');
+  const restreamChatSetup=document.getElementById('restreamChatSetup');
+  const restreamChatUrl=(cfg.restreamChatEmbedUrl||'').trim();
+  if(restreamChatUrl&&restreamChat){
+    try{
+      const u=new URL(restreamChatUrl);
+      if(u.protocol==='https:'&&/(^|\.)restream\.io$/i.test(u.hostname)){
+        showFrame(restreamChat,u.href);
+        if(restreamChatSetup)restreamChatSetup.hidden=true;
+      }
+    }catch(e){ console.warn('Invalid Restream chat embed URL.'); }
   }
-
-  const twitchChat=document.getElementById('twitchChat');
-  const twitchChatSetup=document.getElementById('twitchChatSetup');
-  if(twitchChannel&&twitchChat){
-    showFrame(twitchChat,`https://www.twitch.tv/embed/${encodeURIComponent(twitchChannel)}/chat?parent=${encodeURIComponent(host)}&darkpopout`);
-    if(twitchChatSetup)twitchChatSetup.hidden=true;
-  }
-
-  // Facebook does not expose a dependable embeddable Live chat composer for third-party sites.
-  // We therefore route viewers to the official public Facebook Live post/comments.
-  const fbLink=document.getElementById('facebookLiveLink');
-  const fbNote=document.getElementById('facebookSetupNote');
-  if(fbLink&&facebookLiveUrl){fbLink.href=facebookLiveUrl;if(fbNote)fbNote.hidden=true}
-  else if(fbLink){fbLink.setAttribute('aria-disabled','true');fbLink.addEventListener('click',e=>e.preventDefault())}
-
-  const isMobile=matchMedia('(max-width: 760px)').matches;
-  const mobileNotice=document.getElementById('youtubeMobileNotice');
-  if(mobileNotice&&isMobile) mobileNotice.hidden=false;
-
-  // YouTube/Facebook switcher on the left. On mobile, prefer Facebook when configured.
-  const buttons=[...document.querySelectorAll('[data-chat-switch]')];
-  const views=[...document.querySelectorAll('[data-chat-view]')];
-  const leftTag=document.getElementById('leftChatPlatformTag');
-  const leftTitle=document.getElementById('leftChatTitle');
-  const leftNote=document.getElementById('leftChatLoginNote');
-  const leftHeader=document.getElementById('leftChatHeader');
-  const leftDot=document.getElementById('leftChatDot');
-  function selectChat(which){
-    buttons.forEach(b=>b.classList.toggle('active',b.dataset.chatSwitch===which));
-    views.forEach(v=>{const active=v.dataset.chatView===which;v.classList.toggle('active',active);v.hidden=!active});
-    const fb=which==='facebook';
-    if(leftTag){leftTag.textContent=fb?'Facebook':'YouTube';leftTag.className='platform-tag '+(fb?'platform-facebook':'platform-youtube')}
-    if(leftTitle)leftTitle.textContent=fb?'Facebook Live Comments':'YouTube Live Chat';
-    if(leftNote)leftNote.textContent=fb?'Use your Facebook account on the Live post':'Sign in with YouTube to chat';
-    if(leftHeader)leftHeader.textContent=fb?'Facebook Live Comments':'YouTube Live Chat';
-    if(leftDot)leftDot.classList.toggle('facebook-dot',fb);
-  }
-  buttons.forEach(b=>b.addEventListener('click',()=>selectChat(b.dataset.chatSwitch)));
-  selectChat(isMobile&&facebookLiveUrl?'facebook':'youtube');
 
   // Theatre mode / lights-out focus works on desktop and mobile, with a smooth dimmer fade.
   const theatreBtn=document.getElementById('theatreToggle');
@@ -129,10 +98,6 @@ window.bbApplyDetectedLive=(live)=>{
     if(player){player.src=`https://www.youtube.com/embed/${encodeURIComponent(live.videoId)}?rel=0&autoplay=0`;player.hidden=false}
     if(setup)setup.hidden=true;
     if(tag){tag.textContent='YOUTUBE LIVE';tag.className='platform-tag platform-youtube'}
-    const chat=document.getElementById('youtubeChat');
-    const chatSetup=document.getElementById('youtubeChatSetup');
-    if(chat){chat.src=`https://www.youtube.com/live_chat?v=${encodeURIComponent(live.videoId)}&embed_domain=${encodeURIComponent(host)}`;chat.hidden=false}
-    if(chatSetup)chatSetup.hidden=true;
   }else if(live.platform==='twitch'){
     const channel=(window.BB_LIVE_CONFIG?.twitchChannel||'bandbpodcast').trim();
     if(player){player.src=`https://player.twitch.tv/?channel=${encodeURIComponent(channel)}&parent=${encodeURIComponent(host)}&autoplay=false`;player.hidden=false}

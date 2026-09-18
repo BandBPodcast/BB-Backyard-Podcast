@@ -2,7 +2,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
 </head><body><div class="loader" id="siteLoader"><div class="loader-atmosphere"></div><div class="loader-inner"><div class="loader-sign-wrap"><div class="loader-sign-frame"><div class="loader-logo-stack loader-sunset-stack" aria-label="B & B Backyard Podcast"><img class="loader-logo loader-logo-off loader-sunset-image" src="assets/images/bnb-sunset-blank.png" alt="B & B Backyard Podcast sunset"><img class="loader-logo loader-logo-on loader-sunset-image" src="assets/images/bnb-sunset-logo.png" alt="" aria-hidden="true"></div><img class="loader-billboard-frame" src="assets/images/billboardcustomloader.png" alt="" aria-hidden="true"><span class="loader-electric-glow"></span><div class="country-progress-shell" aria-label="Website loading progress"><img class="country-progress-art" src="assets/images/customloaderbar.png" alt="" aria-hidden="true"><div class="progress"><span id="loaderProgress"></span></div></div></div></div><div class="loader-status"><span class="loader-status-label">Powering up the backyard</span><strong id="loaderPercent">0%</strong></div><div class="loader-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small id="loaderMessage">Neon circuits warming up</small></div></div><header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="nav-logo-stack" aria-label="B & B Backyard Podcast"><img class="nav-logo nav-logo-on" src="assets/images/bnb-current-logo.png" alt="B & B Backyard Podcast"></span><span>B & B Backyard Podcast</span></a><button class="menu-btn" id="menuBtn">Menu</button><nav class="nav-links" id="navLinks"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="episodes.html">Episodes</a><a class="nav-link" href="live.html">Live</a><a class="nav-link" href="clips.html">Clips</a><a class="nav-link" href="crew.html">Crew</a><a class="nav-link" href="about.html">About</a><a class="nav-link" href="socials.html">Socials</a><a class="nav-link" href="contact.html">Contact</a></nav></div></header><main>
-<section class="page-hero"><div class="container"><div class="eyebrow">B&B Live</div><h1>Pull up a chair.<br>Join the <span class="neon-page-flicker">live room.</span></h1><p>Watch the main B&B livestream, switch the left community panel between YouTube and Facebook, and keep Twitch chat on the right.</p></div></section>
+<section class="page-hero"><div class="container"><div class="eyebrow">B&B Live</div><h1>Pull up a chair.<br>Join the <span class="neon-page-flicker">live room.</span></h1><p>Watch the main B&B livestream and follow the whole conversation in one unified Restream chat panel.</p></div></section>
 <section class="section live-hub-section"><div class="container">
   <section class="live-neon-status card" id="liveNeonStatus" aria-live="polite">
     <div class="live-neon-sign is-off" id="liveNeonSign">
@@ -26,38 +26,22 @@
     </div>
   </article>
 
-  <div class="live-chat-grid" id="liveChats">
-    <article class="chat-panel card youtube-chat-panel">
-      <div class="chat-panel-head chat-switch-head"><div><span class="platform-tag platform-youtube" id="leftChatPlatformTag">YouTube</span><h2 id="leftChatTitle">YouTube Live Chat</h2></div><span class="chat-login-note" id="leftChatLoginNote">Sign in with YouTube to chat</span></div>
-      <div class="chat-platform-switch" role="group" aria-label="Choose left live chat">
-        <button class="chat-switch-btn active" type="button" data-chat-switch="youtube">YouTube</button>
-        <button class="chat-switch-btn" type="button" data-chat-switch="facebook">Facebook</button>
+  <div class="live-chat-grid restream-chat-grid" id="liveChats">
+    <article class="chat-panel card restream-chat-panel">
+      <div class="chat-panel-head"><div><span class="platform-tag platform-restream">Restream</span><h2>Unified Live Chat</h2></div><span class="chat-login-note">YouTube + Twitch + connected Restream destinations</span></div>
+      <div class="stream-chat-shell restream-chat-shell">
+        <div class="chat-header"><span class="chat-dot restream-dot"></span><b>B&amp;B Restream Chat</b></div>
+        <iframe id="restreamChat" title="B&B unified Restream chat" allow="clipboard-write" hidden></iframe>
+        <div class="stream-setup chat-setup" id="restreamChatSetup"><b>Restream chat is ready to connect</b><p>Paste your Restream <em>Embed in stream</em> URL into <code>restreamChatEmbedUrl</code> in <code>js/live-config.js</code>. Once added, messages from your connected Restream destinations can appear together here.</p></div>
       </div>
-      <div class="stream-chat-shell">
-        <div class="chat-header"><span class="chat-dot" id="leftChatDot"></span><b id="leftChatHeader">YouTube Live Chat</b></div>
-        <div class="chat-view active" data-chat-view="youtube">
-          <iframe id="youtubeChat" title="B&B YouTube live chat" hidden></iframe>
-          <div class="stream-setup chat-setup" id="youtubeChatSetup"><p>YouTube Live Chat activates automatically when the social sync detects a YouTube livestream.</p></div>
-          <div class="mobile-chat-note" id="youtubeMobileNotice" hidden>YouTube does not make embedded Live Chat available on mobile web. Use the Facebook tab here on mobile, or open the livestream in YouTube to chat.</div>
-        </div>
-        <div class="chat-view" data-chat-view="facebook" hidden>
-          <div class="facebook-chat-fallback" id="facebookChatFallback">
-            <span class="platform-tag platform-facebook">Facebook</span>
-            <h3>Facebook Live Comments</h3>
-            <p>Facebook does not provide a reliable embeddable live-chat box for third-party websites. Use the official Facebook Live post to read and send comments with your Facebook account.</p>
-            <a class="btn btn-facebook" id="facebookLiveLink" href="#" target="_blank" rel="noopener">Open Facebook Live Comments</a>
-            <small id="facebookSetupNote">Add your Facebook Live/post URL in <code>js/live-config.js</code>.</small>
-          </div>
-        </div>
+      <div class="restream-chat-actions" aria-label="Open platform chats">
+        <a class="btn btn-ghost" href="https://www.youtube.com/@BnBEntertains" target="_blank" rel="noopener noreferrer">Chat on YouTube</a>
+        <a class="btn btn-ghost" href="https://www.twitch.tv/bandbpodcast" target="_blank" rel="noopener noreferrer">Chat on Twitch</a>
+        <a class="btn btn-ghost" href="https://www.facebook.com/profile.php?id=61579615124683" target="_blank" rel="noopener noreferrer">Open Facebook</a>
       </div>
-    </article>
-
-    <article class="chat-panel card twitch-chat-panel">
-      <div class="chat-panel-head"><div><span class="platform-tag platform-twitch">Twitch</span><h2>Twitch Live Chat</h2></div><span class="chat-login-note">Sign in with Twitch to chat</span></div>
-      <div class="stream-chat-shell"><div class="chat-header"><span class="chat-dot twitch-dot"></span><b>Twitch Live Chat</b></div><iframe id="twitchChat" title="B&B Twitch chat" hidden></iframe><div class="stream-setup chat-setup" id="twitchChatSetup"><p>Twitch chat activates when your channel name is configured.</p></div></div>
     </article>
   </div>
   </div>
-  <div class="notice live-chat-note"><b>How chat works:</b> the main livestream stays above. The left panel can switch between YouTube and Facebook, while Twitch stays on the right. Facebook comments open through the official Facebook Live post because Facebook does not provide a dependable embeddable live-chat box for third-party websites. The B&B website never receives or stores platform passwords.</div>
+  <div class="notice live-chat-note"><b>How chat works:</b> Restream combines incoming comments from supported connected destinations into one feed. Viewers can follow the unified conversation here; the platform buttons open YouTube, Twitch, or Facebook when they want to send a message with their own account. The B&B website never receives or stores platform passwords.</div>
 </div></section>
 </main><footer class="footer"><div class="container footer-wrap"><div class="footer-logo"><img src="assets/images/bnb-current-logo.png" alt="B & B Backyard Podcast"><div><b>B & B Backyard Podcast</b><br><small>Local Artist Discovery Network</small></div></div><div class="footer-meta"><small>© <span data-year></span> B & B Backyard Podcast.</small><small class="footer-dev-credit">Website Developer &amp; Backend Technical Assistant / Overseer: <strong>Joseph Romero</strong></small></div></div><img class="footer-farm-art" src="assets/images/custom-footer.png" alt="" aria-hidden="true"></footer><div class="toast-stack" id="toastStack"></div><script src="js/live-config.js"></script><script src="js/main.js"></script><script src="js/live-page.js"></script><script src="js/social-sync.js"></script></body></html>
