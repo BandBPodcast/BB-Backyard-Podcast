@@ -243,3 +243,9 @@ The page transition bottle cap now drops from above with a partial spin and smal
 
 ## v1.4.69
 - Added TikTok official Creator Profile Embed for @bnb_entertains on Socials. It displays recent public TikTok videos automatically without changing the existing cowboy social cards or other site systems.
+
+
+## v1.4.71 — same supplied bottle-cap WebM on mobile
+- Replaced the transition WebM with the newly supplied transparent WebM.
+- Mobile now uses the exact same WebM transition as desktop; removed the v1.4.70 animated WebP mobile fallback.
+- Preserved the v1.4.70 mobile loader centering fix and all other site systems.
