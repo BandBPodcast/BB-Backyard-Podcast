@@ -22,7 +22,7 @@
     <div class="main-stream-head"><div><span class="platform-tag platform-youtube" id="mainPlatformTag">B&B LIVE</span><h2>Main Livestream</h2></div><div class="main-stream-tools"><span class="chat-login-note">One stream. Both communities below.</span><button class="theatre-toggle" id="theatreToggle" type="button" aria-pressed="false">◐ Theatre Mode</button></div></div>
     <div class="main-stream-video-shell">
       <iframe id="mainLivePlayer" title="B & B Backyard Podcast livestream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen hidden></iframe>
-      <div class="stream-setup" id="mainLiveSetup"><b>B&B livestream player</b><p>Twitch is connected to <b>@bandbpodcast</b>. A YouTube livestream can take priority when its active video ID is supplied, and automatic live detection is the next backend step.</p></div>
+      <div class="stream-setup" id="mainLiveSetup"><b>B&B livestream player</b><p>Twitch is connected to <b>@bandbpodcast</b>. Automatic YouTube + Twitch live detection is ready and will switch this player when the social-sync workflow reports a live broadcast.</p></div>
     </div>
   </article>
 
@@ -37,7 +37,7 @@
         <div class="chat-header"><span class="chat-dot" id="leftChatDot"></span><b id="leftChatHeader">YouTube Live Chat</b></div>
         <div class="chat-view active" data-chat-view="youtube">
           <iframe id="youtubeChat" title="B&B YouTube live chat" hidden></iframe>
-          <div class="stream-setup chat-setup" id="youtubeChatSetup"><p>Chat activates when a YouTube livestream video ID is configured.</p></div>
+          <div class="stream-setup chat-setup" id="youtubeChatSetup"><p>YouTube Live Chat activates automatically when the social sync detects a YouTube livestream.</p></div>
           <div class="mobile-chat-note" id="youtubeMobileNotice" hidden>YouTube does not make embedded Live Chat available on mobile web. Use the Facebook tab here on mobile, or open the livestream in YouTube to chat.</div>
         </div>
         <div class="chat-view" data-chat-view="facebook" hidden>

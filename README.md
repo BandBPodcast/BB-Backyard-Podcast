@@ -179,3 +179,13 @@ Version 1.4.42: Crew modal portraits now render behind the transparent WANTED po
 - Mobile initial loader now fully masks the underlying page until loading is complete.
 - Mobile page transition doors use a straight edge-to-edge close/open to prevent 3D skew and center gaps.
 - Desktop transition behavior and all other site systems remain unchanged.
+
+## v1.4.55 — Automatic YouTube + Twitch social sync
+The site now includes a GitHub Actions workflow that refreshes `data/social-feed.json` every 10 minutes and can be run manually from Actions.
+
+Required GitHub repository secrets (Settings → Secrets and variables → Actions):
+- `YOUTUBE_API_KEY` — Google Cloud API key with YouTube Data API v3 enabled.
+- `TWITCH_CLIENT_ID` — Twitch Developer application Client ID.
+- `TWITCH_CLIENT_SECRET` — Twitch Developer application Client Secret.
+
+The workflow resolves YouTube handle `@BnBEntertains`, reads its uploads playlist, checks recent video live status, and checks Twitch channel `bandbpodcast`. API secrets are used only inside GitHub Actions and are never shipped to the public website.

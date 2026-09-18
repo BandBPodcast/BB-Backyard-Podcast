@@ -117,3 +117,26 @@
     testBtn.textContent=testOn?'Reset Live Sign':'Test Live Sign';
   });
 })();
+
+/* v1.4.55: social-sync.js calls this when GitHub Actions detects a live broadcast. */
+window.bbApplyDetectedLive=(live)=>{
+  if(!live?.isLive)return;
+  const host=location.hostname||'bandbpodcast.github.io';
+  const player=document.getElementById('mainLivePlayer');
+  const setup=document.getElementById('mainLiveSetup');
+  const tag=document.getElementById('mainPlatformTag');
+  if(live.platform==='youtube'&&live.videoId){
+    if(player){player.src=`https://www.youtube.com/embed/${encodeURIComponent(live.videoId)}?rel=0&autoplay=0`;player.hidden=false}
+    if(setup)setup.hidden=true;
+    if(tag){tag.textContent='YOUTUBE LIVE';tag.className='platform-tag platform-youtube'}
+    const chat=document.getElementById('youtubeChat');
+    const chatSetup=document.getElementById('youtubeChatSetup');
+    if(chat){chat.src=`https://www.youtube.com/live_chat?v=${encodeURIComponent(live.videoId)}&embed_domain=${encodeURIComponent(host)}`;chat.hidden=false}
+    if(chatSetup)chatSetup.hidden=true;
+  }else if(live.platform==='twitch'){
+    const channel=(window.BB_LIVE_CONFIG?.twitchChannel||'bandbpodcast').trim();
+    if(player){player.src=`https://player.twitch.tv/?channel=${encodeURIComponent(channel)}&parent=${encodeURIComponent(host)}&autoplay=false`;player.hidden=false}
+    if(setup)setup.hidden=true;
+    if(tag){tag.textContent='TWITCH LIVE';tag.className='platform-tag platform-twitch'}
+  }
+};
