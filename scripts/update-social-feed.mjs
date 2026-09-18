@@ -7,7 +7,7 @@ const twitchClientId = process.env.TWITCH_CLIENT_ID || '';
 const twitchClientSecret = process.env.TWITCH_CLIENT_SECRET || '';
 const twitchLogin = process.env.TWITCH_CHANNEL || 'bandbpodcast';
 
-const feed = { generatedAt: new Date().toISOString(), items: [], latestYouTube: null, live: { isLive:false, platform:null, title:null, url:null, videoId:null } };
+const feed = { generatedAt: new Date().toISOString(), items: [], episodes: [], latestYouTube: null, live: { isLive:false, platform:null, title:null, url:null, videoId:null } };
 const getJSON = async (url, options={}) => {
   const r = await fetch(url, options);
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}: ${await r.text()}`);
@@ -28,9 +28,12 @@ async function syncYouTube(){
   const byId=new Map((videos.items||[]).map(v=>[v.id,v]));
   const items=(playlist.items||[]).map(p=>{
     const id=p.contentDetails?.videoId; const v=byId.get(id); const s=v?.snippet||p.snippet||{};
-    return { id:`youtube-${id}`, platform:'youtube', type:s.liveBroadcastContent==='live'?'live':'video', title:s.title||'New B&B video', message:(s.description||'').slice(0,220), url:`https://www.youtube.com/watch?v=${id}`, thumbnail:s.thumbnails?.maxres?.url||s.thumbnails?.high?.url||s.thumbnails?.medium?.url||s.thumbnails?.default?.url||'', publishedAt:p.contentDetails?.videoPublishedAt||s.publishedAt||new Date().toISOString(), videoId:id, liveBroadcastContent:s.liveBroadcastContent||'none' };
+    const liveDetails=v?.liveStreamingDetails||null;
+    return { id:`youtube-${id}`, platform:'youtube', type:s.liveBroadcastContent==='live'?'live':'video', title:s.title||'New B&B video', message:(s.description||'').slice(0,220), url:`https://www.youtube.com/watch?v=${id}`, thumbnail:s.thumbnails?.maxres?.url||s.thumbnails?.high?.url||s.thumbnails?.medium?.url||s.thumbnails?.default?.url||'', publishedAt:p.contentDetails?.videoPublishedAt||s.publishedAt||new Date().toISOString(), videoId:id, liveBroadcastContent:s.liveBroadcastContent||'none', wasLivestream:Boolean(liveDetails), actualStartTime:liveDetails?.actualStartTime||null, actualEndTime:liveDetails?.actualEndTime||null };
   });
   feed.items.push(...items);
+  // Completed YouTube livestreams become full Episodes automatically.
+  feed.episodes=items.filter(x=>x.wasLivestream&&x.actualEndTime).map(x=>({...x,type:'episode'}));
   feed.latestYouTube=items.find(x=>x.liveBroadcastContent!=='upcoming')||items[0]||null;
   const live=items.find(x=>x.liveBroadcastContent==='live');
   if(live) feed.live={isLive:true,platform:'youtube',title:live.title,url:live.url,videoId:live.videoId};
@@ -40,13 +43,21 @@ async function syncTwitch(){
   if(!twitchClientId || !twitchClientSecret){ console.log('Twitch credentials not configured; skipping Twitch.'); return; }
   const body=new URLSearchParams({client_id:twitchClientId,client_secret:twitchClientSecret,grant_type:'client_credentials'});
   const token=await getJSON('https://id.twitch.tv/oauth2/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
-  const streams=await getJSON(`https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(twitchLogin)}`,{headers:{'Client-Id':twitchClientId,'Authorization':`Bearer ${token.access_token}`}});
+  const headers={'Client-Id':twitchClientId,'Authorization':`Bearer ${token.access_token}`};
+  const users=await getJSON(`https://api.twitch.tv/helix/users?login=${encodeURIComponent(twitchLogin)}`,{headers});
+  const broadcasterId=users.data?.[0]?.id;
+  if(broadcasterId){
+    const clips=await getJSON(`https://api.twitch.tv/helix/clips?broadcaster_id=${encodeURIComponent(broadcasterId)}&first=10`,{headers});
+    for(const c of (clips.data||[])) feed.items.push({id:`twitch-clip-${c.id}`,platform:'twitch',type:'clip',title:c.title||'B&B Twitch clip',message:c.creator_name?`Clip by ${c.creator_name}`:'B&B Twitch clip',url:c.url,thumbnail:c.thumbnail_url||'',publishedAt:c.created_at||new Date().toISOString()});
+  }
+  const streams=await getJSON(`https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(twitchLogin)}`,{headers});
   const s=streams.data?.[0];
-  if(!s) return;
-  const item={id:`twitch-live-${s.id}`,platform:'twitch',type:'live',title:s.title||'B&B is live on Twitch',message:s.game_name?`Live in ${s.game_name}`:'B&B is live now.',url:`https://www.twitch.tv/${twitchLogin}`,thumbnail:(s.thumbnail_url||'').replace('{width}','640').replace('{height}','360'),publishedAt:s.started_at||new Date().toISOString()};
-  feed.items.unshift(item);
-  // YouTube takes priority only if it is actually live; otherwise Twitch becomes the active live source.
-  if(!feed.live.isLive) feed.live={isLive:true,platform:'twitch',title:item.title,url:item.url,videoId:null};
+  if(s){
+    const item={id:`twitch-live-${s.id}`,platform:'twitch',type:'live',title:s.title||'B&B is live on Twitch',message:s.game_name?`Live in ${s.game_name}`:'B&B is live now.',url:`https://www.twitch.tv/${twitchLogin}`,thumbnail:(s.thumbnail_url||'').replace('{width}','640').replace('{height}','360'),publishedAt:s.started_at||new Date().toISOString()};
+    feed.items.unshift(item);
+    // YouTube takes priority only if it is actually live; otherwise Twitch becomes the active live source.
+    if(!feed.live.isLive) feed.live={isLive:true,platform:'twitch',title:item.title,url:item.url,videoId:null};
+  }
 }
 
 for (const task of [syncYouTube, syncTwitch]) {

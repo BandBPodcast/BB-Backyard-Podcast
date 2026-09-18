@@ -2709,3 +2709,27 @@ body,p,li,label,input,textarea,select,option,
 }
 @media(max-width:430px){.live-country-status .live-neon-kicker{display:none}.live-country-status-copy{top:29%;bottom:27%}.live-country-status .live-neon-sign strong{font-size:clamp(.95rem,6.1vw,1.55rem)}.live-country-status .live-neon-sign small{font-size:.42rem;margin-top:.2rem}}
 @media(prefers-reduced-motion:reduce){.live-country-status .live-neon-sign.igniting{animation:none!important}}
+
+/* ===== B&B v1.4.62 — true dark OFF state / bright LIVE state ===== */
+.live-country-status .live-neon-sign{transition:filter .32s ease,opacity .32s ease}
+.live-country-status .live-neon-sign.is-checking .live-country-frame-art,
+.live-country-status .live-neon-sign.is-off .live-country-frame-art{
+  filter:brightness(.42) saturate(.62) contrast(1.05);
+  transition:filter .35s ease;
+}
+.live-country-status .live-neon-sign.is-checking .live-country-status-copy,
+.live-country-status .live-neon-sign.is-off .live-country-status-copy{filter:brightness(.72);transition:filter .35s ease}
+.live-country-status .live-neon-sign.is-live .live-country-frame-art,
+.live-country-status .live-neon-sign.igniting .live-country-frame-art{filter:brightness(1) saturate(1);transition:filter .35s ease}
+.live-country-status .live-neon-sign.is-live .live-country-status-copy,
+.live-country-status .live-neon-sign.igniting .live-country-status-copy{filter:none;transition:filter .35s ease}
+
+/* Auto-synced Clips grid */
+.clips-sync-status{margin:0 0 18px;color:var(--muted,#c8b49d);font-size:.92rem}
+.synced-clip-card{overflow:hidden}
+.synced-clip-card .media-thumb{display:block;position:relative;aspect-ratio:16/9;background:#21150f;overflow:hidden;text-decoration:none}
+.synced-clip-card .media-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.synced-clip-card:hover .media-thumb img{transform:scale(1.035)}
+.synced-clip-card .play{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);z-index:2}
+.synced-clip-card h3{margin-top:.45rem}
+.synced-clip-card .clip-link{margin-top:12px}

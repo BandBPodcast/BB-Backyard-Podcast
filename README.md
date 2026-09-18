@@ -211,3 +211,13 @@ The Live page status module now uses the supplied transparent western frame artw
 
 ## v1.4.61 — live sign ON/OFF artwork switching
 The Live status module now uses the lantern-off artwork while checking/offline and automatically swaps to the original lantern-lit artwork when YouTube/Twitch live detection reports a live broadcast. Existing status text, preview/test controls, Restream chat, and social sync are preserved.
+
+## v1.4.62 — Dark OFF live sign + automatic Clips page
+- OFF/checking live sign is deliberately darkened; LIVE/test-live removes the dark treatment and shows the lit artwork at full brightness.
+- Clips page now builds itself from `data/social-feed.json` instead of placeholder cards.
+- Existing YouTube uploads automatically appear on Clips, and the Twitch sync now also retrieves recent broadcaster clips.
+- Future TikTok/Facebook feed items will render automatically on Clips when those platform integrations are connected.
+
+
+## v1.4.63 — Automatic full livestream episodes
+The Episodes page now reads completed YouTube livestream archives from `data/social-feed.json`. The GitHub social-sync workflow identifies a finished livestream by YouTube `liveStreamingDetails.actualEndTime`, then the full YouTube replay appears automatically on Episodes after the next sync.
