@@ -249,3 +249,9 @@ The page transition bottle cap now drops from above with a partial spin and smal
 - Replaced the transition WebM with the newly supplied transparent WebM.
 - Mobile now uses the exact same WebM transition as desktop; removed the v1.4.70 animated WebP mobile fallback.
 - Preserved the v1.4.70 mobile loader centering fix and all other site systems.
+
+## v1.4.72 — supplied transparent WebM on desktop + mobile
+- Replaced `assets/video/bottlecap-transition.webm` with the newly supplied `latestmpasdf.webm` unchanged.
+- Desktop and mobile both reference this exact same WebM asset.
+- Updated the transition asset cache key to v1.4.72 so browsers request the replacement file instead of the previous cached transition.
+- No layout, loader, doors, TikTok, social sync, Live, Clips, Episodes, or other website systems were changed.

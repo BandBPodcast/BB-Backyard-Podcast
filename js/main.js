@@ -100,7 +100,7 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
 (()=>{
   const transition=document.createElement('div');
   transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1471" type="video/webm"></video>';
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1472" type="video/webm"></video>';
   document.body.appendChild(transition);
 
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
