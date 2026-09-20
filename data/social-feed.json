@@ -1,8 +1,38 @@
 {
-  "generatedAt": "2026-09-20T08:08:04.174Z",
-  "items": [],
+  "generatedAt": "2026-09-20T08:21:23.996Z",
+  "items": [
+    {
+      "id": "youtube-vy0t0E_lsDg",
+      "platform": "youtube",
+      "type": "video",
+      "title": "BnB Entertains Live Stream",
+      "message": "",
+      "url": "https://www.youtube.com/watch?v=vy0t0E_lsDg",
+      "thumbnail": "https://i.ytimg.com/vi/vy0t0E_lsDg/maxresdefault_live.jpg",
+      "publishedAt": "2026-09-20T08:10:07Z",
+      "videoId": "vy0t0E_lsDg",
+      "liveBroadcastContent": "upcoming",
+      "wasLivestream": true,
+      "actualStartTime": null,
+      "actualEndTime": null
+    }
+  ],
   "episodes": [],
-  "latestYouTube": null,
+  "latestYouTube": {
+    "id": "youtube-vy0t0E_lsDg",
+    "platform": "youtube",
+    "type": "video",
+    "title": "BnB Entertains Live Stream",
+    "message": "",
+    "url": "https://www.youtube.com/watch?v=vy0t0E_lsDg",
+    "thumbnail": "https://i.ytimg.com/vi/vy0t0E_lsDg/maxresdefault_live.jpg",
+    "publishedAt": "2026-09-20T08:10:07Z",
+    "videoId": "vy0t0E_lsDg",
+    "liveBroadcastContent": "upcoming",
+    "wasLivestream": true,
+    "actualStartTime": null,
+    "actualEndTime": null
+  },
   "live": {
     "isLive": false,
     "platform": null,
