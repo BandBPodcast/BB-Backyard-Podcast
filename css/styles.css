@@ -2994,3 +2994,143 @@ body,p,li,label,input,textarea,select,option,
 /* v1.4.76: Lamont Terry requested no portrait; retain the original wanted-card layout. */
 .wanted-portrait .crew-portrait-placeholder{display:grid;place-items:center;width:100%;height:100%;background:radial-gradient(circle at 50% 35%,#6d4830,#23150f 75%);color:#d4ae77;font-family:Georgia,serif;font-size:clamp(1.5rem,3.4vw,3.5rem);font-weight:900;letter-spacing:.12em;text-shadow:0 3px 8px #170b05;}
 .crew-modal-photo:has(.crew-portrait-placeholder) .crew-portrait-placeholder{display:grid;place-items:center;width:100%;height:100%;font-family:Georgia,serif;font-weight:900;color:#d4ae77;background:radial-gradient(circle,#6d4830,#23150f);font-size:clamp(2rem,5vw,4rem)}
+
+
+/* ===== v1.4.77: A visit to Grandma & Grandpa's house ===== */
+:root{--cozy-cream:#fff0d9;--cozy-brown:#503728;--cozy-sage:#74806a;--cozy-wood:#986744;}
+body{background-color:#e6c5a2;}
+/* Preserve loader timing and progress IDs; retire billboard/sunset artwork. */
+.loader{background:radial-gradient(ellipse at 50% 40%,#f7e5ca 0%,#cda67d 70%,#745039 100%)!important;}
+.loader-atmosphere{opacity:.15!important;filter:sepia(1)!important;}
+.loader-inner{width:min(640px,94vw)!important;max-width:94vw!important;transform:none!important;margin-inline:auto!important;}
+.loader-sign-wrap{width:100%!important;max-width:100%!important;margin:0 auto 1.25rem!important;perspective:none!important;}
+.loader-sign-frame.cozy-loader-frame{position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:12px!important;width:min(560px,90vw)!important;max-width:100%!important;min-height:275px!important;height:auto!important;margin:auto!important;padding:34px 28px!important;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 5px),linear-gradient(140deg,#fdf0d9,#ebd0a9)!important;border:12px solid #805b3e!important;outline:3px solid #c79b6b!important;outline-offset:-19px!important;border-radius:20px!important;box-shadow:0 24px 60px #3d241b66,inset 0 0 28px #a06b3d40!important;transform:none!important;overflow:visible!important;}
+.cozy-loader-lamp{font-family:Georgia,serif;font-size:clamp(2.5rem,7vw,4.5rem);color:#b98645;text-shadow:0 3px #fff4d8,0 0 20px #f7d68a;animation:cozyGlow 2.6s ease-in-out infinite;}
+.cozy-loader-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:700;line-height:1.12;color:#513526;text-align:center;}
+.cozy-loader-subtitle{font-family:Georgia,serif;color:#805b42;font-size:clamp(.85rem,2.7vw,1.1rem);text-align:center;}
+.loader-sign-frame.cozy-loader-frame .country-progress-shell{position:relative!important;inset:auto!important;width:min(360px,90%)!important;height:auto!important;display:block!important;margin:12px auto 0!important;transform:none!important;background:transparent!important;}
+.cozy-loader-frame .progress{display:block!important;width:100%!important;height:12px!important;margin:0!important;background:#c7a684!important;border:2px solid #916d4c!important;border-radius:50px!important;box-shadow:inset 0 2px 5px #6b4a3040!important;}
+.cozy-loader-frame .progress span{background:linear-gradient(90deg,#718167,#b6a56b)!important;box-shadow:none!important;}
+.loader-status,.loader-status-label,.loader-status strong,.loader small{color:#513526!important;text-shadow:none!important;font-family:Georgia,serif!important;}
+.loader-wave i{background:#839075!important;box-shadow:none!important;}
+@keyframes cozyGlow{50%{opacity:.72;transform:scale(.96)}}
+/* Family portrait frames, not wanted posters. Keep the same click-to-open cards. */
+.crew-grid{gap:clamp(18px,3vw,34px)!important;}
+.wanted-crew-card{padding:0!important;background:transparent!important;}
+.wanted-poster-card{aspect-ratio:4/5!important;background:linear-gradient(145deg,#d3a779,#865b39)!important;border:10px solid #755035!important;border-radius:15px!important;box-shadow:inset 0 0 0 4px #dfb988,0 14px 25px #4a291e45!important;filter:none!important;overflow:hidden!important;}
+.wanted-poster-card::before{content:'';position:absolute;inset:9px;border:2px solid #e9cf9f;border-radius:5px;pointer-events:none;z-index:3;}
+.wanted-portrait{position:absolute!important;inset:17px 17px 66px!important;background:#c9b295!important;border:5px solid #f0dcb7!important;border-radius:5px!important;overflow:hidden!important;}
+.wanted-portrait img{object-fit:cover!important;filter:sepia(.13) saturate(.83)!important;}
+.wanted-crew-card:hover .wanted-portrait img,.wanted-crew-card:focus-visible .wanted-portrait img{filter:none!important;}
+.wanted-poster-frame{display:none!important;}
+.wanted-nameplate{position:absolute!important;inset:auto 14px 12px!important;height:45px!important;display:flex!important;align-items:center!important;justify-content:center!important;font:700 clamp(1.05rem,1.65vw,1.45rem) Georgia,serif!important;color:#fff1d5!important;letter-spacing:.02em!important;text-shadow:0 1px 2px #39241b!important;white-space:normal!important;text-align:center!important;}
+.wanted-view-hint{color:#674833!important;font-family:Georgia,serif!important;letter-spacing:.01em!important;text-transform:none!important;}
+.wanted-portrait .crew-portrait-placeholder{background:linear-gradient(150deg,#bba080,#8b7055)!important;color:#fff1d7!important;font-family:Georgia,serif!important;}
+/* Replace both desktop and mobile wanted-modal artwork with a cozy photo album. */
+.crew-modal{padding:20px!important;overflow:auto!important;align-items:center!important;}
+.crew-modal-panel{position:relative!important;display:grid!important;grid-template-columns:minmax(0,40%) minmax(0,60%)!important;gap:0!important;width:min(850px,94vw)!important;max-width:94vw!important;height:auto!important;min-height:350px!important;aspect-ratio:auto!important;margin:auto!important;padding:30px!important;background:linear-gradient(135deg,#f9e9cb,#e7c79d)!important;border:12px solid #7e573b!important;border-radius:20px!important;box-shadow:0 30px 75px #170e0b99,inset 0 0 0 3px #c69b6a!important;overflow:visible!important;}
+.crew-modal-panel::before,.crew-modal-panel::after{display:none!important;content:none!important;background:none!important;}
+.crew-modal-photo{position:relative!important;inset:auto!important;width:100%!important;height:100%!important;min-height:280px!important;margin:0!important;background:#b99a78!important;border:8px solid #fff3dd!important;border-radius:8px!important;display:grid!important;place-items:center!important;overflow:hidden!important;color:#fff0d6!important;font:700 2rem Georgia,serif!important;}
+.crew-modal-photo img{width:100%!important;height:100%!important;object-fit:cover!important;}
+.crew-modal-copy{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;max-height:none!important;padding:20px 22px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;text-align:left!important;color:#493225!important;}
+.crew-modal-copy h2{font-family:Georgia,serif!important;font-size:clamp(1.6rem,3vw,2.7rem)!important;line-height:1.12!important;color:#4c3324!important;margin:0 0 10px!important;text-align:left!important;}
+.crew-modal-copy .eyebrow{font-family:Georgia,serif!important;font-size:clamp(.8rem,1.5vw,1rem)!important;margin:0 0 10px!important;color:#7d6148!important;text-align:left!important;}
+.crew-modal-copy p{font-family:Georgia,serif!important;font-size:clamp(.9rem,1.3vw,1.05rem)!important;line-height:1.55!important;max-width:100%!important;margin:0!important;color:#493225!important;text-align:left!important;}
+.crew-modal-close{position:absolute!important;right:-13px!important;top:-13px!important;z-index:8!important;background:#754d38!important;color:#fff1dc!important;border:2px solid #e3c7a3!important;border-radius:50%!important;}
+@media(max-width:700px){.crew-modal-panel{display:flex!important;flex-direction:column!important;width:min(430px,94vw)!important;max-width:94vw!important;min-height:0!important;padding:22px!important;aspect-ratio:auto!important;}.crew-modal-photo{min-height:0!important;height:clamp(200px,60vw,330px)!important;flex-shrink:0!important;}.crew-modal-copy{padding:20px 4px 4px!important;}.wanted-portrait{inset:17px 17px 65px!important;}.loader-inner{transform:none!important;}.loader-sign-frame.cozy-loader-frame{min-height:245px!important;padding:24px 20px!important;}}
+@media(prefers-reduced-motion:reduce){.cozy-loader-lamp{animation:none!important;}}
+
+/* v1.4.78 — grandma-and-grandpa living room visual direction.
+   Presentation-only overrides: do not alter IDs, transitions, feeds or modal behavior. */
+:root{--home-cream:#f8e9d2;--home-walnut:#523a2b;--home-sage:#71816c;--home-rose:#a76e61}
+body{background:#e9d7bc!important;color:#463124!important;background-image:radial-gradient(ellipse at 18% 14%,rgba(255,250,234,.78),transparent 50%),repeating-linear-gradient(115deg,rgba(120,89,66,.025) 0 2px,transparent 2px 16px)!important}
+.site-header{background:linear-gradient(180deg,rgba(76,49,34,.98),rgba(95,64,46,.96))!important;border-bottom:3px solid #c7a77d!important;box-shadow:0 4px 16px #3a271b36!important}
+.nav-link,.brand{color:#f8ead4!important}.nav-link:hover,.nav-link.active{color:#ffe3ac!important;text-shadow:none!important}.nav-link::after{background:#d7b487!important;box-shadow:none!important}
+/* Use the supplied reference photo as an actual, responsive part of the homepage. */
+.hero{background:linear-gradient(90deg,rgba(250,237,215,.97) 0%,rgba(250,237,215,.91) 37%,rgba(244,223,195,.66) 65%,rgba(94,64,43,.30) 100%),url('../assets/images/cozy-living-room-reference.jpg') center 45%/cover no-repeat!important;border-bottom:11px solid #a77a52!important;box-shadow:inset 0 -10px 0 #d9b78b!important}
+.hero::before,.hero::after{display:none!important}.hero-wrap{position:relative;z-index:1}.hero h1{color:#543829!important;letter-spacing:-.045em!important;text-shadow:0 2px 0 #fff5e7!important}.hero h1 span{color:#8d5d48!important}.hero .eyebrow{color:#76553d!important}.hero p{color:#503b2b!important;text-shadow:0 1px 0 #fff5e7!important}.hero-logo{filter:drop-shadow(0 16px 18px #4b2e2266)!important}
+/* Floral wallpaper, family-photo framing and upholstered card palette across pages. */
+.page-hero{background:linear-gradient(90deg,rgba(248,235,214,.95),rgba(246,230,205,.88)),url('../assets/images/cozy-living-room-reference.jpg') center 36%/cover no-repeat!important;border-bottom:5px solid #bd9872!important;box-shadow:inset 0 -1px 0 #fff3df!important}
+.page-hero h1,.page-hero p,.page-hero .eyebrow{color:#503a2a!important;text-shadow:none!important}
+.section{background:transparent!important}.section h2,.section h3{color:#523829!important}
+.card,.media-card,.social-card,.episode-card,.clip-card{background:linear-gradient(145deg,rgba(255,248,233,.96),rgba(228,204,173,.94))!important;border:2px solid #c8a883!important;border-radius:15px!important;box-shadow:0 8px 22px #62442b22,inset 0 0 0 4px #f6e5cb66!important;color:#493529!important}
+.card p,.media-card p,.social-card p{color:#5c4736!important}
+.btn-primary{background:linear-gradient(145deg,#8d6950,#61432f)!important;border:1px solid #4e3627!important;color:#fff4e1!important;box-shadow:0 6px 15px #593d2c38!important}
+.btn-ghost{background:#f8e9d5e8!important;color:#593c2c!important;border:2px solid #aa8969!important}.btn-ghost:hover{background:#fff5e7!important;box-shadow:0 5px 14px #59432a22!important}
+/* Family album frames from v1.4.77, warmed to match the supplied room. */
+.wanted-poster-card{background:linear-gradient(145deg,#e2bc90,#9b7150)!important;border-color:#78543a!important;box-shadow:0 10px 25px #51341f44,inset 0 0 0 4px #f1d5ae!important}
+.wanted-nameplate{background:#f1dfc2!important;color:#5c3d2b!important}
+.crew-modal-panel{background:linear-gradient(135deg,#fff1d8,#e3c5a2)!important}
+/* Retire visual farm props, not the working footer links or scroll functionality. */
+.footer{background:linear-gradient(180deg,#70513b,#453025)!important;color:#f7e9d5!important;border-top:6px solid #b9946b!important;padding-bottom:55px!important}
+.footer-farm-art,.bb-footer-tumbleweed-track{display:none!important}
+/* Make the welcome screen feel like an antique family picture frame. */
+.loader{background:linear-gradient(120deg,rgba(239,218,188,.88),rgba(233,203,169,.90)),url('../assets/images/cozy-living-room-reference.jpg') center/cover no-repeat!important}
+.loader-sign-frame.cozy-loader-frame{background:linear-gradient(145deg,#fff2d9,#e6c9a5)!important;border-color:#7e5a3e!important}
+@media(max-width:760px){.hero{background:linear-gradient(180deg,rgba(249,236,216,.95),rgba(249,236,216,.90) 68%,rgba(239,216,185,.72)),url('../assets/images/cozy-living-room-reference.jpg') 57% center/cover no-repeat!important;padding:46px 0 65px!important}.hero h1{font-size:clamp(2.7rem,12vw,5rem)!important;line-height:.95!important}.hero-wrap{gap:25px!important}.hero p{font-size:1rem!important}.page-hero{background-position:55% center!important}.footer{padding-bottom:75px!important}}
+@media(prefers-reduced-motion:reduce){.hero-logo{animation:none!important}}
+
+
+/* ===== v1.4.79: living-room polish, isolated to crew title, loader and page transitions ===== */
+/* Retire the old bright neon word effect only for the crew heading. */
+.page-hero .neon-page-flicker{color:#8b594b!important;text-shadow:0 1px 0 #f9e9d1!important;filter:none!important;animation:bbWarmWord1479 9s ease-in-out infinite!important;}
+@keyframes bbWarmWord1479{0%,88%,100%{color:#8b594b}92%{color:#a06b56}96%{color:#76513f}}
+/* Center the entire welcome composition, not just the outer card. */
+#siteLoader{display:flex!important;align-items:center!important;justify-content:center!important;padding:clamp(12px,3vw,28px)!important;box-sizing:border-box!important;overflow:hidden!important;}
+#siteLoader .loader-inner{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;margin:0 auto!important;padding:0!important;width:min(560px,calc(100vw - 32px))!important;max-width:100%!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;}
+#siteLoader .loader-sign-wrap{position:relative!important;left:auto!important;right:auto!important;transform:none!important;margin:0 auto 16px!important;width:100%!important;max-width:100%!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;}
+#siteLoader .loader-sign-frame.cozy-loader-frame{box-sizing:border-box!important;width:100%!important;max-width:100%!important;margin:0 auto!important;left:auto!important;right:auto!important;transform:none!important;}
+#siteLoader .cozy-loader-frame .country-progress-shell{position:relative!important;left:auto!important;right:auto!important;inset:auto!important;transform:none!important;width:min(360px,100%)!important;max-width:100%!important;min-width:0!important;align-self:center!important;margin:14px auto 0!important;padding:0!important;box-sizing:border-box!important;}
+#siteLoader .cozy-loader-frame .progress{position:relative!important;left:auto!important;right:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin:0 auto!important;box-sizing:border-box!important;}
+#siteLoader .loader-status,#siteLoader .loader-wave,#siteLoader #loaderMessage{position:relative!important;left:auto!important;right:auto!important;transform:none!important;margin-left:auto!important;margin-right:auto!important;max-width:100%!important;text-align:center!important;}
+/* Wallpaper behind a pair of warm fabric curtains. No WebM alpha dependencies. */
+.page-transition,.page-transition.show{perspective:none!important;transform:none!important;overflow:hidden!important;background:linear-gradient(rgba(57,38,27,.36),rgba(57,38,27,.36)),url('../assets/images/cozy-living-room-reference.jpg') center/cover no-repeat!important;}
+.page-transition::before{content:''!important;position:absolute!important;inset:0!important;z-index:0!important;background:rgba(47,30,23,.28)!important;box-shadow:inset 0 0 110px rgba(39,24,19,.5)!important;pointer-events:none!important;}
+.page-transition .transition-door{position:absolute!important;top:0!important;bottom:0!important;height:100%!important;width:50.5%!important;box-sizing:border-box!important;z-index:2!important;backface-visibility:visible!important;filter:none!important;perspective:none!important;transform-style:flat!important;border:0!important;border-radius:0!important;transition:transform .9s cubic-bezier(.58,.04,.22,1)!important;background-image:repeating-linear-gradient(90deg,rgba(82,48,38,.20) 0,rgba(255,244,218,.10) 4%,rgba(100,62,49,.18) 9%,rgba(255,238,208,.08) 15%),linear-gradient(90deg,#76534b,#bc917d 25%,#986d5c 51%,#c19c86 77%,#775347)!important;background-size:100% 100%!important;box-shadow:inset 0 0 35px rgba(57,31,25,.36),0 0 25px rgba(44,27,22,.3)!important;}
+.page-transition .transition-door-left{left:0!important;right:auto!important;border-right:7px solid #d6b38a!important;transform-origin:left center!important;transform:translateX(-102%)!important;}
+.page-transition .transition-door-right{right:0!important;left:auto!important;border-left:7px solid #d6b38a!important;transform-origin:right center!important;transform:translateX(102%)!important;}
+.page-transition.closing .transition-door-left,.page-transition.closed .transition-door-left,.page-transition.entering .transition-door-left{transform:translateX(0)!important;}
+.page-transition.closing .transition-door-right,.page-transition.closed .transition-door-right,.page-transition.entering .transition-door-right{transform:translateX(0)!important;}
+.page-transition.opening .transition-door-left{transform:translateX(-102%)!important;}
+.page-transition.opening .transition-door-right{transform:translateX(102%)!important;}
+.page-transition .transition-seam,.page-transition .transition-bottlecap-video,.page-transition .transition-mobile-coin{display:none!important;}
+.page-transition .cozy-transition-center{position:absolute!important;left:50%!important;top:50%!important;z-index:4!important;transform:translate(-50%,-46%) scale(.94)!important;opacity:0!important;visibility:hidden!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;width:min(470px,78vw)!important;min-height:170px!important;padding:28px 24px!important;box-sizing:border-box!important;border:10px ridge #8a6042!important;outline:3px solid #d8b58a!important;outline-offset:-17px!important;border-radius:9px!important;background:linear-gradient(145deg,#f9edd8,#e1c6a3)!important;box-shadow:0 18px 60px rgba(36,22,17,.5),inset 0 0 25px #bd9b7955!important;text-align:center!important;transition:opacity .3s ease,transform .42s ease,visibility .3s!important;}
+.page-transition.closed .cozy-transition-center,.page-transition.entering .cozy-transition-center{opacity:1!important;visibility:visible!important;transform:translate(-50%,-50%) scale(1)!important;}
+.page-transition.opening .cozy-transition-center{opacity:0!important;visibility:hidden!important;}
+.cozy-transition-ornament{font:32px Georgia,serif;color:#9e7951}.cozy-transition-title{font:700 clamp(1.3rem,3.5vw,2.2rem) Georgia,serif;color:#573b2b;line-height:1.15}.cozy-transition-caption{font:italic clamp(.85rem,2vw,1.08rem) Georgia,serif;color:#7b5b46;line-height:1.3}
+@media(max-width:760px){#siteLoader .loader-inner{width:min(440px,calc(100vw - 28px))!important;}#siteLoader .loader-sign-frame.cozy-loader-frame{padding:24px 16px!important;border-width:8px!important;}#siteLoader .cozy-loader-frame .country-progress-shell{width:min(310px,100%)!important;}.page-transition .transition-door{width:50.5%!important;transform-style:flat!important;}.page-transition .cozy-transition-center{width:min(340px,78vw)!important;min-height:150px!important;padding:20px 15px!important;border-width:7px!important;}}
+@media(prefers-reduced-motion:reduce){.page-hero .neon-page-flicker{animation:none!important;}.page-transition .transition-door,.page-transition .cozy-transition-center{transition:none!important;}}
+
+
+/* ===== v1.4.80 — cozy-home legibility polish (no layout changes) ===== */
+/* Cream surfaces need dark ink, rather than inherited pale Western display colors. */
+.hero .eyebrow,.page-hero .eyebrow,.section .eyebrow,.card .eyebrow,
+.section-copy,.hero p,.page-hero p,.section p,.card p,
+.media-card p,.social-card p,.episode-card p,.clip-card p,
+.card small,.section small,.card label,.section label,
+.card li,.section li,.notice,.notice a {color:#493428!important;text-shadow:none!important;}
+.hero h1,.page-hero h1,.section h1,.section h2,.section h3,
+.card h2,.card h3,.card h4,.media-card h3,.social-card h3,
+.episode-card h3,.clip-card h3 {color:#463025!important;text-shadow:none!important;}
+/* The highlighted hero words previously inherited a near-white effect. */
+.hero h1 span,.page-hero h1 span,.page-hero .neon-page-flicker{
+ color:#81513c!important;text-shadow:0 1px 0 rgba(255,244,224,.45)!important;
+ filter:none!important;
+}
+@keyframes bbReadableWord1480{0%,88%,100%{color:#81513c}94%{color:#704632}97%{color:#91654e}}
+.page-hero .neon-page-flicker{animation:bbReadableWord1480 9s ease-in-out infinite!important;}
+/* Preserve the light-on-dark navigation/footer and dark live-chat iframe. */
+.site-header .brand,.site-header .nav-link{color:#fff1df!important;text-shadow:0 1px 2px rgba(35,19,12,.5)!important;}
+.footer,.footer p,.footer small,.footer b,.footer strong,.footer a{color:#fff1dc!important;text-shadow:none!important;}
+/* Contact fields and notices should remain legible in every input state. */
+.form .input,.form input,.form textarea,.form select{color:#39291f!important;background-color:#fff8eb!important;border-color:#96765a!important;}
+.form .input::placeholder,.form input::placeholder,.form textarea::placeholder{color:#6d5746!important;opacity:1!important;}
+.form .input:focus,.form input:focus,.form textarea:focus{outline:2px solid #785139!important;outline-offset:2px!important;}
+.notice{background:#f5e5cc!important;border-color:#aa8768!important;}
+.notice a{font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+/* Retain contrast for buttons regardless of broad text overrides. */
+.btn-primary,.btn-primary:visited{color:#fff8e9!important;}
+.btn-ghost,.btn-ghost:visited{color:#4c3325!important;}
+.cozy-loader-title,.cozy-transition-title{color:#493124!important;}
+.cozy-loader-subtitle,.cozy-transition-caption{color:#634735!important;}
+@media(prefers-reduced-motion:reduce){.page-hero .neon-page-flicker{animation:none!important;}}

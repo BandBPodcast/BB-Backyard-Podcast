@@ -95,14 +95,13 @@ const year=qs('[data-year]');if(year)year.textContent=new Date().getFullYear();
 // Atmospheric smoke is decorative only and never blocks interaction.
 if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className='site-smoke';smoke.setAttribute('aria-hidden','true');document.body.appendChild(smoke)}
 
-// Seamless internal transition. Destination page suppresses the loader before paint,
-// restores the closed doors, then opens them so the old loader can never flash between pages.
+// v1.4.79 — Cozy living-room page turn. Keep the existing session-based handoff.
 (()=>{
   const transition=document.createElement('div');
-  transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><div class="transition-mobile-coin" aria-hidden="true"><span class="transition-mobile-halo"></span><img class="transition-mobile-logo" id="transitionMobileLogo" src="assets/images/bnb-bottlecap-transition-logo.png?v=1475" alt=""><span class="transition-mobile-glint"></span></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1472" type="video/webm"></video>';
+  transition.className='page-transition'; transition.id='pageTransition';
+  transition.setAttribute('aria-hidden','true');
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="cozy-transition-center"><span class="cozy-transition-ornament" aria-hidden="true">✦</span><span class="cozy-transition-title">B &amp; B Backyard Podcast</span><span class="cozy-transition-caption">Come on in, make yourself at home</span></div>';
   document.body.appendChild(transition);
-
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
   if(entering){
     sessionStorage.removeItem('bb-transition-pending');
@@ -110,65 +109,32 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     document.documentElement.classList.remove('bb-transition-enter');
     transition.classList.add('show','entering');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      setTimeout(()=>{transition.classList.remove('entering');transition.classList.add('opening')},180);
-      setTimeout(()=>{transition.classList.remove('show','opening');},1080);
+      setTimeout(()=>{transition.classList.remove('entering');transition.classList.add('opening')},160);
+      setTimeout(()=>transition.classList.remove('show','opening'),1230);
     }));
   }else{
     document.documentElement.classList.add('bb-transition-ready');
     document.documentElement.classList.remove('bb-transition-enter');
   }
-
-  document.addEventListener('click',(event)=>{
-    const link=event.target.closest('a[href]'); if(!link)return;
+  let navigating=false;
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('a[href]');if(!link||navigating)return;
     const href=link.getAttribute('href');
     if(!href||href.startsWith('#')||href.startsWith('mailto:')||href.startsWith('tel:')||link.target==='_blank'||link.hasAttribute('download'))return;
     let url;try{url=new URL(link.href,location.href)}catch{return}
-    if(url.origin!==location.origin)return;
-    if(url.pathname===location.pathname&&url.hash)return;
-    event.preventDefault();
+    if(url.origin!==location.origin||(url.pathname===location.pathname&&url.hash))return;
+    event.preventDefault();navigating=true;
     transition.className='page-transition show closing';
-    const capVideo=transition.querySelector('#transitionBottlecapVideo');
-    const mobileLogo=transition.querySelector('#transitionMobileLogo');
-    const mobileTransition=window.matchMedia('(max-width:760px)').matches;
-    let leaving=false;
-    const leave=()=>{
-      if(leaving)return; leaving=true;
+    // Fabric panels meet before the framed welcome appears. Navigate only after it settles.
+    setTimeout(()=>{transition.classList.remove('closing');transition.classList.add('closed')},920);
+    setTimeout(()=>{
       sessionStorage.setItem('bb-loader-seen','1');
       sessionStorage.setItem('bb-transition-pending','1');
       location.href=link.href;
-    };
-    setTimeout(()=>{
-      transition.classList.remove('closing');transition.classList.add('closed','video-playing');
-      if(mobileTransition && mobileLogo){
-        transition.classList.remove('video-playing');
-        transition.classList.add('mobile-logo-playing');
-        mobileLogo.classList.remove('spin-finished');
-        // Restart the CSS coin animation on each navigation.
-        void mobileLogo.offsetWidth;
-        // Spin the B&B bottle-cap logo, let it settle, then change pages.
-        setTimeout(()=>mobileLogo.classList.add('spin-finished'),1870);
-        setTimeout(leave,2250);
-      }else if(capVideo){
-        capVideo.muted=true;
-        capVideo.defaultMuted=true;
-        capVideo.playsInline=true;
-        try{capVideo.pause();capVideo.currentTime=0;capVideo.load()}catch(e){}
-        capVideo.addEventListener('ended',leave,{once:true});
-        const startVideo=()=>{
-          transition.classList.add('video-playing');
-          const playPromise=capVideo.play();
-          if(playPromise?.catch)playPromise.catch(()=>leave());
-        };
-        if(capVideo.readyState>=2) startVideo();
-        else capVideo.addEventListener('canplay',startVideo,{once:true});
-      }else leave();
-    },760);
-    setTimeout(leave,6500);
+    },2040);
   });
-
-  window.addEventListener('pageshow',(e)=>{if(e.persisted){transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});
+  window.addEventListener('pageshow',e=>{if(e.persisted){navigating=false;transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});
 })();
-
 
 // ===== B&B v1.3.7 motion polish =====
 // Always begin at the top of the current page instead of restoring an old scroll position.
