@@ -2918,3 +2918,79 @@ body,p,li,label,input,textarea,select,option,
 .restream-head-brand .chat-login-note{max-width:190px;text-align:right}
 .restream-head-brand img{display:block;width:82px;height:82px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 7px 8px rgba(20,8,3,.38))}
 @media(max-width:700px){.restream-head-brand{width:100%;justify-content:space-between;align-items:center}.restream-head-brand .chat-login-note{text-align:left;max-width:210px}.restream-head-brand img{width:70px;height:70px}}
+
+
+/* ===== B&B v1.4.75 — retired porch sign + mobile 3-D doors / coin ===== */
+/* The sign is no longer created in JS; hide any legacy markup if cached pages contain it. */
+.bb-hanging-sign{display:none!important;}
+@media(max-width:760px){
+  /* A stable perspective on the transition layer; no transforms on body. */
+  .page-transition{perspective:1100px!important;perspective-origin:50% 48%!important;transform:none!important;overflow:hidden!important;}
+  .page-transition .transition-door{
+    width:51%!important;height:100%!important;top:0!important;bottom:0!important;
+    transform-style:preserve-3d!important;-webkit-transform-style:preserve-3d!important;
+    backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;
+    transition:transform .76s cubic-bezier(.65,.04,.2,1)!important;
+    box-shadow:inset 0 0 28px rgba(0,0,0,.34),0 10px 28px rgba(0,0,0,.25)!important;
+  }
+  .page-transition .transition-door-left{left:0!important;right:auto!important;transform-origin:left center!important;transform:rotateY(-105deg)!important;}
+  .page-transition .transition-door-right{right:0!important;left:auto!important;transform-origin:right center!important;transform:rotateY(105deg)!important;}
+  .page-transition.closing .transition-door-left,.page-transition.closed .transition-door-left,.page-transition.entering .transition-door-left,
+  .page-transition.closing .transition-door-right,.page-transition.closed .transition-door-right,.page-transition.entering .transition-door-right{transform:rotateY(0deg)!important;}
+  .page-transition.opening .transition-door-left{transform:rotateY(-105deg)!important;}
+  .page-transition.opening .transition-door-right{transform:rotateY(105deg)!important;}
+  /* The video remains desktop-only: mobile uses the existing transparent PNG. */
+  .page-transition .transition-mobile-coin{
+    position:absolute;left:50%;top:50%;width:min(61vw,290px);aspect-ratio:1;
+    transform:translate(-50%,-50%);z-index:52;pointer-events:none;
+    display:none;opacity:0;perspective:900px;transform-style:preserve-3d;
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-coin{display:block;opacity:1;animation:bbCoinAppear1475 .24s ease-out both;}
+  .page-transition .transition-mobile-coin .transition-mobile-logo{
+    display:block!important;position:absolute!important;inset:0!important;left:0!important;top:0!important;
+    width:100%!important;height:100%!important;object-fit:contain!important;
+    opacity:1!important;visibility:visible!important;
+    transform:rotateY(0deg) scale(.84)!important;transform-style:preserve-3d!important;
+    backface-visibility:visible!important;-webkit-backface-visibility:visible!important;
+    filter:drop-shadow(0 15px 18px rgba(0,0,0,.65))!important;
+    animation:none!important;
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-coin .transition-mobile-logo{
+    animation:bbCoinFlip1475 1.87s cubic-bezier(.17,.66,.25,1) both!important;
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-coin .transition-mobile-logo.spin-finished{
+    animation:none!important;transform:rotateY(1080deg) scale(1)!important;
+  }
+  .page-transition .transition-mobile-halo{
+    position:absolute;inset:-15%;border-radius:50%;opacity:0;
+    background:radial-gradient(circle,transparent 43%,rgba(245,186,95,.28) 60%,transparent 71%);
+    box-shadow:0 0 24px rgba(249,175,65,.13);
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-halo{animation:bbCoinHalo1475 1.87s ease-out both;}
+  .page-transition .transition-mobile-glint{
+    position:absolute;inset:-6%;border-radius:50%;opacity:0;mix-blend-mode:screen;
+    background:linear-gradient(112deg,transparent 35%,rgba(255,227,162,.38) 49%,transparent 58%);
+    transform:translateX(-85%) rotate(-15deg);
+  }
+  .page-transition.closed.mobile-logo-playing .transition-mobile-glint{animation:bbCoinGlint1475 1.87s ease-in-out both;}
+  .page-transition.opening .transition-mobile-coin,.page-transition.entering .transition-mobile-coin{display:none!important;opacity:0!important;}
+}
+@keyframes bbCoinAppear1475{from{opacity:0;transform:translate(-50%,-50%) scale(.75)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes bbCoinFlip1475{
+  0%{transform:rotateY(0deg) rotateZ(-9deg) scale(.78);filter:drop-shadow(0 6px 9px rgba(0,0,0,.5)) brightness(.85)}
+  24%{transform:rotateY(350deg) rotateZ(6deg) scale(1.08)}
+  55%{transform:rotateY(760deg) rotateZ(-3deg) scale(1.13);filter:drop-shadow(0 22px 23px rgba(0,0,0,.7)) brightness(1.18)}
+  82%{transform:rotateY(1050deg) rotateZ(1deg) scale(1.03)}
+  100%{transform:rotateY(1080deg) rotateZ(0deg) scale(1);filter:drop-shadow(0 14px 19px rgba(0,0,0,.62)) brightness(1)}
+}
+@keyframes bbCoinHalo1475{0%{opacity:0;transform:scale(.65)}35%{opacity:1;transform:scale(1.05)}75%{opacity:.58;transform:scale(1.2)}100%{opacity:.25;transform:scale(1.12)}}
+@keyframes bbCoinGlint1475{0%,22%{opacity:0;transform:translateX(-85%) rotate(-15deg)}43%{opacity:.75}65%,100%{opacity:0;transform:translateX(85%) rotate(-15deg)}}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+  .page-transition .transition-door{transition:none!important;}
+  .page-transition.closed.mobile-logo-playing .transition-mobile-coin,.page-transition.closed.mobile-logo-playing .transition-mobile-coin .transition-mobile-logo{animation:none!important;opacity:1!important;transform:rotateY(0deg) scale(1)!important;}
+  .page-transition.closed.mobile-logo-playing .transition-mobile-halo,.page-transition.closed.mobile-logo-playing .transition-mobile-glint{animation:none!important;opacity:0!important;}
+}
+
+/* v1.4.76: Lamont Terry requested no portrait; retain the original wanted-card layout. */
+.wanted-portrait .crew-portrait-placeholder{display:grid;place-items:center;width:100%;height:100%;background:radial-gradient(circle at 50% 35%,#6d4830,#23150f 75%);color:#d4ae77;font-family:Georgia,serif;font-size:clamp(1.5rem,3.4vw,3.5rem);font-weight:900;letter-spacing:.12em;text-shadow:0 3px 8px #170b05;}
+.crew-modal-photo:has(.crew-portrait-placeholder) .crew-portrait-placeholder{display:grid;place-items:center;width:100%;height:100%;font-family:Georgia,serif;font-weight:900;color:#d4ae77;background:radial-gradient(circle,#6d4830,#23150f);font-size:clamp(2rem,5vw,4rem)}

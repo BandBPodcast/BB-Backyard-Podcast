@@ -267,3 +267,9 @@ The page transition bottle cap now drops from above with a partial spin and smal
 - Added the supplied Western Restream emblem to the Unified Live Chat header.
 - Added a matching Restream card to Socials explaining its role in B&B's streaming/unified-chat setup.
 - Preserved existing transition, loader, social sync, TikTok, Live, Episodes and Clips systems.
+
+
+## v1.4.75
+Removed the left hanging porch sign; mobile navigation uses a rotating 3-D coin-style B&B PNG with a subtle gold halo/glint, then settles before navigation; mobile barn doors now hinge in 3-D. Desktop transparent WebM and existing loader are unchanged.
+
+- v1.4.76: Removed Lamont Terry portrait from the crew card and website assets at his request; preserved his name, role, and existing layout.

@@ -100,7 +100,7 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
 (()=>{
   const transition=document.createElement('div');
   transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><img class="transition-mobile-logo" id="transitionMobileLogo" src="assets/images/bnb-bottlecap-transition-logo.png?v=1473" alt="" aria-hidden="true"><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1472" type="video/webm"></video>';
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><div class="transition-mobile-coin" aria-hidden="true"><span class="transition-mobile-halo"></span><img class="transition-mobile-logo" id="transitionMobileLogo" src="assets/images/bnb-bottlecap-transition-logo.png?v=1475" alt=""><span class="transition-mobile-glint"></span></div><video class="transition-bottlecap-video" id="transitionBottlecapVideo" muted playsinline webkit-playsinline preload="auto" aria-hidden="true"><source src="assets/video/bottlecap-transition.webm?v=1472" type="video/webm"></video>';
   document.body.appendChild(transition);
 
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
@@ -143,9 +143,11 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
         transition.classList.remove('video-playing');
         transition.classList.add('mobile-logo-playing');
         mobileLogo.classList.remove('spin-finished');
+        // Restart the CSS coin animation on each navigation.
+        void mobileLogo.offsetWidth;
         // Spin the B&B bottle-cap logo, let it settle, then change pages.
-        setTimeout(()=>mobileLogo.classList.add('spin-finished'),1800);
-        setTimeout(leave,2150);
+        setTimeout(()=>mobileLogo.classList.add('spin-finished'),1870);
+        setTimeout(leave,2250);
       }else if(capVideo){
         capVideo.muted=true;
         capVideo.defaultMuted=true;
@@ -308,52 +310,7 @@ window.addEventListener('pageshow',bbResetScroll);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))close()});
 })();
 
-// B & B v1.4.27 — chain-hung sign: subtle forward/back porch-sign motion + mouse response.
-(()=>{
-  const wrap=document.createElement('div');
-  wrap.className='bb-hanging-sign';
-  wrap.setAttribute('aria-hidden','true');
-  wrap.innerHTML='<img class="bb-hanging-post" src="assets/images/hanging-sign-post.png" alt=""><div class="bb-sign-pivot"><img class="bb-hanging-board" src="assets/images/hanging-bnb-sign.png" alt=""></div>';
-  document.body.appendChild(wrap);
-  const pivot=wrap.querySelector('.bb-sign-pivot');
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches||innerWidth<=480)return;
-
-  let mousePitch=0, mouseLift=0;
-  let lastMove=0;
-  addEventListener('pointermove',e=>{
-    const r=wrap.getBoundingClientRect();
-    const cx=r.left+r.width*.63, cy=r.top+r.height*.39;
-    const dx=e.clientX-cx, dy=e.clientY-cy;
-    const dist=Math.hypot(dx,dy);
-    if(dist<520){
-      const proximity=1-dist/520;
-      // Vertical pointer movement pushes the board toward/away from the viewer.
-      mousePitch=Math.max(-9,Math.min(9,(dy/230)*9))*proximity;
-      mouseLift=Math.max(-4,Math.min(4,(-dy/270)*4))*proximity;
-      lastMove=performance.now();
-    }
-  },{passive:true});
-
-  const started=performance.now();
-  const animate=now=>{
-    // Slow natural front/back movement, like a heavy weathered sign in a light breeze.
-    const t=(now-started)/1000;
-    const gust=(Math.sin(t*.19)+1)*.5;
-    const idlePitch=Math.sin(t*.88)*3.1 + Math.sin(t*.37)*1.25 + Math.sin(t*1.73)*(.65+gust*.8);
-    const idleLift=Math.sin(t*.88+.7)*1.35 + Math.sin(t*.29)*.55;
-    const stale=Math.min(1,Math.max(0,(now-lastMove-250)/1500));
-    mousePitch*=.965;
-    mouseLift*=.965;
-    const pitch=idlePitch+mousePitch*(1-stale);
-    const lift=idleLift+mouseLift*(1-stale);
-    pivot.style.setProperty('--sign-pitch',pitch.toFixed(2)+'deg');
-    pivot.style.setProperty('--sign-y',lift.toFixed(2)+'px');
-    pivot.style.setProperty('--sign-shadow-y',(10+Math.abs(pitch)*.7).toFixed(1)+'px');
-    pivot.style.setProperty('--sign-shadow-blur',(9+Math.abs(pitch)*.45).toFixed(1)+'px');
-    requestAnimationFrame(animate);
-  };
-  requestAnimationFrame(animate);
-})();
+// v1.4.75: The retired left-side hanging sign is no longer injected.
 
 // B & B v1.4.44 — tumbleweed rolls/bounces across the footer once every minute.
 (()=>{
