@@ -1,10 +1,5 @@
 {
-<<<<<<< HEAD
-  "generatedAt": null,
-  "items": [],
-  "latestYouTube": null,
-=======
-  "generatedAt": "2026-10-06T17:50:52.460Z",
+  "generatedAt": "2026-10-06T18:00:07.342Z",
   "items": [
     {
       "id": "youtube-vy0t0E_lsDg",
@@ -38,7 +33,6 @@
     "actualStartTime": null,
     "actualEndTime": null
   },
->>>>>>> 8dce70b20331528b8a94a45aa9d2353900e2e46f
   "live": {
     "isLive": false,
     "platform": null,
