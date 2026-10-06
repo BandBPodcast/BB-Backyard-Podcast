@@ -95,13 +95,14 @@ const year=qs('[data-year]');if(year)year.textContent=new Date().getFullYear();
 // Atmospheric smoke is decorative only and never blocks interaction.
 if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className='site-smoke';smoke.setAttribute('aria-hidden','true');document.body.appendChild(smoke)}
 
-// v1.4.79 — Cozy living-room page turn. Keep the existing session-based handoff.
+// Seamless internal transition. Destination page suppresses the loader before paint,
+// restores the closed doors, then opens them so the old loader can never flash between pages.
 (()=>{
   const transition=document.createElement('div');
-  transition.className='page-transition'; transition.id='pageTransition';
-  transition.setAttribute('aria-hidden','true');
-  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="cozy-transition-center"><span class="cozy-transition-ornament" aria-hidden="true">✦</span><span class="cozy-transition-title">B &amp; B Backyard Podcast</span><span class="cozy-transition-caption">Come on in, make yourself at home</span></div>';
+  transition.className='page-transition'; transition.id='pageTransition'; transition.setAttribute('aria-hidden','true');
+  transition.innerHTML='<div class="transition-door transition-door-left"></div><div class="transition-door transition-door-right"></div><div class="transition-seam"></div><img class="transition-cap-logo" id="transitionCapLogo" src="assets/images/bnb-transition-cap.webp?v=1476" alt="" aria-hidden="true">';
   document.body.appendChild(transition);
+
   const entering=sessionStorage.getItem('bb-transition-pending')==='1';
   if(entering){
     sessionStorage.removeItem('bb-transition-pending');
@@ -109,32 +110,50 @@ if(!qs('.site-smoke')){const smoke=document.createElement('div');smoke.className
     document.documentElement.classList.remove('bb-transition-enter');
     transition.classList.add('show','entering');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      setTimeout(()=>{transition.classList.remove('entering');transition.classList.add('opening')},160);
-      setTimeout(()=>transition.classList.remove('show','opening'),1230);
+      setTimeout(()=>{transition.classList.remove('entering');transition.classList.add('opening')},180);
+      setTimeout(()=>{transition.classList.remove('show','opening');},1080);
     }));
   }else{
     document.documentElement.classList.add('bb-transition-ready');
     document.documentElement.classList.remove('bb-transition-enter');
   }
-  let navigating=false;
-  document.addEventListener('click',event=>{
-    const link=event.target.closest('a[href]');if(!link||navigating)return;
+
+  document.addEventListener('click',(event)=>{
+    const link=event.target.closest('a[href]'); if(!link)return;
     const href=link.getAttribute('href');
     if(!href||href.startsWith('#')||href.startsWith('mailto:')||href.startsWith('tel:')||link.target==='_blank'||link.hasAttribute('download'))return;
     let url;try{url=new URL(link.href,location.href)}catch{return}
-    if(url.origin!==location.origin||(url.pathname===location.pathname&&url.hash))return;
-    event.preventDefault();navigating=true;
+    if(url.origin!==location.origin)return;
+    if(url.pathname===location.pathname&&url.hash)return;
+    event.preventDefault();
     transition.className='page-transition show closing';
-    // Fabric panels meet before the framed welcome appears. Navigate only after it settles.
-    setTimeout(()=>{transition.classList.remove('closing');transition.classList.add('closed')},920);
-    setTimeout(()=>{
+    const capLogo=transition.querySelector('#transitionCapLogo');
+    let leaving=false;
+    const leave=()=>{
+      if(leaving)return; leaving=true;
       sessionStorage.setItem('bb-loader-seen','1');
       sessionStorage.setItem('bb-transition-pending','1');
       location.href=link.href;
-    },2040);
+    };
+    setTimeout(()=>{
+      transition.classList.remove('closing');
+      transition.classList.add('closed','cap-spinning');
+      transition.classList.remove('cap-fading');
+      if(capLogo){
+        capLogo.classList.remove('cap-settled');
+        // Spin in 3D, then settle face-on before navigating.
+        setTimeout(()=>capLogo.classList.add('cap-settled'),1500);
+        // Softly fade the settled cap away before the destination loads.
+        setTimeout(()=>transition.classList.add('cap-fading'),1780);
+        setTimeout(leave,2200);
+      }else leave();
+    },760);
+    setTimeout(leave,3600);
   });
-  window.addEventListener('pageshow',e=>{if(e.persisted){navigating=false;transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});
+
+  window.addEventListener('pageshow',(e)=>{if(e.persisted){transition.className='page-transition';document.documentElement.classList.add('loader-seen','bb-transition-ready');document.documentElement.classList.remove('bb-transition-enter')}});
 })();
+
 
 // ===== B&B v1.3.7 motion polish =====
 // Always begin at the top of the current page instead of restoring an old scroll position.
@@ -276,7 +295,7 @@ window.addEventListener('pageshow',bbResetScroll);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))close()});
 })();
 
-// v1.4.75: The retired left-side hanging sign is no longer injected.
+// v1.4.75: hanging sign removed from all pages.
 
 // B & B v1.4.44 — tumbleweed rolls/bounces across the footer once every minute.
 (()=>{
@@ -287,7 +306,7 @@ window.addEventListener('pageshow',bbResetScroll);
   track.setAttribute('aria-hidden','true');
   const weed=document.createElement('img');
   weed.className='bb-footer-tumbleweed';
-  weed.src='assets/images/tumbleweed.png';
+  weed.src='assets/images/tumbleweed.webp';
   weed.alt='';
   track.appendChild(weed);
   footer.appendChild(track);

@@ -58,8 +58,8 @@
   const signText=document.getElementById('liveNeonText');
   const signSub=document.getElementById('liveNeonSubtext');
   const signFrame=document.getElementById('liveCountryFrame');
-  const frameOff='assets/images/live-status-western-frame-off.png';
-  const frameOn='assets/images/live-status-western-frame-on.png';
+  const frameOff='assets/images/live-status-western-frame-off.webp';
+  const frameOn='assets/images/live-status-western-frame-on.webp';
   window.bbSetLiveState=(isLive,title,url)=>{
     if(!sign)return;
     sign.classList.remove('is-checking','is-off','is-live','igniting');

@@ -94,11 +94,11 @@ function updateEpisodesPage(data){
   if(!grid)return;
   const status=document.getElementById('episodesSyncStatus');
   const episodes=(Array.isArray(data?.episodes)?data.episodes:[])
-    .filter(item=>item&&item.platform==='youtube'&&item.videoId&&item.actualEndTime)
+    .filter(item=>item&&['youtube','twitch'].includes(String(item.platform||'').toLowerCase())&&item.videoId&&item.actualEndTime)
     .sort((a,b)=>new Date(b.actualEndTime||b.publishedAt)-new Date(a.actualEndTime||a.publishedAt));
   if(!episodes.length){
     grid.innerHTML='<article class="card"><div class="card-pad"><h3>No finished livestream episodes yet</h3><p>After a B&amp;B YouTube livestream ends and YouTube finishes the archive, the full broadcast will appear here automatically.</p></div></article>';
-    if(status)status.textContent='Waiting for a completed B&B YouTube livestream.';
+    if(status)status.textContent='Waiting for a completed B&B YouTube or Twitch livestream.';
     return;
   }
   grid.innerHTML='';
@@ -106,7 +106,7 @@ function updateEpisodesPage(data){
     const card=document.createElement('article'); card.className='card episode-card synced-episode-card';
     const date=new Date(item.actualStartTime||item.publishedAt).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
     const thumb=item.thumbnail?`<img src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title||'B&B episode')}" loading="lazy">`:'';
-    card.innerHTML=`<a class="media-thumb" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${thumb}<span class="play">▶</span></a><div class="card-pad"><div class="meta"><span>Full Livestream</span><span>•</span><span>YouTube</span><span>•</span><span>${escapeHtml(date)}</span></div><h3>${escapeHtml(item.title||`B&B Episode ${episodes.length-index}`)}</h3><p>${escapeHtml((item.message||'Watch the complete B&B Backyard Podcast livestream replay.').slice(0,220))}</p><a class="btn btn-ghost" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Watch Full Episode</a></div>`;
+    card.innerHTML=`<a class="media-thumb" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${thumb}<span class="play">▶</span></a><div class="card-pad"><div class="meta"><span>Full Livestream</span><span>•</span><span>${escapeHtml(String(item.platform||'B&B').toUpperCase())}</span><span>•</span><span>${escapeHtml(date)}</span></div><h3>${escapeHtml(item.title||`B&B Episode ${episodes.length-index}`)}</h3><p>${escapeHtml((item.message||'Watch the complete B&B Backyard Podcast livestream replay.').slice(0,220))}</p><a class="btn btn-ghost" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Watch Full Episode</a></div>`;
     grid.appendChild(card);
   });
   if(status)status.textContent=`Showing ${episodes.length} completed B&B livestream episode${episodes.length===1?'':'s'}. New finished livestreams are added automatically.`;

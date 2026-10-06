@@ -49,6 +49,12 @@ async function syncTwitch(){
   if(broadcasterId){
     const clips=await getJSON(`https://api.twitch.tv/helix/clips?broadcaster_id=${encodeURIComponent(broadcasterId)}&first=10`,{headers});
     for(const c of (clips.data||[])) feed.items.push({id:`twitch-clip-${c.id}`,platform:'twitch',type:'clip',title:c.title||'B&B Twitch clip',message:c.creator_name?`Clip by ${c.creator_name}`:'B&B Twitch clip',url:c.url,thumbnail:c.thumbnail_url||'',publishedAt:c.created_at||new Date().toISOString()});
+    // Finished Twitch broadcasts are added to Episodes alongside completed YouTube livestreams.
+    const vods=await getJSON(`https://api.twitch.tv/helix/videos?user_id=${encodeURIComponent(broadcasterId)}&type=archive&first=10`,{headers});
+    for(const v of (vods.data||[])){
+      const ep={id:`twitch-vod-${v.id}`,platform:'twitch',type:'episode',title:v.title||'B&B Twitch broadcast',message:v.description||'Watch the completed B&B Backyard Podcast Twitch broadcast.',url:v.url||`https://www.twitch.tv/videos/${v.id}`,thumbnail:(v.thumbnail_url||'').replace('%{width}','640').replace('%{height}','360'),publishedAt:v.published_at||v.created_at||new Date().toISOString(),videoId:v.id,actualStartTime:v.created_at||v.published_at||null,actualEndTime:v.published_at||v.created_at||null};
+      feed.episodes.push(ep);
+    }
   }
   const streams=await getJSON(`https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(twitchLogin)}`,{headers});
   const s=streams.data?.[0];

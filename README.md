@@ -269,21 +269,21 @@ The page transition bottle cap now drops from above with a partial spin and smal
 - Preserved existing transition, loader, social sync, TikTok, Live, Episodes and Clips systems.
 
 
-## v1.4.75
-Removed the left hanging porch sign; mobile navigation uses a rotating 3-D coin-style B&B PNG with a subtle gold halo/glint, then settles before navigation; mobile barn doors now hinge in 3-D. Desktop transparent WebM and existing loader are unchanged.
+## v1.4.75 maintenance update
+- Removed the global hanging sign.
+- Replaced WANTED crew posters with normal crew cards.
+- Removed Lamont Terry portrait asset while preserving his profile text.
+- Added Twitch past broadcasts to Episodes alongside completed YouTube livestreams.
+- Optimized large local artwork with WebP variants and lazy loading.
 
-- v1.4.76: Removed Lamont Terry portrait from the crew card and website assets at his request; preserved his name, role, and existing layout.
-
-
-## v1.4.77 — Cozy home rebrand
-Replaced the old billboard loading artwork with a CSS-rendered, centered welcome card while preserving loading progress/timing. Replaced all three WANTED poster treatments (crew cards, wide desktop modal, mobile modal) with warm wooden family-photo frames. Kept crew photos and click-to-open profile behavior; Lamont remains text-only with no photo. Other page systems, social integrations, and desktop/mobile transitions are unchanged.
-
-
-## v1.4.78 — Living room visual update
-Uses supplied cozy living-room photograph in the home hero, inner-page headers and welcome loader. Warmer wallpaper-inspired palette, family-photo framing, walnut navigation and footer. Preserves all HTML structures, existing scripts, transitions, integrations, and Lamont portrait removal.
-
-
-v1.4.79: Crew heading warm muted color; centered loading progress/card; replaced page transitions with living-room fabric curtains and antique welcome frame on desktop and mobile. Existing navigation, page data, feeds and crew privacy unchanged.
+## v1.4.77
+- Mobile/tablet crew-card and crew-profile responsive polish.
+- Ora Johnson portrait framing adjusted so his full face/head stays visible on the Crew page.
+- Bottle-cap transition now fades in, performs the 3D spin, settles face-on, then fades out before the barn-door page change.
 
 
-v1.4.80: Cozy theme contrast polish across light backgrounds; contact email set to bnbentertains@gmail.com. No page structure or transition changes.
+## v1.4.78
+- Replaced YouTube, TikTok, Facebook, and Twitch social artwork with the supplied hat-free western emblems.
+- Kept the official TikTok creator feed for @bnb_entertains on the Socials page.
+- Reinforced the B&B transition coin soft fade-in/spin/fade-out sequence.
+- Preserved live sync, crew, navigation, loader, and existing site systems.
