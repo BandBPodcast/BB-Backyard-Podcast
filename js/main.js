@@ -89,7 +89,6 @@ window.bbToast=(title,message,link)=>{
   el.querySelector('.toast-close')?.addEventListener('click',remove);
   const auto=setTimeout(remove,duration);
 };
-qsa('[data-demo-toast]').forEach(btn=>btn.addEventListener('click',()=>window.bbToast('B&B IS LIVE','The Backyard Podcast is live now. Tap to join the stream.','live.html')));
 const year=qs('[data-year]');if(year)year.textContent=new Date().getFullYear();
 
 // Atmospheric smoke is decorative only and never blocks interaction.

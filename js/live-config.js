@@ -1,9 +1,9 @@
 /* B&B Live page configuration — official accounts added in v1.3.6.
-   youtubeVideoId changes for each individual YouTube livestream until automatic detection is connected. */
+   Live detection is handled automatically by the GitHub social-sync workflow. */
 window.BB_LIVE_CONFIG = {
   // Restream: Settings → Chat → Embed in stream → copy the URL and paste it between the quotes below.
   restreamChatEmbedUrl: 'https://chat.restream.io/embed?token=a52261f6-cd45-488a-9e70-c8c926bf3c8e',
-  youtubeVideoId: '', // Paste the active YouTube livestream video ID here until auto-detection is connected.
+  youtubeVideoId: '', // Kept for compatibility; automatic live detection controls the player.
   youtubeChannelUrl: 'https://www.youtube.com/@BnBEntertains',
   youtubeHandle: 'BnBEntertains',
   twitchChannel: 'bandbpodcast',

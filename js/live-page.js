@@ -11,17 +11,11 @@
   const showFrame=(el,src)=>{if(!el)return;el.src=src;el.hidden=false};
   const hideSetup=()=>{if(setup)setup.hidden=true};
 
-  // Keep ONE main livestream player above both chats.
-  // Prefer YouTube when configured; otherwise use Twitch.
-  if(ytVideo){
-    showFrame(player,`https://www.youtube.com/embed/${encodeURIComponent(ytVideo)}?rel=0&autoplay=0`);
-    hideSetup();
-    if(tag){tag.textContent='YOUTUBE LIVE';tag.className='platform-tag platform-youtube'}
-  }else if(twitchChannel){
-    showFrame(player,`https://player.twitch.tv/?channel=${encodeURIComponent(twitchChannel)}&parent=${encodeURIComponent(host)}&autoplay=false`);
-    hideSetup();
-    if(tag){tag.textContent='TWITCH LIVE';tag.className='platform-tag platform-twitch'}
-  }
+  // The player is controlled by the automatically generated social feed.
+  // It stays in a neutral checking/off-air state until a real YouTube or Twitch broadcast is detected.
+  if(player) player.hidden=true;
+  if(setup) setup.hidden=false;
+  if(tag){tag.textContent='CHECKING LIVE STATUS';tag.className='platform-tag'}
 
   // v1.4.56: one unified Restream chat panel replaces the separate website chat boxes.
   // Restream's embed is a combined message display; viewers still authenticate/chat on the source platform.
@@ -83,23 +77,20 @@
   // Keep a neutral checking state until social-sync.js returns the current feed.
   if(sign){sign.classList.remove('is-off','is-live');sign.classList.add('is-checking');if(signFrame)signFrame.src=frameOff;}
 
-  // Test button makes the sign ignite without changing any real live status.
-  const testBtn=document.getElementById('testLiveSign');
-  let testOn=false;
-  testBtn?.addEventListener('click',()=>{
-    testOn=!testOn;
-    window.bbSetLiveState(testOn,testOn?'Test signal: B&B is live!':'');
-    testBtn.textContent=testOn?'Reset Live Status':'Test Live Status';
-  });
 })();
 
 /* v1.4.55: social-sync.js calls this when GitHub Actions detects a live broadcast. */
 window.bbApplyDetectedLive=(live)=>{
-  if(!live?.isLive)return;
-  const host=location.hostname||'bandbpodcast.github.io';
   const player=document.getElementById('mainLivePlayer');
   const setup=document.getElementById('mainLiveSetup');
   const tag=document.getElementById('mainPlatformTag');
+  if(!live?.isLive){
+    if(player){player.hidden=true;player.removeAttribute('src')}
+    if(setup)setup.hidden=false;
+    if(tag){tag.textContent='OFF AIR';tag.className='platform-tag'}
+    return;
+  }
+  const host=location.hostname||'bandbpodcast.github.io';
   if(live.platform==='youtube'&&live.videoId){
     if(player){player.src=`https://www.youtube.com/embed/${encodeURIComponent(live.videoId)}?rel=0&autoplay=0`;player.hidden=false}
     if(setup)setup.hidden=true;

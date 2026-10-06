@@ -82,7 +82,6 @@ Edit `js/live-config.js` and set `youtubeVideoId` to the current YouTube livestr
 
 ## v1.3.5 Live-page update
 - Replaced the plain live-status bar with a neon OFF AIR / CURRENTLY LIVE sign.
-- Added a Test Live Sign button beside Preview Neon Toast.
 - Added Theatre Mode / lights-out focus for desktop and mobile.
 - Left chat can switch between YouTube and Facebook. Because Facebook does not expose a dependable embedded live-chat composer for third-party sites, the Facebook tab opens the official Facebook Live post/comments instead; on mobile it is preferred automatically when configured.
 - Twitch chat remains on the right.
@@ -206,7 +205,7 @@ The Live page is now configured to load the Restream **Embed chat from any live 
 
 
 ## v1.4.59 — Custom western live-status frame
-The Live page status module now uses the supplied transparent western frame artwork. Status text stays centered inside the artwork, uses the site display font stack, and switches automatically between checking, off-air, and live states without neon effects. Preview Notification and Test Live Status controls remain below the module.
+The Live page status module now uses the supplied transparent western frame artwork. Status text stays centered inside the artwork, uses the site display font stack, and switches automatically between checking, off-air, and live states without neon effects. The status module is production-only and updates automatically from the generated YouTube/Twitch live feed.
 
 
 ## v1.4.61 — live sign ON/OFF artwork switching
